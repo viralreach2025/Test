@@ -2,7 +2,8 @@ import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
 import { WaitlistEmailTemplate } from './email-template'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+const resendApiKey = process.env.RESEND_API_KEY
+const resend = resendApiKey ? new Resend(resendApiKey) : null
 
 export async function POST(request: NextRequest) {
   try {
@@ -14,6 +15,15 @@ export async function POST(request: NextRequest) {
         { error: 'Email is required' },
         { status: 400 }
       )
+    }
+
+    // Check if Resend is configured
+    if (!resend) {
+      console.warn('⚠️ Resend API key not configured, skipping email send')
+      return NextResponse.json({ 
+        success: true, 
+        message: 'Email service not configured, but waitlist entry saved successfully' 
+      })
     }
 
     // Handle quiz completion template
@@ -28,7 +38,7 @@ export async function POST(request: NextRequest) {
       if (error) {
         console.error('Resend error:', error)
         return NextResponse.json(
-          { error: 'Failed to send email' },
+          { error: 'Failed to send email', details: error },
           { status: 500 }
         )
       }
@@ -48,7 +58,7 @@ export async function POST(request: NextRequest) {
       if (error) {
         console.error('Resend error:', error)
         return NextResponse.json(
-          { error: 'Failed to send email' },
+          { error: 'Failed to send email', details: error },
           { status: 500 }
         )
       }
@@ -75,7 +85,7 @@ export async function POST(request: NextRequest) {
     if (error) {
       console.error('Resend error:', error)
       return NextResponse.json(
-        { error: 'Failed to send email' },
+        { error: 'Failed to send email', details: error },
         { status: 500 }
       )
     }
@@ -84,7 +94,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('Email API error:', error)
     return NextResponse.json(
-      { error: 'Internal server error' },
+      { error: 'Internal server error', details: error },
       { status: 500 }
     )
   }

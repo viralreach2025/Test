@@ -200,9 +200,10 @@ export default function WaitlistQuiz({ onComplete, onSkip }: WaitlistQuizProps) 
 
   const handleNext = () => {
     if (currentStep === 0 && !isEmailValid) return
-    if (currentStep < getTotalSteps()) {
+    if (currentStep < getTotalSteps() - 1) {
       setCurrentStep(currentStep + 1)
     } else {
+      // This is the final step, complete the quiz
       onComplete({ email, ...answers } as QuizData)
     }
   }
@@ -220,23 +221,23 @@ export default function WaitlistQuiz({ onComplete, onSkip }: WaitlistQuizProps) 
     <div className="max-w-2xl mx-auto bg-white rounded-xl p-8 shadow-lg">
       {/* Progress Bar */}
       <div className="mb-8">
-        <div className="flex justify-between items-center mb-2">
-          <span className="text-sm text-gray-600">
-            Step {currentStep + 1} of {totalSteps}
-          </span>
-          <span className="text-sm text-gray-600">
-            {Math.round(((currentStep + 1) / totalSteps) * 100)}%
-          </span>
-        </div>
-        <div className="w-full bg-gray-200 rounded-full h-2">
-          <motion.div
-            className="bg-gradient-to-r from-pink-500 to-purple-600 h-2 rounded-full"
-            initial={{ width: 0 }}
-            animate={{ width: `${((currentStep + 1) / totalSteps) * 100}%` }}
-            transition={{ duration: 0.3 }}
-          />
-        </div>
-      </div>
+  <div className="flex justify-between items-center mb-2">
+    <span className="text-sm text-gray-600">
+      Step {Math.min(currentStep + 1, totalSteps)} of {totalSteps}
+    </span>
+    <span className="text-sm text-gray-600">
+      {Math.min(Math.round(((currentStep + 1) / totalSteps) * 100), 100)}%
+    </span>
+  </div>
+  <div className="w-full bg-gray-200 rounded-full h-2">
+    <motion.div
+      className="bg-gradient-to-r from-pink-500 to-purple-600 h-2 rounded-full"
+      initial={{ width: 0 }}
+      animate={{ width: `${Math.min(((currentStep + 1) / totalSteps) * 100, 100)}%` }}
+      transition={{ duration: 0.3 }}
+    />
+  </div>
+</div>
 
       <AnimatePresence mode="wait">
         <motion.div

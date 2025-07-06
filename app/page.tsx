@@ -59,12 +59,16 @@ export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [showQuiz, setShowQuiz] = useState(false)
+  const [error, setError] = useState('')
 
   const handleQuizComplete = async (quizData: any) => {
+    console.log('🚀 Quiz completion started with data:', quizData)
     setIsLoading(true)
+    setError('')
 
     try {
       // Save quiz data to waitlist
+      console.log('📝 Saving waitlist entry...')
       const result = await saveWaitlistEntry({
         email: quizData.email,
         user_type: quizData.userType,
@@ -77,65 +81,89 @@ export default function Home() {
         collaboration_experience: quizData.monthlyCampaigns
       })
       
+      console.log('📝 Waitlist entry result:', result)
+      
       if (result.alreadyExists) {
-        // User is already on the list
+        console.log('⚠️ User already exists, showing existing user message')
         setIsAlreadyOnList(true)
         setIsSubmitted(true)
         setShowQuiz(false)
       } else if (result.success) {
-              // New user added successfully - send welcome email
-      try {
-        await fetch('/api/send-waitlist-email', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            email: quizData.email,
-            userType: quizData.userType,
-            template: 'quiz-completion',
-            data: {
-              ...quizData,
-              // Map role-specific fields to database fields
-              primary_goal: quizData.primaryGoal,
-              biggest_challenge: quizData.biggestChallenge,
-              budget_range: quizData.budgetRange,
-              timeline: quizData.timeline,
-              follower_count: quizData.followerCount,
-              primary_platform: quizData.preferredPlatform,
-              collaboration_experience: quizData.monthlyCampaigns
-            }
-          }),
-        })
-      } catch (emailError) {
-        console.error('Error sending email:', emailError)
-        // Don't fail the quiz completion if email fails
-      }
+        console.log('✅ Waitlist entry saved, attempting to send email...')
+        // New user added successfully - try to send welcome email
+        try {
+          const emailResponse = await fetch('/api/send-waitlist-email', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              email: quizData.email,
+              userType: quizData.userType,
+              template: 'quiz-completion',
+              data: {
+                ...quizData,
+                primary_goal: quizData.primaryGoal,
+                biggest_challenge: quizData.biggestChallenge,
+                budget_range: quizData.budgetRange,
+                timeline: quizData.timeline,
+                follower_count: quizData.followerCount,
+                primary_platform: quizData.preferredPlatform,
+                collaboration_experience: quizData.monthlyCampaigns
+              }
+            }),
+          })
+          
+          if (!emailResponse.ok) {
+            const emailError = await emailResponse.json()
+            console.error('📧 Email API error:', emailError)
+          } else {
+            console.log('✅ Welcome email sent successfully')
+          }
+        } catch (emailError) {
+          console.error('📧 Error sending email:', emailError)
+        }
         
+        // Always show success regardless of email status
+        console.log('🎉 Setting UI to completed state')
         setIsAlreadyOnList(false)
         setIsSubmitted(true)
         setShowQuiz(false)
+      } else {
+        console.log('❌ Waitlist entry failed:', result)
+        setError(result.message || 'Failed to join waitlist. Please try again.')
+        console.error('Waitlist submission failed:', result.error)
       }
     } catch (error: any) {
-      console.error('Error saving waitlist entry:', error)
+      console.error('❌ Error saving waitlist entry:', error)
+      setError('An unexpected error occurred. Please try again.')
     } finally {
+      console.log('🏁 Quiz completion finished, setting loading to false')
       setIsLoading(false)
     }
   }
 
   const handleQuizSkip = async () => {
     setIsLoading(true)
+    setError('')
 
     try {
       // Save minimal data to waitlist
-      await saveWaitlistEntry({
+      const result = await saveWaitlistEntry({
         email: 'anonymous@example.com', // Placeholder for skipped quiz
         user_type: 'brand'
       })
-      setIsSubmitted(true)
-      setShowQuiz(false)
+      
+      if (result.success) {
+        setIsSubmitted(true)
+        setShowQuiz(false)
+      } else {
+        setError(result.message || 'Failed to join waitlist. Please try again.')
+        console.error('Waitlist submission failed:', result.error)
+      }
     } catch (error: any) {
       console.error('Error saving waitlist entry:', error)
+      setError('An unexpected error occurred. Please try again.')
     } finally {
       setIsLoading(false)
     }
@@ -755,6 +783,14 @@ export default function Home() {
             Take our quick quiz to get personalized early access
           </p>
           <p className="text-sm text-pink-200 mb-8">No credit card required • Early access guaranteed • Exclusive founding member perks</p>
+          
+          {/* Error Message */}
+          {error && (
+            <div className="bg-red-500/20 backdrop-blur-sm rounded-xl p-4 mb-6 max-w-md mx-auto border border-red-300">
+              <p className="text-red-100 text-sm">{error}</p>
+            </div>
+          )}
+          
           {!isSubmitted ? (
             showQuiz ? (
               <WaitlistQuiz 
@@ -765,9 +801,10 @@ export default function Home() {
               <div className="max-w-md mx-auto">
                 <button 
                   onClick={handleStartQuiz}
-                  className="bg-white text-pink-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors w-full"
+                  disabled={isLoading}
+                  className="bg-white text-pink-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors w-full disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Take Quick Quiz & Join Waitlist
+                  {isLoading ? 'Loading...' : 'Take Quick Quiz & Join Waitlist'}
                 </button>
               </div>
             )

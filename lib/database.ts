@@ -25,6 +25,15 @@ export async function saveWaitlistEntry(data: Omit<WaitlistEntry, 'id' | 'create
     
     console.log('🔍 Database connection test:', { testData, testError })
     
+    if (testError) {
+      console.error('❌ Database connection failed:', testError)
+      return { 
+        success: false, 
+        error: testError,
+        message: 'Database connection failed. Please try again later.'
+      }
+    }
+    
     const { data: existingEntries, error: checkError } = await supabase
       .from('waitlist_entries')
       .select('email, id, created_at')
@@ -34,7 +43,11 @@ export async function saveWaitlistEntry(data: Omit<WaitlistEntry, 'id' | 'create
 
     if (checkError) {
       console.error('❌ Error checking existing entry:', checkError)
-      return { success: false, error: checkError }
+      return { 
+        success: false, 
+        error: checkError,
+        message: 'Failed to check existing entries. Please try again.'
+      }
     }
 
     if (existingEntries && existingEntries.length > 0) {
@@ -74,14 +87,23 @@ export async function saveWaitlistEntry(data: Omit<WaitlistEntry, 'id' | 'create
       .select()
 
     if (error) {
-      console.error('Error saving waitlist entry:', error)
-      return { success: false, error }
+      console.error('❌ Error saving waitlist entry:', error)
+      return { 
+        success: false, 
+        error,
+        message: 'Failed to save your information. Please try again.'
+      }
     }
 
+    console.log('✅ Waitlist entry saved successfully:', result)
     return { success: true, data: result, isNewEntry: true }
   } catch (error) {
-    console.error('Database error:', error)
-    return { success: false, error }
+    console.error('❌ Database error:', error)
+    return { 
+      success: false, 
+      error,
+      message: 'An unexpected error occurred. Please try again.'
+    }
   }
 }
 
