@@ -1,4 +1,34 @@
+"use client"
+
+import { useState } from 'react'
+import { motion } from 'framer-motion'
+import Link from 'next/link'
+import { Metadata } from 'next'
+import { 
+  Mail, 
+  Phone, 
+  MapPin, 
+  Clock, 
+  Send,
+  CheckCircle,
+  ArrowRight
+} from 'lucide-react'
 import ContactForm from '../components/ContactForm'
+
+export const metadata: Metadata = {
+  title: 'Contact Us - Get in Touch with ViralReach',
+  description: 'Have questions about our performance-based influencer marketing platform? Contact our team for support, partnerships, or to learn more about ViralReach.',
+  keywords: ['contact viralreach', 'influencer marketing support', 'brand partnerships', 'creator support', 'customer service'],
+  openGraph: {
+    title: 'Contact Us - Get in Touch with ViralReach',
+    description: 'Have questions about our performance-based influencer marketing platform? Contact our team for support.',
+    url: 'https://viralreach.com/contact',
+  },
+  twitter: {
+    title: 'Contact Us - Get in Touch with ViralReach',
+    description: 'Have questions about our performance-based influencer marketing platform? Contact our team for support.',
+  },
+}
 
 export default function ContactPage() {
   return (

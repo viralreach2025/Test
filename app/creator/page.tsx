@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import { Metadata } from 'next'
 import { 
   CheckCircle, 
   ArrowRight, 
@@ -11,6 +12,7 @@ import {
   TrendingUp, 
   Shield, 
   Zap,
+  Target,
   DollarSign,
   BarChart3,
   Eye,
@@ -25,9 +27,24 @@ import {
   MessageCircle,
   Share2,
   Calendar,
-  Target,
+  MapPin,
   X
 } from 'lucide-react'
+
+export const metadata: Metadata = {
+  title: 'For Creators - Earn More with Performance-Based Payments',
+  description: 'Join the only platform that pays you based on actual results, not just posts. Earn 2-3x more with performance-based payments, escrow protection, and AI-powered brand matching.',
+  keywords: ['influencer earnings', 'creator monetization', 'performance-based payments', 'beauty influencer', 'skincare creator', 'brand collaborations'],
+  openGraph: {
+    title: 'For Creators - Earn More with Performance-Based Payments',
+    description: 'Join the only platform that pays you based on actual results, not just posts. Earn 2-3x more with performance-based payments.',
+    url: 'https://viralreach.com/creator',
+  },
+  twitter: {
+    title: 'For Creators - Earn More with Performance-Based Payments',
+    description: 'Join the only platform that pays you based on actual results, not just posts. Earn 2-3x more with performance-based payments.',
+  },
+}
 
 export default function CreatorPage() {
   const [isFAQOpen, setIsFAQOpen] = useState<number | null>(null)

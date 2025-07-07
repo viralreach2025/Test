@@ -1,17 +1,64 @@
 {
-  "name": "ViralReach - Performance-Driven Creator Platform",
+  "name": "ViralReach - Performance-Based Influencer Marketing",
   "short_name": "ViralReach",
-  "description": "Connect with 50K+ verified creators who genuinely promote your products. Track real metrics and only pay for verified performance.",
+  "description": "Connect beauty and skincare brands with authentic creators. Pay only for real results, not just posts.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#6366f1",
+  "theme_color": "#8B5CF6",
   "orientation": "portrait-primary",
   "scope": "/",
-  "lang": "en-US",
-  "dir": "ltr",
+  "lang": "en",
   "categories": ["business", "marketing", "social"],
-  "screenshots": [],
-  "icons": [],
-  "shortcuts": []
+  "icons": [
+    {
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshot-wide.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    },
+    {
+      "src": "/screenshot-narrow.png",
+      "sizes": "750x1334",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "For Brands",
+      "short_name": "Brands",
+      "description": "Access brand features",
+      "url": "/brand",
+      "icons": [{ "src": "/icon-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "For Creators",
+      "short_name": "Creators",
+      "description": "Access creator features",
+      "url": "/creator",
+      "icons": [{ "src": "/icon-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Contact",
+      "short_name": "Contact",
+      "description": "Get in touch",
+      "url": "/contact",
+      "icons": [{ "src": "/icon-192x192.png", "sizes": "192x192" }]
+    }
+  ]
 } 

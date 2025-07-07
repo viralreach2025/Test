@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import { Metadata } from 'next'
 import { 
   CheckCircle, 
   ArrowRight, 
@@ -23,6 +24,21 @@ import {
   Youtube,
   Video
 } from 'lucide-react'
+
+export const metadata: Metadata = {
+  title: 'For Brands - Performance-Based Influencer Marketing',
+  description: 'Connect with verified beauty and skincare creators. Pay only for real results, not just posts. AI-powered matching, escrow protection, and performance-based payments.',
+  keywords: ['beauty influencer marketing', 'skincare brand marketing', 'performance-based marketing', 'creator collaboration', 'brand partnerships'],
+  openGraph: {
+    title: 'For Brands - Performance-Based Influencer Marketing',
+    description: 'Connect with verified beauty and skincare creators. Pay only for real results, not just posts.',
+    url: 'https://viralreach.com/brand',
+  },
+  twitter: {
+    title: 'For Brands - Performance-Based Influencer Marketing',
+    description: 'Connect with verified beauty and skincare creators. Pay only for real results, not just posts.',
+  },
+}
 
 export default function BrandPage() {
   const [isFAQOpen, setIsFAQOpen] = useState<number | null>(null)
