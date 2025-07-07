@@ -399,10 +399,18 @@ export default function BrandPage() {
                 Get notified when our creator marketplace launches.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-pink-600 hover:to-purple-700 transition-all duration-300">
+                <button 
+                  disabled
+                  className="bg-gray-400 text-white px-6 py-3 rounded-lg font-semibold cursor-not-allowed transition-all duration-300"
+                  title="Coming soon"
+                >
                   Get Notified
                 </button>
-                <button className="border-2 border-gray-300 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:border-gray-400 transition-all duration-300">
+                <button 
+                  disabled
+                  className="bg-gray-400 text-white border-2 border-gray-400 px-6 py-3 rounded-lg font-semibold cursor-not-allowed transition-all duration-300"
+                  title="Coming soon"
+                >
                   Learn More
                 </button>
               </div>
@@ -457,13 +465,14 @@ export default function BrandPage() {
           <p className="text-xl text-pink-100 mb-8">
             Join hundreds of beauty brands who've already discovered the ViralReach difference.
           </p>
-          <Link 
-            href="/signup?type=brand"
-            className="inline-flex items-center bg-white text-pink-600 px-8 py-4 rounded-xl font-semibold text-lg hover:bg-gray-100 transition-colors"
+          <button 
+            disabled
+            className="inline-flex items-center bg-gray-400 text-white px-8 py-4 rounded-xl font-semibold text-lg cursor-not-allowed"
+            title="Coming soon"
           >
             Start Your First Campaign
             <ArrowRight className="w-5 h-5 ml-2" />
-          </Link>
+          </button>
         </div>
       </section>
 

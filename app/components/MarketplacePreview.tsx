@@ -206,7 +206,11 @@ export default function MarketplacePreview() {
             </div>
           ))}
         </div>
-        <button className="w-full mt-4 bg-purple-600 text-white text-sm py-2 px-4 rounded-lg hover:bg-purple-700 transition-colors font-medium">
+        <button 
+          disabled
+          className="w-full mt-4 bg-gray-400 text-white text-sm py-2 px-4 rounded-lg cursor-not-allowed font-medium"
+          title="Coming soon"
+        >
           Contact Creator
         </button>
       </div>

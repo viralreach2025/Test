@@ -857,8 +857,8 @@ export default function Home() {
             <div>
               <h3 className="font-semibold mb-4">Legal</h3>
               <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Terms of Service</a></li>
+                <li><button disabled className="hover:text-white transition-colors cursor-not-allowed text-gray-400" title="Coming soon">Privacy Policy</button></li>
+                <li><button disabled className="hover:text-white transition-colors cursor-not-allowed text-gray-400" title="Coming soon">Terms of Service</button></li>
                 <li><a href="/contact" className="hover:text-white transition-colors">Contact Us</a></li>
               </ul>
             </div>

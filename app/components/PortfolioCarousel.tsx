@@ -151,10 +151,18 @@ export default function PortfolioCarousel({
             {currentIndex + 1} of {portfolioItems.length}
           </span>
           <div className="flex space-x-2">
-            <button className="px-3 py-1 text-sm bg-purple-100 text-purple-700 rounded-full hover:bg-purple-200 transition-colors">
+            <button 
+              disabled
+              className="px-3 py-1 text-sm bg-gray-300 text-gray-500 rounded-full cursor-not-allowed"
+              title="Coming soon"
+            >
               Contact Creator
             </button>
-            <button className="px-3 py-1 text-sm bg-gray-100 text-gray-700 rounded-full hover:bg-gray-200 transition-colors">
+            <button 
+              disabled
+              className="px-3 py-1 text-sm bg-gray-300 text-gray-500 rounded-full cursor-not-allowed"
+              title="Coming soon"
+            >
               View Profile
             </button>
           </div>
