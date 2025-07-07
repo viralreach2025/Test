@@ -66,7 +66,7 @@ const creators = [
   },
   {
     name: 'Vivid Glow',
-    video: '/videos/t10.mp4',
+    video: '/videos/T10.mp4',
     image: '',
     shape: 'rounded',
     link: '#'

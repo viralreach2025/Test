@@ -1,8 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { saveContactSubmission } from '../../lib/database'
-import { ContactSubmission } from '../../lib/supabase'
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -29,15 +27,21 @@ export default function ContactForm() {
     setError('')
 
     try {
-      const contactData: Omit<ContactSubmission, 'id' | 'created_at'> = {
-        name: formData.name,
-        email: formData.email,
-        company: formData.company || undefined,
-        subject: formData.subject,
-        message: formData.message
-      }
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          company: formData.company || undefined,
+          subject: formData.subject,
+          message: formData.message
+        })
+      })
 
-      const result = await saveContactSubmission(contactData)
+      const result = await response.json()
       
       if (result.success) {
         setSubmitted(true)
@@ -49,9 +53,10 @@ export default function ContactForm() {
           message: ''
         })
       } else {
-        setError('Failed to send message. Please try again.')
+        setError(result.error || 'Failed to send message. Please try again.')
       }
     } catch (err) {
+      console.error('Contact form error:', err)
       setError('An error occurred. Please try again.')
     } finally {
       setIsSubmitting(false)

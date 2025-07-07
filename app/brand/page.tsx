@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { Metadata } from 'next'
 import { 
   CheckCircle, 
   ArrowRight, 
@@ -24,21 +23,6 @@ import {
   Youtube,
   Video
 } from 'lucide-react'
-
-export const metadata: Metadata = {
-  title: 'For Brands - Performance-Based Influencer Marketing',
-  description: 'Connect with verified beauty and skincare creators. Pay only for real results, not just posts. AI-powered matching, escrow protection, and performance-based payments.',
-  keywords: ['beauty influencer marketing', 'skincare brand marketing', 'performance-based marketing', 'creator collaboration', 'brand partnerships'],
-  openGraph: {
-    title: 'For Brands - Performance-Based Influencer Marketing',
-    description: 'Connect with verified beauty and skincare creators. Pay only for real results, not just posts.',
-    url: 'https://viralreach.com/brand',
-  },
-  twitter: {
-    title: 'For Brands - Performance-Based Influencer Marketing',
-    description: 'Connect with verified beauty and skincare creators. Pay only for real results, not just posts.',
-  },
-}
 
 export default function BrandPage() {
   const [isFAQOpen, setIsFAQOpen] = useState<number | null>(null)
@@ -266,21 +250,19 @@ export default function BrandPage() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="flex flex-col sm:flex-row gap-4 justify-center mb-8"
             >
-              <button 
-                disabled
-                className="bg-gray-400 text-white px-8 py-4 rounded-xl font-semibold text-lg cursor-not-allowed transition-all duration-300 shadow-lg"
-                title="Coming soon"
+              <Link 
+                href="/#waitlist"
+                className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:from-pink-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg"
               >
                 Start Your Campaign
                 <ArrowRight className="w-5 h-5 ml-2 inline" />
-              </button>
-              <button 
-                disabled
-                className="bg-gray-400 text-white border-2 border-gray-400 px-8 py-4 rounded-xl font-semibold text-lg cursor-not-allowed transition-all duration-300"
-                title="Coming soon"
+              </Link>
+              <Link 
+                href="/#waitlist"
+                className="bg-white text-purple-600 border-2 border-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-gray-100 transition-all duration-300"
               >
                 Browse Creators
-              </button>
+              </Link>
             </motion.div>
 
             <motion.div
@@ -305,8 +287,6 @@ export default function BrandPage() {
           </div>
         </div>
       </section>
-
-
 
       {/* Why Choose ViralReach */}
       <section className="py-20 bg-white">
@@ -481,14 +461,13 @@ export default function BrandPage() {
           <p className="text-xl text-pink-100 mb-8">
             Join hundreds of beauty brands who've already discovered the ViralReach difference.
           </p>
-          <button 
-            disabled
-            className="inline-flex items-center bg-gray-400 text-white px-8 py-4 rounded-xl font-semibold text-lg cursor-not-allowed"
-            title="Coming soon"
+          <Link 
+            href="/#waitlist"
+            className="inline-flex items-center bg-white text-pink-600 px-8 py-4 rounded-xl font-semibold text-lg hover:bg-gray-100 transition-colors"
           >
             Start Your First Campaign
             <ArrowRight className="w-5 h-5 ml-2" />
-          </button>
+          </Link>
         </div>
       </section>
 

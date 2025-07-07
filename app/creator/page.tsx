@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { Metadata } from 'next'
 import { 
   CheckCircle, 
   ArrowRight, 
@@ -30,21 +29,6 @@ import {
   MapPin,
   X
 } from 'lucide-react'
-
-export const metadata: Metadata = {
-  title: 'For Creators - Earn More with Performance-Based Payments',
-  description: 'Join the only platform that pays you based on actual results, not just posts. Earn 2-3x more with performance-based payments, escrow protection, and AI-powered brand matching.',
-  keywords: ['influencer earnings', 'creator monetization', 'performance-based payments', 'beauty influencer', 'skincare creator', 'brand collaborations'],
-  openGraph: {
-    title: 'For Creators - Earn More with Performance-Based Payments',
-    description: 'Join the only platform that pays you based on actual results, not just posts. Earn 2-3x more with performance-based payments.',
-    url: 'https://viralreach.com/creator',
-  },
-  twitter: {
-    title: 'For Creators - Earn More with Performance-Based Payments',
-    description: 'Join the only platform that pays you based on actual results, not just posts. Earn 2-3x more with performance-based payments.',
-  },
-}
 
 export default function CreatorPage() {
   const [isFAQOpen, setIsFAQOpen] = useState<number | null>(null)
@@ -283,14 +267,13 @@ export default function CreatorPage() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="flex flex-col sm:flex-row gap-4 justify-center mb-8"
             >
-              <button 
-                disabled
-                className="bg-gray-400 text-white px-8 py-4 rounded-xl font-semibold text-lg cursor-not-allowed transition-all duration-300 shadow-lg"
-                title="Coming soon"
+              <Link 
+                href="/#waitlist"
+                className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:from-pink-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg"
               >
                 Join as Creator
                 <ArrowRight className="w-5 h-5 ml-2 inline" />
-              </button>
+              </Link>
               <button 
                 disabled
                 className="bg-gray-400 text-white border-2 border-gray-400 px-8 py-4 rounded-xl font-semibold text-lg cursor-not-allowed transition-all duration-300"
@@ -772,7 +755,7 @@ export default function CreatorPage() {
             Join hundreds of creators who've already discovered the ViralReach difference.
           </p>
           <Link 
-            href="/signup?type=creator"
+            href="/#waitlist"
             className="inline-flex items-center bg-white text-pink-600 px-8 py-4 rounded-xl font-semibold text-lg hover:bg-gray-100 transition-colors"
           >
             Join as Creator

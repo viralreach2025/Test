@@ -841,7 +841,7 @@ export default function Home() {
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-16" role="contentinfo">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-4 gap-8">
             <div className="md:col-span-2">
               <div className="flex items-center mb-4">
                 <div className="w-8 h-8 monday-gradient-purple rounded-lg mr-3 flex items-center justify-center">
@@ -855,11 +855,18 @@ export default function Home() {
             </div>
             
             <div>
+              <h3 className="font-semibold mb-4">Contact</h3>
+              <ul className="space-y-2 text-gray-400">
+                <li><a href="mailto:support@viralreach.ca" className="hover:text-white transition-colors">support@viralreach.ca</a></li>
+                <li><a href="/contact" className="hover:text-white transition-colors">Contact Form</a></li>
+              </ul>
+            </div>
+            
+            <div>
               <h3 className="font-semibold mb-4">Legal</h3>
               <ul className="space-y-2 text-gray-400">
                 <li><button disabled className="hover:text-white transition-colors cursor-not-allowed text-gray-400" title="Coming soon">Privacy Policy</button></li>
                 <li><button disabled className="hover:text-white transition-colors cursor-not-allowed text-gray-400" title="Coming soon">Terms of Service</button></li>
-                <li><a href="/contact" className="hover:text-white transition-colors">Contact Us</a></li>
               </ul>
             </div>
           </div>
