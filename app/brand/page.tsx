@@ -154,10 +154,20 @@ export default function BrandPage() {
             <div className="hidden md:flex items-center space-x-8">
               <Link href="/" className="text-gray-600 hover:text-gray-900">Home</Link>
               <Link href="/creator" className="text-gray-600 hover:text-gray-900">For Creators</Link>
-              <Link href="/login" className="text-gray-600 hover:text-gray-900">Sign In</Link>
+              <button 
+                disabled
+                className="text-gray-400 cursor-not-allowed"
+                title="Coming soon"
+              >
+                Sign In
+              </button>
             </div>
             <div className="md:hidden">
-              <button className="text-gray-600">
+              <button 
+                disabled
+                className="text-gray-400 cursor-not-allowed"
+                title="Coming soon"
+              >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
@@ -240,14 +250,19 @@ export default function BrandPage() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="flex flex-col sm:flex-row gap-4 justify-center mb-8"
             >
-              <Link 
-                href="/signup?type=brand"
-                className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:from-pink-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg"
+              <button 
+                disabled
+                className="bg-gray-400 text-white px-8 py-4 rounded-xl font-semibold text-lg cursor-not-allowed transition-all duration-300 shadow-lg"
+                title="Coming soon"
               >
                 Start Your Campaign
                 <ArrowRight className="w-5 h-5 ml-2 inline" />
-              </Link>
-              <button className="bg-white/90 backdrop-blur-sm text-purple-600 border-2 border-purple-600 px-8 py-4 rounded-xl font-semibold text-lg hover:bg-purple-50 transition-all duration-300 transform hover:scale-105 shadow-lg">
+              </button>
+              <button 
+                disabled
+                className="bg-gray-400 text-white border-2 border-gray-400 px-8 py-4 rounded-xl font-semibold text-lg cursor-not-allowed transition-all duration-300"
+                title="Coming soon"
+              >
                 Browse Creators
               </button>
             </motion.div>

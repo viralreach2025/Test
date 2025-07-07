@@ -240,7 +240,13 @@ export default function Home() {
             </div>
 
             <div className="hidden md:flex items-center space-x-4">
-              <Link href="/login" className="text-purple-600 hover:text-purple-700 font-medium">Sign In</Link>
+              <button 
+                disabled
+                className="text-gray-400 cursor-not-allowed font-medium"
+                title="Coming soon"
+              >
+                Sign In
+              </button>
               <button 
                 onClick={() => document.getElementById('waitlist')?.scrollIntoView({ behavior: 'smooth' })}
                 className="btn-monday-primary"
@@ -267,7 +273,13 @@ export default function Home() {
                 <a href="#faq" className="block px-3 py-2 text-gray-600 hover:text-purple-600 font-medium">FAQ</a>
                 <a href="/contact" className="block px-3 py-2 text-gray-600 hover:text-purple-600 font-medium">Contact</a>
                 <div className="pt-2 border-t border-gray-200">
-                  <button className="block w-full text-left px-3 py-2 text-purple-600 hover:text-purple-700 font-medium">Sign In</button>
+                  <button 
+                    disabled
+                    className="block w-full text-left px-3 py-2 text-gray-400 cursor-not-allowed font-medium"
+                    title="Coming soon"
+                  >
+                    Sign In
+                  </button>
                   <button 
                     onClick={() => {
                       setMobileMenuOpen(false);
