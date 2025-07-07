@@ -37,9 +37,9 @@ export const metadata: Metadata = {
     description: 'Connect beauty and skincare brands with authentic creators. Pay only for real results, not just posts.',
     images: [
       {
-        url: '/og-image.jpg',
-        width: 1200,
-        height: 630,
+        url: '/favicon.svg',
+        width: 32,
+        height: 32,
         alt: 'ViralReach - Influencer Marketing Platform',
       },
     ],
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'ViralReach - Performance-Based Influencer Marketing Platform',
     description: 'Connect beauty and skincare brands with authentic creators. Pay only for real results, not just posts.',
-    images: ['/og-image.jpg'],
+    images: ['/favicon.svg'],
     creator: '@viralreach',
     site: '@viralreach',
   },
@@ -107,7 +107,7 @@ export default function RootLayout({
               "@type": "Organization",
               "name": "ViralReach",
               "url": "https://viralreach.com",
-              "logo": "https://viralreach.com/logo.png",
+              "logo": "https://viralreach.com/favicon.svg",
               "description": "Performance-based influencer marketing platform connecting beauty and skincare brands with authentic creators.",
               "sameAs": [
                 "https://twitter.com/viralreach",
@@ -133,7 +133,7 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="ViralReach" />
         <meta name="application-name" content="ViralReach" />
-        <meta name="msapplication-TileImage" content="/mstile-144x144.png" />
+        <meta name="msapplication-TileImage" content="/favicon.svg" />
         <meta name="msapplication-config" content="/browserconfig.xml" />
         
         {/* Preconnect to external domains for performance */}
@@ -142,9 +142,11 @@ export default function RootLayout({
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://www.google-analytics.com" />
         
+        {/* Favicon */}
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        
         {/* PWA Manifest */}
         <link rel="manifest" href="/manifest.json" />
-        <link rel="apple-touch-icon" href="/icon-192x192.png" />
       </head>
       <body className={inter.className}>
         {children}

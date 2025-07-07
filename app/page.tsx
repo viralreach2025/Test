@@ -413,6 +413,185 @@ export default function Home() {
         {/* Creator Stories Carousel Section */}
         <CreatorStoriesCarousel />
 
+        {/* Pain Points Section - The Problems Brands Face */}
+        <section className="py-20 bg-white border-t border-gray-100">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold text-gray-900 mb-4">
+                The Reality of Traditional Influencer Marketing
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                These are the painful problems that cost brands millions every year
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {/* Problem 1: Paying for Posts, Not Results */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+                className="bg-white rounded-2xl p-8 shadow-lg border-l-4 border-red-500 hover:shadow-xl transition-shadow"
+              >
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mr-4">
+                    <X className="w-6 h-6 text-red-600" />
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900">Paying for Posts, Not Results</h3>
+                </div>
+                <p className="text-gray-600 mb-4">
+                  You pay $500-2000 per post upfront, but have no guarantee of sales, clicks, or even engagement. Many posts get 0 conversions.
+                </p>
+                <div className="bg-red-50 p-4 rounded-lg">
+                  <div className="text-sm text-red-700">
+                    <strong>Real Cost:</strong> $1,500 average per post with 0-5% conversion rate
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Problem 2: Fake Followers & Engagement */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="bg-white rounded-2xl p-8 shadow-lg border-l-4 border-red-500 hover:shadow-xl transition-shadow"
+              >
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mr-4">
+                    <X className="w-6 h-6 text-red-600" />
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900">Fake Followers & Engagement</h3>
+                </div>
+                <p className="text-gray-600 mb-4">
+                  Up to 40% of influencer followers are fake. You're paying for bots, not real customers who will buy your products.
+                </p>
+                <div className="bg-red-50 p-4 rounded-lg">
+                  <div className="text-sm text-red-700">
+                    <strong>Real Cost:</strong> 40% of your budget wasted on fake audiences
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Problem 3: No Performance Tracking */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                className="bg-white rounded-2xl p-8 shadow-lg border-l-4 border-red-500 hover:shadow-xl transition-shadow"
+              >
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mr-4">
+                    <X className="w-6 h-6 text-red-600" />
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900">No Performance Tracking</h3>
+                </div>
+                <p className="text-gray-600 mb-4">
+                  You have no idea if your influencer campaigns are actually driving sales. No attribution, no ROI data, just hope.
+                </p>
+                <div className="bg-red-50 p-4 rounded-lg">
+                  <div className="text-sm text-red-700">
+                    <strong>Real Cost:</strong> Flying blind with no data to optimize campaigns
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Problem 4: Late or No Payments */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                className="bg-white rounded-2xl p-8 shadow-lg border-l-4 border-red-500 hover:shadow-xl transition-shadow"
+              >
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mr-4">
+                    <X className="w-6 h-6 text-red-600" />
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900">Late or No Payments</h3>
+                </div>
+                <p className="text-gray-600 mb-4">
+                  Creators often wait 30-90 days for payment, or never get paid at all. This kills motivation and content quality.
+                </p>
+                <div className="bg-red-50 p-4 rounded-lg">
+                  <div className="text-sm text-red-700">
+                    <strong>Real Cost:</strong> Poor content quality and creator churn
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Problem 5: Manual Research & Outreach */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+                className="bg-white rounded-2xl p-8 shadow-lg border-l-4 border-red-500 hover:shadow-xl transition-shadow"
+              >
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mr-4">
+                    <X className="w-6 h-6 text-red-600" />
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900">Manual Research & Outreach</h3>
+                </div>
+                <p className="text-gray-600 mb-4">
+                  Hours spent researching creators, sending DMs, negotiating rates, and managing relationships manually.
+                </p>
+                <div className="bg-red-50 p-4 rounded-lg">
+                  <div className="text-sm text-red-700">
+                    <strong>Real Cost:</strong> 20+ hours per month on admin work
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Problem 6: Poor Brand-Creator Fit */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6 }}
+                className="bg-white rounded-2xl p-8 shadow-lg border-l-4 border-red-500 hover:shadow-xl transition-shadow"
+              >
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mr-4">
+                    <X className="w-6 h-6 text-red-600" />
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900">Poor Brand-Creator Fit</h3>
+                </div>
+                <p className="text-gray-600 mb-4">
+                  Creators who don't align with your brand values or audience. Awkward collaborations that feel forced and inauthentic.
+                </p>
+                <div className="bg-red-50 p-4 rounded-lg">
+                  <div className="text-sm text-red-700">
+                    <strong>Real Cost:</strong> Damaged brand reputation and poor engagement
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+
+            <div className="text-center mt-12">
+              <div className="bg-gradient-to-r from-red-500 to-red-600 text-white p-8 rounded-2xl max-w-4xl mx-auto">
+                <h3 className="text-2xl font-bold mb-4">
+                  The Total Cost of Traditional Influencer Marketing
+                </h3>
+                <div className="grid md:grid-cols-3 gap-6 text-center">
+                  <div>
+                    <div className="text-3xl font-bold mb-2">$5,000+</div>
+                    <div className="text-red-100">Average wasted per campaign</div>
+                  </div>
+                  <div>
+                    <div className="text-3xl font-bold mb-2">60%</div>
+                    <div className="text-red-100">Campaigns with 0 ROI</div>
+                  </div>
+                  <div>
+                    <div className="text-3xl font-bold mb-2">40+ hrs</div>
+                    <div className="text-red-100">Monthly admin time</div>
+                  </div>
+                </div>
+                <p className="text-red-100 mt-6 text-lg">
+                  <strong>There's a better way.</strong> ViralReach eliminates these problems with performance-based payments and AI-powered matching.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Social Proof Section */}
       <section className="py-16 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
