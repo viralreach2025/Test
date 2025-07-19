@@ -242,7 +242,7 @@ export default function Home() {
 
       {/* Hero Section */}
       <main>
-        <section className="relative py-20 bg-black overflow-hidden">
+        <section className="relative pt-24 sm:pt-28 md:pt-32 pb-20 bg-black overflow-hidden">
           {/* Diagonal Collage Background of Influencers */}
           <div className="absolute inset-0 w-full h-full z-0 pointer-events-none">
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rotate-[-18deg] flex flex-wrap gap-4" style={{ width: '120vw', height: '60vh' }}>
