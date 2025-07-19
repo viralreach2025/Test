@@ -36,9 +36,9 @@ export default function CreatorPage() {
   const creatorBenefits = [
     {
       icon: <DollarSign className="w-8 h-8" />,
-      title: "Earn More Per Post",
-      description: "Performance-based payments mean you earn based on results, not just posting. Top creators earn 2-3x more.",
-      stat: "Earn up to 3x more"
+      title: "Content + Commission Earnings",
+      description: "Get paid for creating content plus earn commission on sales. More ways to earn from your influence.",
+      stat: "Earn from content + sales"
     },
     {
       icon: <Target className="w-8 h-8" />,
@@ -122,20 +122,20 @@ export default function CreatorPage() {
 
   const faqs = [
     {
-      question: "How do performance-based payments work?",
-      answer: "You set performance goals with brands (views, clicks, engagement). You get paid based on actual results achieved, often earning 2-3x more than traditional flat-rate payments."
+      question: "How do content + commission payments work?",
+      answer: "You get paid a fixed rate for creating content, plus earn commission on sales generated from your posts (coming soon). This gives you multiple ways to earn from your influence."
     },
     {
       question: "What makes ViralReach different from other platforms?",
-      answer: "We focus on beauty/skincare, offer performance-based payments, provide AI-powered brand matching, and guarantee secure payments through escrow. Most platforms pay flat rates regardless of performance."
+      answer: "We focus on beauty/skincare, offer content + commission payments, provide AI-powered brand matching, and guarantee secure payments through escrow. Most platforms only pay flat rates."
     },
     {
       question: "How quickly can I start earning?",
       answer: "You can complete your profile in 10 minutes and start browsing opportunities immediately. Most creators get their first campaign within 48 hours."
     },
     {
-      question: "What if my content doesn't meet performance targets?",
-      answer: "We work with you to optimize content and provide guidance. If targets aren't met, we help troubleshoot and may adjust expectations based on circumstances."
+      question: "What if my content doesn't meet quality standards?",
+      answer: "We work with you to optimize content and provide guidance. If content doesn't meet standards, we help troubleshoot and may adjust expectations based on circumstances."
     },
     {
       question: "Do I need a large following to join?",
@@ -254,10 +254,10 @@ export default function CreatorPage() {
               </h1>
               
               <p className="text-xl md:text-2xl text-gray-200 mb-8 max-w-3xl mx-auto drop-shadow">
-                Join the only platform that pays you based on 
-                <span className="font-medium text-purple-200"> actual results, not just posts.</span>
+                Join the only platform that pays you for 
+                <span className="font-medium text-purple-200"> content creation plus commission on sales.</span>
                 <br />
-                Earn 2-3x more with performance-based payments.
+                Multiple revenue streams from your influence.
               </p>
             </motion.div>
 
@@ -291,15 +291,7 @@ export default function CreatorPage() {
             >
               <div className="flex items-center space-x-2">
                 <CheckCircle className="w-5 h-5 text-green-400" />
-                <span>500+ Active Brands</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <CheckCircle className="w-5 h-5 text-green-400" />
-                <span>Performance-Based Pay</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <CheckCircle className="w-5 h-5 text-green-400" />
-                <span>Secure Payments</span>
+                <span>Content + Commission Pay</span>
               </div>
             </motion.div>
           </div>
@@ -314,7 +306,7 @@ export default function CreatorPage() {
               Why Creators Choose ViralReach
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              We're not just another influencer platform. We're the only one that rewards quality content and real results.
+              We're not just another influencer platform. We're the only one that rewards content creation and sales generation.
             </p>
           </div>
 
@@ -391,7 +383,7 @@ export default function CreatorPage() {
               Why ViralReach Beats Other Platforms
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              See how our performance-based model and creator-first approach gives you the edge.
+              See how our content + commission model and creator-first approach gives you the edge.
             </p>
           </div>
 
@@ -412,8 +404,8 @@ export default function CreatorPage() {
                     <CheckCircle className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h4 className="text-lg font-semibold text-gray-900 mb-2">Performance-Based Payments</h4>
-                    <p className="text-gray-600">Earn 2-3x more based on actual results. Your quality content gets rewarded, not just posting.</p>
+                    <h4 className="text-lg font-semibold text-gray-900 mb-2">Content + Commission Payments</h4>
+                    <p className="text-gray-600">Earn for creating content plus commission on sales (coming soon). Multiple revenue streams from your influence.</p>
                   </div>
                 </motion.div>
 
@@ -495,8 +487,8 @@ export default function CreatorPage() {
                     <X className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h4 className="text-lg font-semibold text-gray-900 mb-2">Flat-Rate Payments</h4>
-                    <p className="text-gray-600">Same pay regardless of performance. Your best content gets the same compensation as mediocre posts.</p>
+                    <h4 className="text-lg font-semibold text-gray-900 mb-2">Flat-Rate Only Payments</h4>
+                    <p className="text-gray-600">Same pay regardless of performance. No opportunity to earn from the sales you drive.</p>
                   </div>
                 </motion.div>
 
@@ -586,10 +578,10 @@ export default function CreatorPage() {
                   <tr className="border-b border-gray-100">
                     <td className="py-4 px-4 font-medium text-gray-900">Payment Model</td>
                     <td className="py-4 px-4 text-center">
-                      <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Performance-Based</span>
+                      <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Content + Commission</span>
                     </td>
                     <td className="py-4 px-4 text-center">
-                      <span className="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-sm">Flat Rate</span>
+                      <span className="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-sm">Flat Rate Only</span>
                     </td>
                   </tr>
                   <tr className="border-b border-gray-100">
@@ -635,75 +627,233 @@ export default function CreatorPage() {
         </div>
       </section>
 
-      {/* Earnings Calculator Preview */}
+      {/* Available Campaigns Preview */}
       <section className="py-20 bg-gradient-to-br from-pink-50 to-purple-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              See Your Potential Earnings
+              Available Campaigns
             </h2>
-            <p className="text-xl text-gray-600">
-              Calculate how much you could earn with performance-based payments.
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Browse real brand opportunities with different payment models. Choose campaigns that match your style and earning goals.
             </p>
           </div>
 
-          <div className="bg-white rounded-2xl shadow-xl p-8">
-            <div className="grid md:grid-cols-2 gap-8">
-              <div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-6">Earnings Calculator</h3>
-                <div className="space-y-4">
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* Flat Rate Campaign */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100 hover:shadow-2xl transition-shadow"
+            >
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center space-x-3">
+                  <img 
+                    src="https://images.unsplash.com/photo-1556228720-195a672e8a03?w=60&h=60&fit=crop&crop=center" 
+                    alt="Glow Serum" 
+                    className="w-12 h-12 rounded-lg object-cover"
+                  />
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Followers</label>
-                    <select className="w-full p-3 border border-gray-300 rounded-lg">
-                      <option>5K - 10K</option>
-                      <option>10K - 25K</option>
-                      <option>25K - 50K</option>
-                      <option>50K - 100K</option>
-                      <option>100K+</option>
-                    </select>
+                    <h3 className="font-semibold text-gray-900">Glow Serum Launch</h3>
+                    <p className="text-sm text-gray-500">@glowbeauty</p>
                   </div>
+                </div>
+                <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-semibold">
+                  Flat Rate
+                </span>
+              </div>
+
+              <div className="space-y-3 mb-6">
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-600">Platform:</span>
+                  <span className="font-medium">Instagram Post</span>
+                </div>
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-600">Followers Required:</span>
+                  <span className="font-medium">10K - 50K</span>
+                </div>
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-600">Content Type:</span>
+                  <span className="font-medium">Product Review</span>
+                </div>
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-600">Deadline:</span>
+                  <span className="font-medium">7 days</span>
+                </div>
+              </div>
+
+              <div className="bg-blue-50 text-blue-900 p-4 rounded-xl mb-6">
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-blue-600 mb-1">$150</div>
+                  <div className="text-sm text-blue-700">Guaranteed payment per post</div>
+                </div>
+              </div>
+
+              <Link 
+                href="/#waitlist"
+                className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-blue-600 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center"
+              >
+                Apply Now
+                <ArrowRight className="w-5 h-5 ml-2" />
+              </Link>
+            </motion.div>
+
+            {/* Hybrid Campaign */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="bg-gradient-to-br from-pink-50 to-purple-50 rounded-2xl shadow-xl p-8 border-2 border-pink-200 hover:shadow-2xl transition-shadow relative"
+            >
+              <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                <span className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-4 py-1 rounded-full text-sm font-semibold">
+                  Most Popular
+                </span>
+              </div>
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center space-x-3">
+                  <img 
+                    src="https://images.unsplash.com/photo-1526947425960-945c6e72858f?w=60&h=60&fit=crop&crop=center" 
+                    alt="Hydra Boost" 
+                    className="w-12 h-12 rounded-lg object-cover"
+                  />
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Engagement Rate</label>
-                    <select className="w-full p-3 border border-gray-300 rounded-lg">
-                      <option>2% - 3%</option>
-                      <option>3% - 5%</option>
-                      <option>5% - 8%</option>
-                      <option>8%+</option>
-                    </select>
+                    <h3 className="font-semibold text-gray-900">Hydra Boost Campaign</h3>
+                    <p className="text-sm text-gray-500">@hydraskin</p>
                   </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Content Type</label>
-                    <select className="w-full p-3 border border-gray-300 rounded-lg">
-                      <option>Instagram Post</option>
-                      <option>Instagram Story</option>
-                      <option>YouTube Video</option>
-                      <option>TikTok Video</option>
-                    </select>
+                </div>
+                <span className="bg-pink-100 text-pink-700 px-3 py-1 rounded-full text-xs font-semibold">
+                  Hybrid
+                </span>
+              </div>
+
+              <div className="space-y-3 mb-6">
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-600">Platform:</span>
+                  <span className="font-medium">Instagram + TikTok</span>
+                </div>
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-600">Followers Required:</span>
+                  <span className="font-medium">25K - 100K</span>
+                </div>
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-600">Content Type:</span>
+                  <span className="font-medium">Before/After</span>
+                </div>
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-600">Deadline:</span>
+                  <span className="font-medium">14 days</span>
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-br from-pink-500 to-purple-600 text-white p-4 rounded-xl mb-6">
+                <div className="space-y-2">
+                  <div className="flex justify-between text-sm">
+                    <span>Base Rate:</span>
+                    <span className="font-semibold">$200</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span>+ $2/click</span>
+                    <span className="font-semibold">+ $15/conversion</span>
+                  </div>
+                  <div className="border-t border-white/20 pt-2 flex justify-between text-lg">
+                    <span>Potential:</span>
+                    <span className="font-bold">$600+</span>
                   </div>
                 </div>
               </div>
 
-              <div className="bg-gradient-to-br from-pink-500 to-purple-600 text-white p-6 rounded-xl">
-                <h3 className="text-xl font-semibold mb-4">Estimated Earnings</h3>
-                <div className="space-y-4">
-                  <div className="flex justify-between">
-                    <span>Base Rate:</span>
-                    <span className="font-semibold">$300</span>
+              <Link 
+                href="/#waitlist"
+                className="w-full bg-gradient-to-r from-pink-500 to-purple-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-pink-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center"
+              >
+                Apply Now
+                <ArrowRight className="w-5 h-5 ml-2" />
+              </Link>
+            </motion.div>
+
+            {/* Performance Only Campaign */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100 hover:shadow-2xl transition-shadow"
+            >
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center space-x-3">
+                  <img 
+                    src="https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=60&h=60&fit=crop&crop=center" 
+                    alt="Vitamin C Serum" 
+                    className="w-12 h-12 rounded-lg object-cover"
+                  />
+                  <div>
+                    <h3 className="font-semibold text-gray-900">Vitamin C Boost</h3>
+                    <p className="text-sm text-gray-500">@vitamincare</p>
                   </div>
-                  <div className="flex justify-between">
-                    <span>Performance Bonus:</span>
-                    <span className="font-semibold">$450</span>
+                </div>
+                <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-semibold">
+                  Performance
+                </span>
+              </div>
+
+              <div className="space-y-3 mb-6">
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-600">Platform:</span>
+                  <span className="font-medium">YouTube + Instagram</span>
+                </div>
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-600">Followers Required:</span>
+                  <span className="font-medium">50K+</span>
+                </div>
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-600">Content Type:</span>
+                  <span className="font-medium">Tutorial Video</span>
+                </div>
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-600">Deadline:</span>
+                  <span className="font-medium">21 days</span>
+                </div>
+              </div>
+
+              <div className="bg-green-50 text-green-900 p-4 rounded-xl mb-6">
+                <div className="space-y-2">
+                  <div className="flex justify-between text-sm">
+                    <span>Per Click:</span>
+                    <span className="font-semibold">$1.50</span>
                   </div>
-                  <div className="border-t border-white/20 pt-2 flex justify-between text-lg">
-                    <span>Total Per Campaign:</span>
-                    <span className="font-bold">$750</span>
+                  <div className="flex justify-between text-sm">
+                    <span>Per Conversion:</span>
+                    <span className="font-semibold">$25</span>
                   </div>
-                  <div className="text-sm opacity-90">
-                    *Based on 25K followers, 4% engagement
+                  <div className="border-t border-green-200 pt-2 flex justify-between text-lg">
+                    <span>Potential:</span>
+                    <span className="font-bold text-green-600">$800+</span>
                   </div>
                 </div>
               </div>
-            </div>
+
+              <Link 
+                href="/#waitlist"
+                className="w-full bg-gradient-to-r from-green-500 to-green-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-green-600 hover:to-green-700 transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center"
+              >
+                Apply Now
+                <ArrowRight className="w-5 h-5 ml-2" />
+              </Link>
+            </motion.div>
+          </div>
+
+          <div className="text-center mt-12">
+            <p className="text-lg text-gray-600 mb-6">
+              These are sample campaigns. Join our waitlist to access the full creator marketplace with hundreds of real brand opportunities.
+            </p>
+            <Link 
+              href="/#waitlist"
+              className="inline-flex items-center bg-gradient-to-r from-pink-500 to-purple-600 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:from-pink-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg"
+            >
+              Join Creator Marketplace
+              <ArrowRight className="w-5 h-5 ml-2" />
+            </Link>
           </div>
         </div>
       </section>

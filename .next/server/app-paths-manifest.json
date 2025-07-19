@@ -1,5 +1,9 @@
 {
-  "/not-found": "app/not-found.js",
-  "/page": "app/page.js",
-  "/api/send-waitlist-email/route": "app/api/send-waitlist-email/route.js"
+  "/_not-found": "app/_not-found.js",
+  "/api/contact/route": "app/api/contact/route.js",
+  "/api/send-waitlist-email/route": "app/api/send-waitlist-email/route.js",
+  "/brand/page": "app/brand/page.js",
+  "/contact/page": "app/contact/page.js",
+  "/creator/page": "app/creator/page.js",
+  "/page": "app/page.js"
 }

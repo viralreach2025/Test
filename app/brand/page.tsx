@@ -365,6 +365,132 @@ export default function BrandPage() {
         </div>
       </section>
 
+      {/* Choose Your Payment Model */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              Choose Your Payment Model
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-6">
+              Start with simple, fixed payments. More options coming soon.
+            </p>
+            <p className="text-lg text-gray-600 max-w-4xl mx-auto">
+              We're launching with fixed payments for guaranteed results. Hybrid and performance-based options will be available soon.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* Flat Rate Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="bg-gradient-to-br from-pink-50 to-purple-50 p-8 rounded-2xl border-2 border-pink-200 relative"
+            >
+              <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                <span className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-4 py-1 rounded-full text-sm font-semibold">
+                  Available Now
+                </span>
+              </div>
+              <div className="text-center mb-6">
+                <div className="w-16 h-16 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <DollarSign className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">Fixed Rate</h3>
+                <p className="text-gray-600 mb-4">
+                  Pay a fixed amount per post with guaranteed delivery. Simple, predictable pricing for reliable results.
+                </p>
+                <div className="bg-pink-50 text-pink-700 px-4 py-2 rounded-lg font-semibold text-sm">
+                  Example: $150/post
+                </div>
+              </div>
+              <Link 
+                href="/#waitlist"
+                className="w-full bg-gradient-to-r from-pink-500 to-purple-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-pink-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center"
+              >
+                Get Started
+                <ArrowRight className="w-5 h-5 ml-2" />
+              </Link>
+            </motion.div>
+
+            {/* Hybrid Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="bg-gray-50 p-8 rounded-2xl border border-gray-100 relative"
+            >
+              <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                <span className="bg-gray-500 text-white px-4 py-1 rounded-full text-sm font-semibold">
+                  Coming Soon
+                </span>
+              </div>
+              <div className="text-center mb-6">
+                <div className="w-16 h-16 bg-gray-400 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Target className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">Hybrid (Fixed + Performance)</h3>
+                <p className="text-gray-600 mb-4">
+                  Guarantee a base pay plus bonuses for clicks and conversions. Best balance of security and performance.
+                </p>
+                <div className="bg-gray-100 text-gray-600 px-4 py-2 rounded-lg font-semibold text-sm">
+                  Example: $100 + $2/click + $15/conversion
+                </div>
+              </div>
+              <button 
+                disabled
+                className="w-full bg-gray-400 text-white px-6 py-3 rounded-xl font-semibold cursor-not-allowed transition-all duration-300 flex items-center justify-center"
+                title="Coming soon"
+              >
+                Coming Soon
+                <Clock className="w-5 h-5 ml-2" />
+              </button>
+            </motion.div>
+
+            {/* Performance Only Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="bg-gray-50 p-8 rounded-2xl border border-gray-100 relative"
+            >
+              <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                <span className="bg-gray-500 text-white px-4 py-1 rounded-full text-sm font-semibold">
+                  Coming Soon
+                </span>
+              </div>
+              <div className="text-center mb-6">
+                <div className="w-16 h-16 bg-gray-400 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <TrendingUp className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">Performance Only</h3>
+                <p className="text-gray-600 mb-4">
+                  Pay only when clicks or conversions happen. Ideal for ROI-focused campaigns.
+                </p>
+                <div className="bg-gray-100 text-gray-600 px-4 py-2 rounded-lg font-semibold text-sm">
+                  Example: $1.50/click or $25/conversion
+                </div>
+              </div>
+              <button 
+                disabled
+                className="w-full bg-gray-400 text-white px-6 py-3 rounded-xl font-semibold cursor-not-allowed transition-all duration-300 flex items-center justify-center"
+                title="Coming soon"
+              >
+                Coming Soon
+                <Clock className="w-5 h-5 ml-2" />
+              </button>
+            </motion.div>
+          </div>
+
+          <div className="text-center mt-8">
+            <p className="text-sm text-gray-500">
+              Start with fixed payments today. Hybrid and performance options will be available in the coming months.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Creator Preview */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

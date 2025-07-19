@@ -190,12 +190,12 @@ export default function Home() {
 
   const faqs = [
     {
-      question: "How does performance-based payment work?",
-      answer: "You set performance goals (views, clicks, sales) and only pay when those targets are met. Creators earn 2-3x more based on actual results, not just posting content."
+      question: "How does the payment model work?",
+      answer: "Brands pay fixed rates per post with guaranteed delivery. Creators get paid for content creation plus commission on sales (coming soon). This ensures quality content and fair compensation."
     },
     {
       question: "What makes ViralReach different from other platforms?",
-      answer: "We focus on skincare/beauty, offer performance-based payments, have AI-powered matching, and provide escrow protection. Most platforms charge upfront regardless of results."
+      answer: "We focus on skincare/beauty, offer fixed payments for brands with hybrid options coming soon, provide AI-powered matching, and guarantee secure payments through escrow. Most platforms charge variable rates with no guarantees."
     },
     {
       question: "How quickly can I launch a campaign?",
@@ -203,7 +203,7 @@ export default function Home() {
     },
     {
       question: "What if I'm not satisfied with the results?",
-      answer: "We offer escrow protection and performance guarantees. If results don't meet expectations, we work to resolve issues or provide refunds."
+      answer: "We offer escrow protection and content guarantees. If content doesn't meet quality standards, we work to resolve issues or provide refunds."
     },
     {
       question: "Do you work with micro-influencers?",
@@ -361,7 +361,7 @@ export default function Home() {
                 
                 <p className="text-xl md:text-2xl text-gray-200 mb-8 max-w-3xl mx-auto drop-shadow">
                   Connect skincare brands with authentic creators. 
-                  <span className="font-medium text-purple-200"> Pay only for performance, not just posts.</span>
+                  <span className="font-medium text-purple-200"> Fixed payments for brands, content + commission for creators.</span>
                 </p>
               </motion.div>
 
@@ -395,11 +395,11 @@ export default function Home() {
               >
                 <div className="flex items-center space-x-2">
                   <CheckCircle className="w-5 h-5 text-green-400" />
-                  <span>Performance-Based Payments</span>
+                  <span>Fixed Payments for Brands</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <CheckCircle className="w-5 h-5 text-green-400" />
-                  <span>Escrow Protection</span>
+                  <span>Content + Commission for Creators</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <CheckCircle className="w-5 h-5 text-green-400" />
@@ -666,9 +666,9 @@ export default function Home() {
               <div className="w-16 h-16 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-6">
                 <DollarSign className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">Performance-Based Payments</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">Fixed Payments for Brands</h3>
               <p className="text-gray-600">
-                Pay only for real results, not just posts. Earn 2-3x more as a creator, get better ROI as a brand.
+                Pay a fixed amount per post with guaranteed delivery. Simple, predictable pricing with hybrid options coming soon.
               </p>
             </div>
             <div className="text-center">
@@ -748,7 +748,7 @@ export default function Home() {
               <div className="w-16 h-16 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-6">3</div>
               <h3 className="text-xl font-semibold text-gray-900 mb-4">Track & Pay for Results</h3>
               <p className="text-gray-600">
-                Monitor performance in real-time and pay only when your targets are met.
+                Monitor performance in real-time and pay fixed rates with guaranteed content delivery.
               </p>
             </div>
           </div>
