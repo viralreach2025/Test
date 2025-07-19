@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useEffect, useState } from 'react';
 
 const creators = [
   {
@@ -75,6 +75,7 @@ const creators = [
 
 export default function CreatorStoriesCarousel() {
   const carouselRef = useRef<HTMLDivElement>(null);
+  const [isAutoScrolling, setIsAutoScrolling] = useState(true);
 
   const scroll = (dir: 'left' | 'right') => {
     if (carouselRef.current) {
@@ -85,6 +86,34 @@ export default function CreatorStoriesCarousel() {
       });
     }
   };
+
+  // Auto-scroll functionality
+  useEffect(() => {
+    if (!isAutoScrolling) return;
+
+    const interval = setInterval(() => {
+      if (carouselRef.current) {
+        const { scrollLeft, scrollWidth, clientWidth } = carouselRef.current;
+        
+        // If we're at the end, scroll back to the beginning
+        if (scrollLeft >= scrollWidth - clientWidth - 10) {
+          carouselRef.current.scrollTo({
+            left: 0,
+            behavior: 'smooth'
+          });
+        } else {
+          // Otherwise, scroll to the next item
+          scroll('right');
+        }
+      }
+    }, 3000); // Scroll every 3 seconds
+
+    return () => clearInterval(interval);
+  }, [isAutoScrolling]);
+
+  // Pause auto-scroll on hover
+  const handleMouseEnter = () => setIsAutoScrolling(false);
+  const handleMouseLeave = () => setIsAutoScrolling(true);
 
   return (
     <section className="py-20 bg-black">
@@ -106,6 +135,8 @@ export default function CreatorStoriesCarousel() {
             ref={carouselRef}
             className="flex gap-12 overflow-x-auto pb-4 scrollbar-hide snap-x snap-mandatory"
             style={{ scrollSnapType: 'x mandatory' }}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
           >
             {creators.map((creator, i) => (
               <div

@@ -27,8 +27,10 @@ import {
   Share2,
   Calendar,
   MapPin,
-  X
+  X,
+  Menu
 } from 'lucide-react'
+import Navbar from '../components/Navbar'
 
 export default function CreatorPage() {
   const [isFAQOpen, setIsFAQOpen] = useState<number | null>(null)
@@ -36,27 +38,27 @@ export default function CreatorPage() {
   const creatorBenefits = [
     {
       icon: <DollarSign className="w-8 h-8" />,
-      title: "Content + Commission Earnings",
-      description: "Get paid for creating content plus earn commission on sales. More ways to earn from your influence.",
-      stat: "Earn from content + sales"
+      title: "Earn Based on Performance",
+      description: "Get paid based on your results and audience engagement, not just your follower count. Better content = higher earnings.",
+      stat: "Performance-based pay"
     },
     {
       icon: <Target className="w-8 h-8" />,
-      title: "Perfect Brand Matches",
-      description: "Our AI matches you with brands that align with your values and audience. No more awkward partnerships.",
-      stat: "95% brand satisfaction"
+      title: "Apply for Brand Opportunities",
+      description: "Browse campaigns from brands and apply for ones that match your content and audience. Brands choose the best fit.",
+      stat: "Quality brand partnerships"
     },
     {
       icon: <Shield className="w-8 h-8" />,
-      title: "Secure Payments",
-      description: "Get paid upfront via escrow. No more chasing payments or dealing with late-paying brands.",
-      stat: "100% payment guarantee"
+      title: "Get Paid Securely",
+      description: "No more chasing payments or waiting months for your money. Secure escrow ensures you get paid on time, every time.",
+      stat: "Guaranteed payments"
     },
     {
       icon: <BarChart3 className="w-8 h-8" />,
-      title: "Performance Analytics",
-      description: "Track your content performance and earnings in real-time. Know exactly what works for your audience.",
-      stat: "Real-time insights"
+      title: "Track Your Success",
+      description: "See exactly how much you earn from each campaign and which content performs best. Optimize your strategy for maximum income.",
+      stat: "Real earnings insights"
     }
   ]
 
@@ -64,23 +66,23 @@ export default function CreatorPage() {
     {
       step: "1",
       title: "Complete Your Profile",
-      description: "Showcase your content, audience demographics, and brand values. The more complete, the better matches.",
+      description: "Showcase your content, audience demographics, and brand values. The better your profile, the more opportunities you get.",
       icon: <Users className="w-6 h-6" />,
       time: "10 minutes"
     },
     {
       step: "2",
-      title: "Browse Opportunities",
-      description: "Get matched with relevant brand campaigns. Review requirements and compensation before applying.",
+      title: "Browse & Apply",
+      description: "Find brand campaigns that match your content and audience. Apply with your rates and content ideas.",
       icon: <Eye className="w-6 h-6" />,
-      time: "Daily updates"
+      time: "Daily opportunities"
     },
     {
       step: "3",
-      title: "Create & Get Paid",
-      description: "Create authentic content, track performance, and get paid when targets are met.",
+      title: "Create & Earn",
+      description: "Get approved by brands, create content, and earn based on your performance. Track your earnings in real-time.",
       icon: <TrendingUp className="w-6 h-6" />,
-      time: "Performance-based"
+      time: "Start earning immediately"
     }
   ]
 
@@ -90,10 +92,10 @@ export default function CreatorPage() {
       handle: "@sarahbeauty",
       followers: "125K",
       niche: "Skincare & Beauty",
-      earnings: "$12,450",
+      earnings: "$2,450",
       period: "Last 3 months",
       image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=200&h=200&fit=crop&crop=face",
-      quote: "ViralReach helped me earn 3x more than other platforms. The performance-based model rewards quality content.",
+      quote: "ViralReach helped me earn more with performance-based payments. I get paid based on my results, not just my follower count.",
       brands: ["Glossier", "The Ordinary", "Drunk Elephant"]
     },
     {
@@ -101,10 +103,10 @@ export default function CreatorPage() {
       handle: "@mayaskincare",
       followers: "156K",
       niche: "Skincare Reviews",
-      earnings: "$18,200",
+      earnings: "$3,200",
       period: "Last 3 months",
       image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&h=200&fit=crop&crop=face",
-      quote: "I love that I only work with brands I genuinely believe in. The AI matching is spot-on!",
+      quote: "I love applying for campaigns that match my content. The secure payment system gives me peace of mind.",
       brands: ["CeraVe", "La Roche-Posay", "Neutrogena"]
     },
     {
@@ -112,91 +114,58 @@ export default function CreatorPage() {
       handle: "@alexbeauty",
       followers: "67K",
       niche: "Beauty Tutorials",
-      earnings: "$8,900",
+      earnings: "$1,900",
       period: "Last 3 months",
       image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face",
-      quote: "The secure payment system gives me peace of mind. I know I'll get paid for my work.",
+      quote: "The platform makes it easy to find brand opportunities that fit my audience. I get paid securely and on time.",
       brands: ["Fenty Beauty", "Morphe", "ColourPop"]
     }
   ]
 
   const faqs = [
     {
-      question: "How do content + commission payments work?",
-      answer: "You get paid a fixed rate for creating content, plus earn commission on sales generated from your posts (coming soon). This gives you multiple ways to earn from your influence."
+      question: "How do I apply for brand opportunities?",
+      answer: "Complete your profile, browse available campaigns, and apply with your rates and content ideas. Brands review applications and choose the best fit for their campaigns."
     },
     {
-      question: "What makes ViralReach different from other platforms?",
-      answer: "We focus on beauty/skincare, offer content + commission payments, provide AI-powered brand matching, and guarantee secure payments through escrow. Most platforms only pay flat rates."
+      question: "What if my content doesn't perform well?",
+      answer: "With fixed payments, you get paid regardless. With hybrid, you get a base pay plus bonuses. With commission, you only earn when you drive sales - but the potential is unlimited."
+    },
+    {
+      question: "How do you track my performance and earnings?",
+      answer: "We integrate with your content platforms to track engagement, clicks, and sales. Our dashboard shows you exactly how much you earn from each campaign in real-time."
+    },
+    {
+      question: "Can I apply for multiple campaigns at once?",
+      answer: "Yes! Apply for as many campaigns as you want. Each application is reviewed independently by brands, so you can work with multiple brands simultaneously."
+    },
+    {
+      question: "What's different from other creator platforms?",
+      answer: "Other platforms pay you fixed rates regardless of performance. We let you get paid based on results and offer flexible payment models that reward your content quality."
     },
     {
       question: "How quickly can I start earning?",
-      answer: "You can complete your profile in 10 minutes and start browsing opportunities immediately. Most creators get their first campaign within 48 hours."
-    },
-    {
-      question: "What if my content doesn't meet quality standards?",
-      answer: "We work with you to optimize content and provide guidance. If content doesn't meet standards, we help troubleshoot and may adjust expectations based on circumstances."
-    },
-    {
-      question: "Do I need a large following to join?",
-      answer: "No! We work with creators from 5K to 500K+ followers. Micro-influencers often have higher engagement rates and are highly valued by brands."
-    },
-    {
-      question: "Can I work with multiple brands at once?",
-      answer: "Yes! You can manage multiple campaigns simultaneously. Our dashboard helps you track all your partnerships and earnings in one place."
+      answer: "Complete your profile in 10 minutes and start applying for opportunities immediately. Most creators get their first campaign within 48 hours and start earning right away."
     }
   ]
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-white/90 backdrop-blur-md z-50 border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center">
-              <Link href="/" className="text-2xl font-bold bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">
-                ViralReach
-              </Link>
-            </div>
-            <div className="hidden md:flex items-center space-x-8">
-              <Link href="/" className="text-gray-600 hover:text-gray-900">Home</Link>
-              <Link href="/brand" className="text-gray-600 hover:text-gray-900">For Brands</Link>
-              <button 
-                disabled
-                className="text-gray-400 cursor-not-allowed"
-                title="Coming soon"
-              >
-                Sign In
-              </button>
-            </div>
-            <div className="md:hidden">
-              <button 
-                disabled
-                className="text-gray-400 cursor-not-allowed"
-                title="Coming soon"
-              >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <Navbar currentPage="creator" />
 
-      {/* Hero Section - Netflix Style with Video Thumbnails Background */}
+      {/* Hero Section - Creator-Focused */}
       <section className="relative pt-24 pb-16 bg-black overflow-hidden">
-        {/* Diagonal Collage Background of Video Thumbnails */}
+        {/* Background with creator-focused imagery */}
         <div className="absolute inset-0 w-full h-full z-0 pointer-events-none">
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rotate-[-18deg] flex flex-wrap gap-4" style={{ width: '120vw', height: '60vh' }}>
             {[
-              // Influencer Faces - Beauty & Skincare Creators
-              "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=200&h=200&fit=crop&crop=face", // Beauty influencer
+              // Creator-focused images - content creation, monetization, success stories
+              "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=200&h=200&fit=crop&crop=face", // Beauty creator
               "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&h=200&fit=crop&crop=face", // Skincare creator
               "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face", // Beauty guru
-              "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop&crop=face", // Lifestyle influencer
+              "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop&crop=face", // Lifestyle creator
               "https://images.unsplash.com/photo-1548142813-c348350df52b?w=200&h=200&fit=crop&crop=face", // Fashion creator
-              "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop&crop=face", // Male beauty creator
+              "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop&crop=face", // Male creator
               "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&h=200&fit=crop&crop=face", // Beauty influencer
               "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&h=200&fit=crop&crop=face", // Skincare expert
               "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=200&h=200&fit=crop&crop=face", // Beauty blogger
@@ -204,7 +173,7 @@ export default function CreatorPage() {
               "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face", // Beauty guru
               "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop&crop=face", // Lifestyle influencer
               "https://images.unsplash.com/photo-1548142813-c348350df52b?w=200&h=200&fit=crop&crop=face", // Fashion creator
-              "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop&crop=face", // Male beauty creator
+              "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop&crop=face", // Male creator
               "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&h=200&fit=crop&crop=face", // Beauty influencer
               "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&h=200&fit=crop&crop=face", // Skincare expert
               "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=200&h=200&fit=crop&crop=face", // Beauty blogger
@@ -217,7 +186,7 @@ export default function CreatorPage() {
               >
                 <img
                   src={imageSrc}
-                  alt={`Creator Content ${i + 1}`}
+                  alt={`Creator ${i + 1}`}
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-black/20"></div>
@@ -242,22 +211,23 @@ export default function CreatorPage() {
               className="mb-8"
             >
               <div className="inline-flex items-center bg-gradient-to-r from-pink-500 to-purple-600 text-white px-4 py-2 rounded-full text-sm font-medium mb-6 backdrop-blur-sm">
-                <span className="w-2 h-2 bg-white rounded-full mr-2 animate-pulse"></span>
-                For Beauty & Skincare Creators
+                <Globe className="w-4 h-4 mr-2" />
+                🌍 For Creators - Launching Globally
               </div>
               
               <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight drop-shadow-xl">
-                Monetize Your{' '}
+                Get Paid What You're Worth
+                <br />
                 <span className="bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">
-                  Influence
+                  Based on Your Results
                 </span>
               </h1>
               
               <p className="text-xl md:text-2xl text-gray-200 mb-8 max-w-3xl mx-auto drop-shadow">
-                Join the only platform that pays you for 
-                <span className="font-medium text-purple-200"> content creation plus commission on sales.</span>
+                Apply for brand opportunities with flexible payment models. 
+                <span className="font-medium text-purple-200"> Get paid based on your performance, not just your follower count.</span>
                 <br />
-                Multiple revenue streams from your influence.
+                <span className="text-lg text-gray-300">Brands choose you based on your content and audience fit.</span>
               </p>
             </motion.div>
 
@@ -271,16 +241,15 @@ export default function CreatorPage() {
                 href="/#waitlist"
                 className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:from-pink-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg"
               >
-                Join as Creator
+                Apply for Opportunities
                 <ArrowRight className="w-5 h-5 ml-2 inline" />
               </Link>
-              <button 
-                disabled
-                className="bg-gray-400 text-white border-2 border-gray-400 px-8 py-4 rounded-xl font-semibold text-lg cursor-not-allowed transition-all duration-300"
-                title="Coming soon"
+              <Link 
+                href="/#waitlist"
+                className="bg-white text-purple-600 border-2 border-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-gray-100 transition-all duration-300"
               >
-                View Opportunities
-              </button>
+                Browse Campaigns
+              </Link>
             </motion.div>
 
             <motion.div
@@ -291,7 +260,15 @@ export default function CreatorPage() {
             >
               <div className="flex items-center space-x-2">
                 <CheckCircle className="w-5 h-5 text-green-400" />
-                <span>Content + Commission Pay</span>
+                <span>Apply for Opportunities</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <CheckCircle className="w-5 h-5 text-green-400" />
+                <span>Get Paid for Performance</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <CheckCircle className="w-5 h-5 text-green-400" />
+                <span>Secure Payments</span>
               </div>
             </motion.div>
           </div>
@@ -303,10 +280,10 @@ export default function CreatorPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Why Creators Choose ViralReach
+              Solve Your Biggest Creator Problems
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              We're not just another influencer platform. We're the only one that rewards content creation and sales generation.
+              Traditional platforms underpay you and treat you like a commodity. We put creators first with fair, flexible earning models.
             </p>
           </div>
 
@@ -345,7 +322,7 @@ export default function CreatorPage() {
               How It Works for Creators
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Get started in minutes and start earning from your first campaign.
+              From choosing your earning model to tracking your income - everything designed around your success.
             </p>
           </div>
 
@@ -383,7 +360,7 @@ export default function CreatorPage() {
               Why ViralReach Beats Other Platforms
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              See how our content + commission model and creator-first approach gives you the edge.
+              See how our creator-first approach and flexible earning models give you the advantage.
             </p>
           </div>
 
@@ -404,38 +381,8 @@ export default function CreatorPage() {
                     <CheckCircle className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h4 className="text-lg font-semibold text-gray-900 mb-2">Content + Commission Payments</h4>
-                    <p className="text-gray-600">Earn for creating content plus commission on sales (coming soon). Multiple revenue streams from your influence.</p>
-                  </div>
-                </motion.div>
-
-                <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.2 }}
-                  className="flex items-start space-x-4"
-                >
-                  <div className="w-12 h-12 bg-gradient-to-r from-green-400 to-green-600 rounded-full flex items-center justify-center flex-shrink-0">
-                    <CheckCircle className="w-6 h-6 text-white" />
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-semibold text-gray-900 mb-2">Escrow Protection</h4>
-                    <p className="text-gray-600">Get paid upfront and securely. No more chasing payments or dealing with late-paying brands.</p>
-                  </div>
-                </motion.div>
-
-                <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.3 }}
-                  className="flex items-start space-x-4"
-                >
-                  <div className="w-12 h-12 bg-gradient-to-r from-green-400 to-green-600 rounded-full flex items-center justify-center flex-shrink-0">
-                    <CheckCircle className="w-6 h-6 text-white" />
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-semibold text-gray-900 mb-2">AI-Powered Brand Matching</h4>
-                    <p className="text-gray-600">Perfect brand partnerships that align with your values and audience. No awkward collaborations.</p>
+                    <h4 className="text-lg font-semibold text-gray-900 mb-2">Performance-Based Pay</h4>
+                    <p className="text-gray-600">Get paid based on your results, not just your follower count. Better content and engagement = higher earnings.</p>
                   </div>
                 </motion.div>
 
@@ -443,6 +390,21 @@ export default function CreatorPage() {
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.4 }}
+                  className="flex items-start space-x-4"
+                >
+                  <div className="w-12 h-12 bg-gradient-to-r from-green-400 to-green-600 rounded-full flex items-center justify-center flex-shrink-0">
+                    <CheckCircle className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-semibold text-gray-900 mb-2">Quality Brand Partnerships</h4>
+                    <p className="text-gray-600">Apply for campaigns from brands that match your content and audience. No more awkward collaborations.</p>
+                  </div>
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.5 }}
                   className="flex items-start space-x-4"
                 >
                   <div className="w-12 h-12 bg-gradient-to-r from-green-400 to-green-600 rounded-full flex items-center justify-center flex-shrink-0">
@@ -457,15 +419,15 @@ export default function CreatorPage() {
                 <motion.div
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.5 }}
+                  transition={{ delay: 0.6 }}
                   className="flex items-start space-x-4"
                 >
                   <div className="w-12 h-12 bg-gradient-to-r from-green-400 to-green-600 rounded-full flex items-center justify-center flex-shrink-0">
                     <CheckCircle className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h4 className="text-lg font-semibold text-gray-900 mb-2">Skincare/Beauty Focus</h4>
-                    <p className="text-gray-600">Specialized platform with brands that understand your niche. Better opportunities, higher rates.</p>
+                    <h4 className="text-lg font-semibold text-gray-900 mb-2">Flexible Payment Models</h4>
+                    <p className="text-gray-600">Brands offer fixed, hybrid, or commission-based payments. Choose opportunities that match your earning goals.</p>
                   </div>
                 </motion.div>
               </div>
@@ -487,8 +449,8 @@ export default function CreatorPage() {
                     <X className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h4 className="text-lg font-semibold text-gray-900 mb-2">Flat-Rate Only Payments</h4>
-                    <p className="text-gray-600">Same pay regardless of performance. No opportunity to earn from the sales you drive.</p>
+                    <h4 className="text-lg font-semibold text-gray-900 mb-2">Fixed Low Rates</h4>
+                    <p className="text-gray-600">Platforms set your rates regardless of your performance. Get paid the same whether you drive 10 or 10,000 sales.</p>
                   </div>
                 </motion.div>
 
@@ -517,8 +479,8 @@ export default function CreatorPage() {
                     <X className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h4 className="text-lg font-semibold text-gray-900 mb-2">Poor Brand Matches</h4>
-                    <p className="text-gray-600">Random brand partnerships that don't fit your audience or values. Awkward collaborations.</p>
+                    <h4 className="text-lg font-semibold text-gray-900 mb-2">No Performance Rewards</h4>
+                    <p className="text-gray-600">No incentive to create better content. Get paid the same regardless of your results or audience engagement.</p>
                   </div>
                 </motion.div>
 
@@ -532,8 +494,8 @@ export default function CreatorPage() {
                     <X className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h4 className="text-lg font-semibold text-gray-900 mb-2">Limited Analytics</h4>
-                    <p className="text-gray-600">Basic reporting or no insights at all. No way to track your performance or optimize earnings.</p>
+                    <h4 className="text-lg font-semibold text-gray-900 mb-2">Limited Earning Potential</h4>
+                    <p className="text-gray-600">Capped earnings regardless of your performance. No way to earn more for driving better results.</p>
                   </div>
                 </motion.div>
 
@@ -547,8 +509,8 @@ export default function CreatorPage() {
                     <X className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h4 className="text-lg font-semibold text-gray-900 mb-2">Generic Marketplaces</h4>
-                    <p className="text-gray-600">Overcrowded with all types of brands. Hard to find relevant opportunities in your niche.</p>
+                    <h4 className="text-lg font-semibold text-gray-900 mb-2">Poor Brand Matches</h4>
+                    <p className="text-gray-600">Random brand partnerships that don't fit your audience or values. Awkward collaborations.</p>
                   </div>
                 </motion.div>
               </div>
@@ -576,12 +538,21 @@ export default function CreatorPage() {
                 </thead>
                 <tbody className="space-y-2">
                   <tr className="border-b border-gray-100">
-                    <td className="py-4 px-4 font-medium text-gray-900">Payment Model</td>
+                    <td className="py-4 px-4 font-medium text-gray-900">Payment Models</td>
                     <td className="py-4 px-4 text-center">
-                      <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Content + Commission</span>
+                      <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">3 Flexible Models</span>
                     </td>
                     <td className="py-4 px-4 text-center">
-                      <span className="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-sm">Flat Rate Only</span>
+                      <span className="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-sm">Fixed Rate Only</span>
+                    </td>
+                  </tr>
+                  <tr className="border-b border-gray-100">
+                    <td className="py-4 px-4 font-medium text-gray-900">Earning Potential</td>
+                    <td className="py-4 px-4 text-center">
+                      <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Performance-Based</span>
+                    </td>
+                    <td className="py-4 px-4 text-center">
+                      <span className="bg-red-100 text-red-600 px-3 py-1 rounded-full text-sm">Fixed Rates</span>
                     </td>
                   </tr>
                   <tr className="border-b border-gray-100">
@@ -596,10 +567,10 @@ export default function CreatorPage() {
                   <tr className="border-b border-gray-100">
                     <td className="py-4 px-4 font-medium text-gray-900">Brand Matching</td>
                     <td className="py-4 px-4 text-center">
-                      <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">AI-Powered</span>
+                      <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Quality Partnerships</span>
                     </td>
                     <td className="py-4 px-4 text-center">
-                      <span className="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-sm">Manual Search</span>
+                      <span className="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-sm">Random Matches</span>
                     </td>
                   </tr>
                   <tr className="border-b border-gray-100">
@@ -612,12 +583,12 @@ export default function CreatorPage() {
                     </td>
                   </tr>
                   <tr>
-                    <td className="py-4 px-4 font-medium text-gray-900">Niche Focus</td>
+                    <td className="py-4 px-4 font-medium text-gray-900">Application Process</td>
                     <td className="py-4 px-4 text-center">
-                      <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Skincare/Beauty</span>
+                      <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Simple Apply</span>
                     </td>
                     <td className="py-4 px-4 text-center">
-                      <span className="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-sm">Generic</span>
+                      <span className="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-sm">Complex Process</span>
                     </td>
                   </tr>
                 </tbody>
@@ -635,12 +606,12 @@ export default function CreatorPage() {
               Available Campaigns
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Browse real brand opportunities with different payment models. Choose campaigns that match your style and earning goals.
+              Browse brand opportunities with different payment models. Apply for campaigns that match your content and audience.
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {/* Flat Rate Campaign */}
+            {/* Fixed Payments Campaign */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -660,7 +631,7 @@ export default function CreatorPage() {
                   </div>
                 </div>
                 <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-semibold">
-                  Flat Rate
+                  Fixed Rate
                 </span>
               </div>
 
@@ -685,8 +656,8 @@ export default function CreatorPage() {
 
               <div className="bg-blue-50 text-blue-900 p-4 rounded-xl mb-6">
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-blue-600 mb-1">$150</div>
-                  <div className="text-sm text-blue-700">Guaranteed payment per post</div>
+                  <div className="text-2xl font-bold text-blue-600 mb-1">$50 - $500</div>
+                  <div className="text-sm text-blue-700">Fixed rate per post</div>
                 </div>
               </div>
 
@@ -751,15 +722,15 @@ export default function CreatorPage() {
                 <div className="space-y-2">
                   <div className="flex justify-between text-sm">
                     <span>Base Rate:</span>
-                    <span className="font-semibold">$200</span>
+                    <span className="font-semibold">$25 - $200</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span>+ $2/click</span>
-                    <span className="font-semibold">+ $15/conversion</span>
+                    <span>+ $5 per sale</span>
+                    <span className="font-semibold">Performance bonus</span>
                   </div>
                   <div className="border-t border-white/20 pt-2 flex justify-between text-lg">
                     <span>Potential:</span>
-                    <span className="font-bold">$600+</span>
+                    <span className="font-bold">$500+</span>
                   </div>
                 </div>
               </div>
@@ -773,7 +744,7 @@ export default function CreatorPage() {
               </Link>
             </motion.div>
 
-            {/* Performance Only Campaign */}
+            {/* Sales Commission Campaign */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -793,7 +764,7 @@ export default function CreatorPage() {
                   </div>
                 </div>
                 <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-semibold">
-                  Performance
+                  Commission
                 </span>
               </div>
 
@@ -819,16 +790,16 @@ export default function CreatorPage() {
               <div className="bg-green-50 text-green-900 p-4 rounded-xl mb-6">
                 <div className="space-y-2">
                   <div className="flex justify-between text-sm">
-                    <span>Per Click:</span>
-                    <span className="font-semibold">$1.50</span>
+                    <span>Commission Rate:</span>
+                    <span className="font-semibold">5% - 15%</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span>Per Conversion:</span>
-                    <span className="font-semibold">$25</span>
+                    <span>Per Sale:</span>
+                    <span className="font-semibold">Performance-based</span>
                   </div>
                   <div className="border-t border-green-200 pt-2 flex justify-between text-lg">
                     <span>Potential:</span>
-                    <span className="font-bold text-green-600">$800+</span>
+                    <span className="font-bold text-green-600">$1000+</span>
                   </div>
                 </div>
               </div>
@@ -845,7 +816,7 @@ export default function CreatorPage() {
 
           <div className="text-center mt-12">
             <p className="text-lg text-gray-600 mb-6">
-              These are sample campaigns. Join our waitlist to access the full creator marketplace with hundreds of real brand opportunities.
+              These are sample campaigns. Join our waitlist to access the full creator marketplace with real brand opportunities.
             </p>
             <Link 
               href="/#waitlist"
@@ -899,16 +870,16 @@ export default function CreatorPage() {
       <section className="py-20 bg-gradient-to-br from-pink-500 to-purple-600">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl font-bold text-white mb-4">
-            Ready to Earn More?
+            Ready to Apply for Opportunities?
           </h2>
           <p className="text-xl text-pink-100 mb-8">
-            Join hundreds of creators who've already discovered the ViralReach difference.
+            Join the platform and start applying for brand campaigns that match your content and audience.
           </p>
           <Link 
             href="/#waitlist"
             className="inline-flex items-center bg-white text-pink-600 px-8 py-4 rounded-xl font-semibold text-lg hover:bg-gray-100 transition-colors"
           >
-            Join as Creator
+            Apply for Opportunities
             <ArrowRight className="w-5 h-5 ml-2" />
           </Link>
         </div>
@@ -923,7 +894,7 @@ export default function CreatorPage() {
                 ViralReach
               </div>
               <p className="text-gray-400 mb-4">
-                The future of performance-based influencer marketing for beauty and skincare creators.
+                The future of flexible payment models for creators. Choose fixed, hybrid, or commission.
               </p>
               <div className="flex space-x-4">
                 <a href="#" className="text-gray-400 hover:text-white">
@@ -944,7 +915,7 @@ export default function CreatorPage() {
                 <li><Link href="/" className="hover:text-white">Home</Link></li>
                 <li><Link href="/brand" className="hover:text-white">For Brands</Link></li>
                 <li><a href="#" className="hover:text-white">Creator Success</a></li>
-                <li><a href="#" className="hover:text-white">Earnings Calculator</a></li>
+                <li><a href="#" className="hover:text-white">Payment Models</a></li>
               </ul>
             </div>
 
@@ -954,7 +925,7 @@ export default function CreatorPage() {
                 <li><a href="#" className="hover:text-white">About Us</a></li>
                 <li><a href="#" className="hover:text-white">Careers</a></li>
                 <li><a href="#" className="hover:text-white">Press</a></li>
-                <li><a href="#" className="hover:text-white">Contact</a></li>
+                <li><Link href="/contact" className="hover:text-white">Contact</Link></li>
               </ul>
             </div>
 
@@ -970,10 +941,10 @@ export default function CreatorPage() {
           </div>
 
           <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; 2024 ViralReach. All rights reserved.</p>
+            <p>&copy; 2025 ViralReach. Empowering flexible influence.</p>
           </div>
         </div>
       </footer>
     </div>
   )
-} 
+}

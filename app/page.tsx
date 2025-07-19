@@ -3,12 +3,20 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { CheckCircle, ChevronDown, Menu, X, ArrowRight, Search, Shield, TrendingUp, Users, DollarSign, BarChart3, MessageSquare, Star, Clock, Camera, Target, Eye, Zap, Crown, TestTube, Lightbulb } from 'lucide-react'
+import { CheckCircle, ChevronDown, Menu, X, ArrowRight, Search, Shield, TrendingUp, Users, DollarSign, BarChart3, MessageSquare, Star, Clock, Camera, Target, Eye, Zap, Crown, TestTube, Lightbulb, Globe } from 'lucide-react'
 import HeroDemo from './components/HeroDemo'
 import { DashboardPreview } from './components/DashboardPreview'
 import { saveWaitlistEntry } from '../lib/database'
 import WaitlistQuiz from './components/WaitlistQuiz'
 import CreatorStoriesCarousel from './components/CreatorStoriesCarousel'
+import Navbar from './components/Navbar'
+
+// Add gtag type declaration
+declare global {
+  interface Window {
+    gtag: (...args: any[]) => void;
+  }
+}
 
 // Typewriter component
 function TypewriterText({ text, speed = 100, deleteSpeed = 50, delay = 2000 }: { 
@@ -56,15 +64,40 @@ function TypewriterText({ text, speed = 100, deleteSpeed = 50, delay = 2000 }: {
 export default function Home() {
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [isAlreadyOnList, setIsAlreadyOnList] = useState(false)
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [showQuiz, setShowQuiz] = useState(false)
   const [error, setError] = useState('')
+
+  // Handle hash navigation when page loads
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const hash = window.location.hash
+      if (hash === '#waitlist') {
+        // Small delay to ensure the page is fully loaded
+        setTimeout(() => {
+          const waitlistElement = document.getElementById('waitlist')
+          if (waitlistElement) {
+            waitlistElement.scrollIntoView({ behavior: 'smooth' })
+          }
+        }, 100)
+      }
+    }
+  }, [])
 
   const handleQuizComplete = async (quizData: any) => {
     console.log('🚀 Quiz completion started with data:', quizData)
     setIsLoading(true)
     setError('')
+
+    // Track quiz completion
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'quiz_complete', {
+        user_type: quizData.userType,
+        primary_goal: quizData.primaryGoal,
+        budget_range: quizData.budgetRange,
+        page_location: window.location.href
+      });
+    }
 
     try {
       // Save quiz data to waitlist
@@ -85,11 +118,31 @@ export default function Home() {
       
       if (result.alreadyExists) {
         console.log('⚠️ User already exists, showing existing user message')
+        
+        // Track existing user
+        if (typeof window !== 'undefined' && window.gtag) {
+          window.gtag('event', 'waitlist_existing_user', {
+            user_type: quizData.userType,
+            page_location: window.location.href
+          });
+        }
+        
         setIsAlreadyOnList(true)
         setIsSubmitted(true)
         setShowQuiz(false)
       } else if (result.success) {
         console.log('✅ Waitlist entry saved, attempting to send email...')
+        
+        // Track successful waitlist signup
+        if (typeof window !== 'undefined' && window.gtag) {
+          window.gtag('event', 'waitlist_signup', {
+            user_type: quizData.userType,
+            primary_goal: quizData.primaryGoal,
+            budget_range: quizData.budgetRange,
+            page_location: window.location.href
+          });
+        }
+        
         // New user added successfully - try to send welcome email
         try {
           const emailResponse = await fetch('/api/send-waitlist-email', {
@@ -143,37 +196,11 @@ export default function Home() {
     }
   }
 
-  const handleQuizSkip = async () => {
-    setIsLoading(true)
-    setError('')
 
-    try {
-      // Save minimal data to waitlist
-      const result = await saveWaitlistEntry({
-        email: 'anonymous@example.com', // Placeholder for skipped quiz
-        user_type: 'brand'
-      })
-      
-      if (result.success) {
-        setIsSubmitted(true)
-        setShowQuiz(false)
-      } else {
-        setError(result.message || 'Failed to join waitlist. Please try again.')
-        console.error('Waitlist submission failed:', result.error)
-      }
-    } catch (error: any) {
-      console.error('Error saving waitlist entry:', error)
-      setError('An unexpected error occurred. Please try again.')
-    } finally {
-      setIsLoading(false)
-    }
-  }
 
   const handleStartQuiz = () => {
     setShowQuiz(true)
   }
-
-
 
   const testimonials = [
     {
@@ -186,116 +213,32 @@ export default function Home() {
     }
   ]
 
-
-
   const faqs = [
     {
-      question: "How does the payment model work?",
-      answer: "Brands pay fixed rates per post with guaranteed delivery. Creators get paid for content creation plus commission on sales (coming soon). This ensures quality content and fair compensation."
+      question: "How do the 3 payment models work?",
+      answer: "Choose between Fixed Payments (set your own budget from $50 to $5000+), Hybrid Model (set your own fixed + commission rates), or Sales Commission (choose your rate from 5% to 25%). Each model is designed for different business goals and risk tolerance."
     },
     {
-      question: "What makes ViralReach different from other platforms?",
-      answer: "We focus on skincare/beauty, offer fixed payments for brands with hybrid options coming soon, provide AI-powered matching, and guarantee secure payments through escrow. Most platforms charge variable rates with no guarantees."
+      question: "Which payment model is right for my business?",
+      answer: "Fixed Payments are perfect for budget-conscious brands who want predictable costs. Hybrid is ideal for those wanting guaranteed content plus performance incentives. Sales Commission works best for performance-focused brands who only want to pay for actual results."
     },
     {
-      question: "How quickly can I launch a campaign?",
-      answer: "You can create and launch a campaign in under 10 minutes. Our AI matching system connects you with relevant creators instantly."
+      question: "Can I set my own budget and rates?",
+      answer: "Absolutely! You have complete control over your investment. Set your own budget from $50 to $5000+ per post, choose your commission rates, and adjust anytime. No fixed rates or minimums."
     },
     {
-      question: "What if I'm not satisfied with the results?",
-      answer: "We offer escrow protection and content guarantees. If content doesn't meet quality standards, we work to resolve issues or provide refunds."
+      question: "What's the difference between hybrid and commission?",
+      answer: "Hybrid gives you guaranteed content creation plus performance bonuses - you set rates for both. Commission is purely performance-based - you only pay when sales happen. Hybrid reduces risk while commission maximizes ROI potential."
     },
     {
-      question: "Do you work with micro-influencers?",
-      answer: "Yes! We have creators ranging from 5K to 500K+ followers. Micro-influencers often deliver better engagement and ROI for niche products."
+      question: "When is the global launch?",
+      answer: "We're launching globally in Summer 2025. Join our waitlist now to get early access, exclusive founding member perks, and help shape the platform's features."
     }
   ]
 
   return (
-    <div className="min-h-screen bg-white pt-16 md:pt-0">
-      {/* Navigation */}
-      <header>
-        <nav className="monday-nav sticky top-0 z-50" role="navigation" aria-label="Main navigation">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center">
-              <div className="flex items-center">
-                <div className="w-8 h-8 monday-gradient-purple rounded-lg mr-3 flex items-center justify-center">
-                  <span className="text-white font-bold text-sm">VR</span>
-                </div>
-                <div>
-                  <div className="text-xl font-semibold text-gray-900">ViralReach</div>
-                  <div className="text-xs text-gray-500 -mt-1">Brand-Creator Marketplace</div>
-                </div>
-              </div>
-            </div>
-            
-            <div className="hidden md:flex items-center space-x-8">
-              <Link href="/brand" className="text-gray-600 hover:text-purple-600 font-medium transition-colors">For Brands</Link>
-              <Link href="/creator" className="text-gray-600 hover:text-purple-600 font-medium transition-colors">For Creators</Link>
-              <a href="#features" className="text-gray-600 hover:text-purple-600 font-medium transition-colors">Features</a>
-              <a href="#how-it-works" className="text-gray-600 hover:text-purple-600 font-medium transition-colors">How It Works</a>
-              <a href="#faq" className="text-gray-600 hover:text-purple-600 font-medium transition-colors">FAQ</a>
-              <a href="/contact" className="text-gray-600 hover:text-purple-600 font-medium transition-colors">Contact</a>
-            </div>
-
-            <div className="hidden md:flex items-center space-x-4">
-              <button 
-                disabled
-                className="text-gray-400 cursor-not-allowed font-medium"
-                title="Coming soon"
-              >
-                Sign In
-              </button>
-              <button 
-                onClick={() => document.getElementById('waitlist')?.scrollIntoView({ behavior: 'smooth' })}
-                className="btn-monday-primary"
-              >
-                Join Waitlist
-              </button>
-            </div>
-
-            <div className="md:hidden">
-              <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-                {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-              </button>
-            </div>
-          </div>
-          
-          {/* Mobile Menu */}
-          {mobileMenuOpen && (
-            <div className="md:hidden bg-white border-t border-gray-200">
-              <div className="px-4 pt-2 pb-3 space-y-1">
-                <Link href="/brand" className="block px-3 py-2 text-gray-600 hover:text-purple-600 font-medium">For Brands</Link>
-                <Link href="/creator" className="block px-3 py-2 text-gray-600 hover:text-purple-600 font-medium">For Creators</Link>
-                <a href="#features" className="block px-3 py-2 text-gray-600 hover:text-purple-600 font-medium">Features</a>
-                <a href="#how-it-works" className="block px-3 py-2 text-gray-600 hover:text-purple-600 font-medium">How It Works</a>
-                <a href="#faq" className="block px-3 py-2 text-gray-600 hover:text-purple-600 font-medium">FAQ</a>
-                <a href="/contact" className="block px-3 py-2 text-gray-600 hover:text-purple-600 font-medium">Contact</a>
-                <div className="pt-2 border-t border-gray-200">
-                  <button 
-                    disabled
-                    className="block w-full text-left px-3 py-2 text-gray-400 cursor-not-allowed font-medium"
-                    title="Coming soon"
-                  >
-                    Sign In
-                  </button>
-                  <button 
-                    onClick={() => {
-                      setMobileMenuOpen(false);
-                      document.getElementById('waitlist')?.scrollIntoView({ behavior: 'smooth' });
-                    }}
-                    className="w-full mt-2 btn-monday-primary text-center"
-                  >
-                    Join Waitlist
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
-        </nav>
-      </header>
+    <div className="min-h-screen bg-white">
+      <Navbar currentPage="home" />
 
       {/* Hero Section */}
       <main>
@@ -347,21 +290,23 @@ export default function Home() {
                 className="mb-8"
               >
                 <div className="inline-flex items-center bg-gradient-to-r from-pink-500 to-purple-600 text-white px-4 py-2 rounded-full text-sm font-medium mb-6 backdrop-blur-sm">
-                  <span className="w-2 h-2 bg-white rounded-full mr-2 animate-pulse"></span>
-                  Performance-Based Influencer Marketing
+                  <Globe className="w-4 h-4 mr-2" />
+                  🌍 Launching Globally - Join the Revolution
                 </div>
                 
                 <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight drop-shadow-xl">
-                  The Influencer Marketplace
+                  The Future of
                   <br />
                   <span className="bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">
-                    for Real Results
+                    Influencer Marketing
                   </span>
                 </h1>
                 
                 <p className="text-xl md:text-2xl text-gray-200 mb-8 max-w-3xl mx-auto drop-shadow">
-                  Connect skincare brands with authentic creators. 
-                  <span className="font-medium text-purple-200"> Fixed payments for brands, content + commission for creators.</span>
+                  Finally, a platform that puts you in control. 
+                  <span className="font-medium text-purple-200"> Choose from 3 flexible payment models.</span>
+                  <br />
+                  <span className="text-lg text-gray-300">Pay only for results, not just posts.</span>
                 </p>
               </motion.div>
 
@@ -395,15 +340,15 @@ export default function Home() {
               >
                 <div className="flex items-center space-x-2">
                   <CheckCircle className="w-5 h-5 text-green-400" />
-                  <span>Fixed Payments for Brands</span>
+                  <span>Fixed Payments</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <CheckCircle className="w-5 h-5 text-green-400" />
-                  <span>Content + Commission for Creators</span>
+                  <span>Hybrid Bonuses</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <CheckCircle className="w-5 h-5 text-green-400" />
-                  <span>AI-Powered Matching</span>
+                  <span>Sales Commission</span>
                 </div>
               </motion.div>
             </div>
@@ -413,20 +358,211 @@ export default function Home() {
         {/* Creator Stories Carousel Section */}
         <CreatorStoriesCarousel />
 
-        {/* Pain Points Section - The Problems Brands Face */}
+        {/* Payment Models Section */}
+        <section id="payment-models" className="py-24 bg-gradient-to-br from-gray-50 to-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-20">
+              <motion.h2 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                className="text-5xl md:text-6xl font-bold text-gray-900 mb-6"
+              >
+                Three Ways to Pay.
+                <br />
+                <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">Complete Flexibility.</span>
+              </motion.h2>
+              <motion.p 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed"
+              >
+                Choose your payment model and set your own budget. From $50 to $5000+ - you decide what works for your business.
+              </motion.p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8">
+              {/* Fixed Payments */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+                className="group bg-white rounded-3xl p-10 shadow-xl border border-gray-100 hover:border-purple-200 hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2"
+              >
+                <div className="text-center mb-8">
+                  <div className="w-20 h-20 bg-gradient-to-r from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <DollarSign className="w-10 h-10 text-white" />
+                  </div>
+                  <h3 className="text-3xl font-bold text-gray-900 mb-3">Predictable Budgets</h3>
+                  <p className="text-gray-600 text-lg">Know exactly what you'll pay upfront</p>
+                </div>
+                <div className="space-y-6">
+                  <div className="text-center">
+                    <div className="text-4xl font-bold text-blue-600 mb-2">$150 - $2,500</div>
+                    <div className="text-gray-600">per post (you set the price)</div>
+                  </div>
+                  <ul className="space-y-4 text-gray-600">
+                    <li className="flex items-start">
+                      <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
+                      <span>Perfect for content-focused campaigns</span>
+                    </li>
+                    <li className="flex items-start">
+                      <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
+                      <span>Guaranteed delivery and quality</span>
+                    </li>
+                    <li className="flex items-start">
+                      <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
+                      <span>No surprise costs or hidden fees</span>
+                    </li>
+                  </ul>
+                  <div className="text-center pt-6">
+                    <span className="bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-semibold">
+                      Best for: Budget-conscious brands
+                    </span>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Hybrid Model */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="group bg-white rounded-3xl p-10 shadow-xl border-2 border-purple-200 hover:border-purple-400 hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 relative"
+              >
+                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                  <span className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-2 rounded-full text-sm font-semibold shadow-lg">
+                    MOST POPULAR
+                  </span>
+                </div>
+                <div className="text-center mb-8">
+                  <div className="w-20 h-20 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <Target className="w-10 h-10 text-white" />
+                  </div>
+                  <h3 className="text-3xl font-bold text-gray-900 mb-3">Balanced Risk & Reward</h3>
+                  <p className="text-gray-600 text-lg">Guaranteed content + performance bonuses</p>
+                </div>
+                <div className="space-y-6">
+                  <div className="text-center">
+                    <div className="text-4xl font-bold text-purple-600 mb-2">$200 + $25</div>
+                    <div className="text-gray-600">per post + per sale (flexible rates)</div>
+                  </div>
+                  <ul className="space-y-4 text-gray-600">
+                    <li className="flex items-start">
+                      <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
+                      <span>Motivate creators to drive sales</span>
+                    </li>
+                    <li className="flex items-start">
+                      <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
+                      <span>Reduce risk while maximizing ROI</span>
+                    </li>
+                    <li className="flex items-start">
+                      <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
+                      <span>Perfect for growing businesses</span>
+                    </li>
+                  </ul>
+                  <div className="text-center pt-6">
+                    <span className="bg-purple-100 text-purple-800 px-4 py-2 rounded-full text-sm font-semibold">
+                      Best for: Growing businesses
+                    </span>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Sales Commission */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                className="group bg-white rounded-3xl p-10 shadow-xl border border-gray-100 hover:border-green-200 hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2"
+              >
+                <div className="text-center mb-8">
+                  <div className="w-20 h-20 bg-gradient-to-r from-green-500 to-green-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <TrendingUp className="w-10 h-10 text-white" />
+                  </div>
+                  <h3 className="text-3xl font-bold text-gray-900 mb-3">Pay Only for Results</h3>
+                  <p className="text-gray-600 text-lg">Zero risk, maximum ROI</p>
+                </div>
+                <div className="space-y-6">
+                  <div className="text-center">
+                    <div className="text-4xl font-bold text-green-600 mb-2">10% - 20%</div>
+                    <div className="text-gray-600">of sales generated (you choose)</div>
+                  </div>
+                  <ul className="space-y-4 text-gray-600">
+                    <li className="flex items-start">
+                      <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
+                      <span>Zero upfront costs</span>
+                    </li>
+                    <li className="flex items-start">
+                      <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
+                      <span>Perfect for new product launches</span>
+                    </li>
+                    <li className="flex items-start">
+                      <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
+                      <span>Align costs with revenue</span>
+                    </li>
+                  </ul>
+                  <div className="text-center pt-6">
+                    <span className="bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-semibold">
+                      Best for: Performance-focused brands
+                    </span>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Flexibility Note */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+              className="mt-16 text-center"
+            >
+              <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-2xl p-8 border border-purple-100 max-w-4xl mx-auto">
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                  Complete Pricing Flexibility
+                </h3>
+                <p className="text-lg text-gray-600 mb-6">
+                  These are just examples. You set your own rates, budgets, and terms. Whether you want to pay $50 or $5000 per post, 
+                  <span className="font-semibold text-purple-600"> you have complete control over your investment.</span>
+                </p>
+                <div className="grid md:grid-cols-3 gap-6 text-center">
+                  <div>
+                    <div className="text-2xl font-bold text-purple-600 mb-2">💰</div>
+                    <div className="text-gray-700 font-semibold">Set Your Budget</div>
+                    <div className="text-sm text-gray-500">No minimums or maximums</div>
+                  </div>
+                  <div>
+                    <div className="text-2xl font-bold text-purple-600 mb-2">🎯</div>
+                    <div className="text-gray-700 font-semibold">Choose Your Model</div>
+                    <div className="text-sm text-gray-500">Switch anytime</div>
+                  </div>
+                  <div>
+                    <div className="text-2xl font-bold text-purple-600 mb-2">⚡</div>
+                    <div className="text-gray-700 font-semibold">Scale Up/Down</div>
+                    <div className="text-sm text-gray-500">Grow at your pace</div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Pain Points Section - Payment Model Problems */}
         <section className="py-20 bg-white border-t border-gray-100">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <h2 className="text-4xl font-bold text-gray-900 mb-4">
-                The Reality of Traditional Influencer Marketing
+                Tired of Rigid Payment Models?
               </h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                These are the painful problems that cost brands millions every year
+                Traditional platforms force you into one-size-fits-all payment structures that don't match your business goals
               </p>
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {/* Problem 1: Paying for Posts, Not Results */}
+              {/* Problem 1: Paying for posts that don't convert */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -440,16 +576,16 @@ export default function Home() {
                   <h3 className="text-xl font-bold text-gray-900">Paying for Posts, Not Results</h3>
                 </div>
                 <p className="text-gray-600 mb-4">
-                  You pay $500-2000 per post upfront, but have no guarantee of sales, clicks, or even engagement. Many posts get 0 conversions.
+                  Pay $500 for a post that generates zero sales. Traditional platforms charge upfront regardless of performance.
                 </p>
                 <div className="bg-red-50 p-4 rounded-lg">
                   <div className="text-sm text-red-700">
-                    <strong>Real Cost:</strong> $1,500 average per post with 0-5% conversion rate
+                    <strong>Real Problem:</strong> No alignment between cost and results
                   </div>
                 </div>
               </motion.div>
 
-              {/* Problem 2: Fake Followers & Engagement */}
+              {/* Problem 2: No performance guarantees */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -460,19 +596,19 @@ export default function Home() {
                   <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mr-4">
                     <X className="w-6 h-6 text-red-600" />
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900">Fake Followers & Engagement</h3>
+                  <h3 className="text-xl font-bold text-gray-900">No Performance Guarantees</h3>
                 </div>
                 <p className="text-gray-600 mb-4">
-                  Up to 40% of influencer followers are fake. You're paying for bots, not real customers who will buy your products.
+                  Pay the same whether you get 10 or 10,000 sales. No incentive for creators to drive results.
                 </p>
                 <div className="bg-red-50 p-4 rounded-lg">
                   <div className="text-sm text-red-700">
-                    <strong>Real Cost:</strong> 40% of your budget wasted on fake audiences
+                    <strong>Real Problem:</strong> Creators get paid regardless of performance
                   </div>
                 </div>
               </motion.div>
 
-              {/* Problem 3: No Performance Tracking */}
+              {/* Problem 3: Rigid payment structures */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -483,19 +619,19 @@ export default function Home() {
                   <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mr-4">
                     <X className="w-6 h-6 text-red-600" />
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900">No Performance Tracking</h3>
+                  <h3 className="text-xl font-bold text-gray-900">Rigid Payment Structures</h3>
                 </div>
                 <p className="text-gray-600 mb-4">
-                  You have no idea if your influencer campaigns are actually driving sales. No attribution, no ROI data, just hope.
+                  Every platform uses the same one-size-fits-all model. Your business is unique - why should payments be generic?
                 </p>
                 <div className="bg-red-50 p-4 rounded-lg">
                   <div className="text-sm text-red-700">
-                    <strong>Real Cost:</strong> Flying blind with no data to optimize campaigns
+                    <strong>Real Problem:</strong> No flexibility for different business needs
                   </div>
                 </div>
               </motion.div>
 
-              {/* Problem 4: Late or No Payments */}
+              {/* Problem 4: Hidden fees and surprises */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -506,19 +642,19 @@ export default function Home() {
                   <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mr-4">
                     <X className="w-6 h-6 text-red-600" />
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900">Late or No Payments</h3>
+                  <h3 className="text-xl font-bold text-gray-900">Hidden Fees & Surprises</h3>
                 </div>
                 <p className="text-gray-600 mb-4">
-                  Creators often wait 30-90 days for payment, or never get paid at all. This kills motivation and content quality.
+                  Platform fees, processing charges, and unexpected costs. Your $500 campaign becomes $800.
                 </p>
                 <div className="bg-red-50 p-4 rounded-lg">
                   <div className="text-sm text-red-700">
-                    <strong>Real Cost:</strong> Poor content quality and creator churn
+                    <strong>Real Problem:</strong> Unexpected charges and budget overruns
                   </div>
                 </div>
               </motion.div>
 
-              {/* Problem 5: Manual Research & Outreach */}
+              {/* Problem 5: No flexibility as business grows */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -529,19 +665,19 @@ export default function Home() {
                   <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mr-4">
                     <X className="w-6 h-6 text-red-600" />
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900">Manual Research & Outreach</h3>
+                  <h3 className="text-xl font-bold text-gray-900">No Growth Flexibility</h3>
                 </div>
                 <p className="text-gray-600 mb-4">
-                  Hours spent researching creators, sending DMs, negotiating rates, and managing relationships manually.
+                  Can't switch payment models as your business grows. Stuck with the same model forever.
                 </p>
                 <div className="bg-red-50 p-4 rounded-lg">
                   <div className="text-sm text-red-700">
-                    <strong>Real Cost:</strong> 20+ hours per month on admin work
+                    <strong>Real Problem:</strong> Platform doesn't grow with your business
                   </div>
                 </div>
               </motion.div>
 
-              {/* Problem 6: Poor Brand-Creator Fit */}
+              {/* Problem 6: Poor creator motivation */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -552,14 +688,14 @@ export default function Home() {
                   <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mr-4">
                     <X className="w-6 h-6 text-red-600" />
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900">Poor Brand-Creator Fit</h3>
+                  <h3 className="text-xl font-bold text-gray-900">Poor Creator Motivation</h3>
                 </div>
                 <p className="text-gray-600 mb-4">
-                  Creators who don't align with your brand values or audience. Awkward collaborations that feel forced and inauthentic.
+                  Creators get paid the same whether they drive sales or not. No incentive for performance.
                 </p>
                 <div className="bg-red-50 p-4 rounded-lg">
                   <div className="text-sm text-red-700">
-                    <strong>Real Cost:</strong> Damaged brand reputation and poor engagement
+                    <strong>Real Problem:</strong> No alignment between creator pay and results
                   </div>
                 </div>
               </motion.div>
@@ -568,48 +704,48 @@ export default function Home() {
             <div className="text-center mt-12">
               <div className="bg-gradient-to-r from-red-500 to-red-600 text-white p-8 rounded-2xl max-w-4xl mx-auto">
                 <h3 className="text-2xl font-bold mb-4">
-                  The Total Cost of Traditional Influencer Marketing
+                  The Problem with Traditional Platforms
                 </h3>
                 <div className="grid md:grid-cols-3 gap-6 text-center">
                   <div>
-                    <div className="text-3xl font-bold mb-2">$5,000+</div>
-                    <div className="text-red-100">Average wasted per campaign</div>
+                    <div className="text-3xl font-bold mb-2">Rigid</div>
+                    <div className="text-red-100">One-size-fits-all models</div>
                   </div>
                   <div>
-                    <div className="text-3xl font-bold mb-2">60%</div>
-                    <div className="text-red-100">Campaigns with 0 ROI</div>
+                    <div className="text-3xl font-bold mb-2">Expensive</div>
+                    <div className="text-red-100">Hidden fees and charges</div>
                   </div>
                   <div>
-                    <div className="text-3xl font-bold mb-2">40+ hrs</div>
-                    <div className="text-red-100">Monthly admin time</div>
+                    <div className="text-3xl font-bold mb-2">Risky</div>
+                    <div className="text-red-100">Pay upfront, no guarantees</div>
                   </div>
                 </div>
                 <p className="text-red-100 mt-6 text-lg">
-                  <strong>There's a better way.</strong> ViralReach eliminates these problems with performance-based payments and AI-powered matching.
+                  <strong>There's a better way.</strong> ViralReach gives you 3 flexible payment models to choose from.
                 </p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Social Proof Section */}
+      {/* Social Proof Section */}
       <section className="py-16 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Building the Future of Influencer Marketing
+              Join the Revolution in Influencer Marketing
             </h2>
             <p className="text-lg text-gray-600">
-              Join us as we revolutionize how brands and creators collaborate
+              Be among the first to experience flexible payment models
             </p>
           </div>
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center mb-12">
-            {/* Early adopter badges */}
+            {/* Global launch badges */}
             <div className="flex items-center justify-center h-16 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg border border-purple-100">
               <div className="flex items-center space-x-2">
-                <Zap className="w-5 h-5 text-purple-600" />
-                <span className="text-purple-600 font-semibold text-sm">Early Adopter</span>
+                <Globe className="w-5 h-5 text-purple-600" />
+                <span className="text-purple-600 font-semibold text-sm">Global Launch</span>
               </div>
             </div>
             <div className="flex items-center justify-center h-16 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg border border-blue-100">
@@ -620,30 +756,50 @@ export default function Home() {
             </div>
             <div className="flex items-center justify-center h-16 bg-gradient-to-r from-green-50 to-blue-50 rounded-lg border border-green-100">
               <div className="flex items-center space-x-2">
-                <TestTube className="w-5 h-5 text-green-600" />
-                <span className="text-green-600 font-semibold text-sm">Beta Tester</span>
+                <Zap className="w-5 h-5 text-green-600" />
+                <span className="text-green-600 font-semibold text-sm">Early Access</span>
               </div>
             </div>
             <div className="flex items-center justify-center h-16 bg-gradient-to-r from-pink-50 to-orange-50 rounded-lg border border-pink-100">
               <div className="flex items-center space-x-2">
-                <Lightbulb className="w-5 h-5 text-pink-600" />
-                <span className="text-pink-600 font-semibold text-sm">Innovator</span>
+                <DollarSign className="w-5 h-5 text-pink-600" />
+                <span className="text-pink-600 font-semibold text-sm">3 Payment Models</span>
               </div>
             </div>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 text-center">
             <div>
-              <div className="text-3xl font-bold text-purple-600 mb-2">100+</div>
-              <div className="text-gray-600">Early Access Signups</div>
+              <div className="text-3xl font-bold text-purple-600 mb-2">3</div>
+              <div className="text-gray-600">Flexible Payment Models</div>
             </div>
             <div>
-              <div className="text-3xl font-bold text-purple-600 mb-2">$0</div>
-              <div className="text-gray-600">Setup Fees</div>
+              <div className="text-3xl font-bold text-purple-600 mb-2">50+</div>
+              <div className="text-gray-600">Countries</div>
             </div>
             <div>
               <div className="text-3xl font-bold text-purple-600 mb-2">24/7</div>
-              <div className="text-gray-600">Support Available</div>
+              <div className="text-gray-600">Global Support</div>
+            </div>
+          </div>
+
+          {/* Testimonial */}
+          <div className="mt-12 bg-gradient-to-r from-purple-50 to-pink-50 rounded-2xl p-8 border border-purple-100">
+            <div className="text-center">
+              <blockquote className="text-xl italic text-gray-700 mb-4">
+                "Finally, a platform that understands that every business is different. The flexible payment models are exactly what we've been looking for."
+              </blockquote>
+              <div className="flex items-center justify-center space-x-4">
+                <img 
+                  src="https://randomuser.me/api/portraits/women/44.jpg" 
+                  alt="Sarah Chen" 
+                  className="w-12 h-12 rounded-full"
+                />
+                <div className="text-left">
+                  <div className="font-semibold text-gray-900">Sarah Chen</div>
+                  <div className="text-sm text-gray-600">Founder, Glow Beauty</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -657,7 +813,7 @@ export default function Home() {
               Why Choose ViralReach?
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              The only platform that puts results first
+              The only platform with 3 flexible payment models designed for real business needs
             </p>
           </div>
 
@@ -666,27 +822,27 @@ export default function Home() {
               <div className="w-16 h-16 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-6">
                 <DollarSign className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">Fixed Payments for Brands</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">Complete Payment Flexibility</h3>
               <p className="text-gray-600">
-                Pay a fixed amount per post with guaranteed delivery. Simple, predictable pricing with hybrid options coming soon.
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Shield className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">Escrow Protection</h3>
-              <p className="text-gray-600">
-                Secure payments for both parties. No more chasing payments or dealing with late-paying brands.
+                Choose from fixed payments, hybrid bonuses, or pure commission. Set your own budget from $50 to $5000+ per post. No rigid pricing structures.
               </p>
             </div>
             <div className="text-center">
               <div className="w-16 h-16 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-6">
                 <Target className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">AI-Powered Matching</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">Pay Only for Results</h3>
               <p className="text-gray-600">
-                Perfect brand-creator matches in seconds. No more awkward collaborations or wasted time.
+                Our commission model lets you pay only when sales happen. Perfect for new product launches and performance-focused campaigns. Zero risk.
+              </p>
+            </div>
+            <div className="text-center">
+              <div className="w-16 h-16 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                <TrendingUp className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">Grow with Your Business</h3>
+              <p className="text-gray-600">
+                Start with one model and switch anytime. No long-term commitments or rigid contracts. Our platform adapts as your business scales.
               </p>
             </div>
           </div>
@@ -697,10 +853,10 @@ export default function Home() {
       <section className="py-20 bg-gradient-to-br from-pink-500 to-purple-600">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl font-bold text-white mb-4">
-            Ready to Get Started?
+            Choose Your Payment Model & Get Started
           </h2>
           <p className="text-xl text-pink-100 mb-8">
-            Join the performance-based influencer marketing revolution
+            Join the global launch with flexible payment options
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link 
@@ -726,29 +882,29 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">How It Works</h2>
-            <p className="text-lg text-gray-600 mb-8">Simple, transparent, and performance-driven influencer marketing</p>
+            <p className="text-lg text-gray-600 mb-8">Simple, transparent, and flexible payment model selection</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-12">
             <div className="text-center">
               <div className="w-16 h-16 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-6">1</div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">Create Campaign</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">Choose Your Payment Model</h3>
               <p className="text-gray-600">
-                Set your goals, budget, and target audience. Our AI matches you with perfect creators.
+                Select from Fixed Payments, Hybrid Model, or Sales Commission based on your business goals and risk tolerance.
               </p>
             </div>
             <div className="text-center">
               <div className="w-16 h-16 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-6">2</div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">Review & Approve</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">Set Your Budget & Goals</h3>
               <p className="text-gray-600">
-                Browse creator proposals, review their content samples, and approve the best fits.
+                Define your campaign objectives, budget, and target audience. Our AI matches you with perfect creators.
               </p>
             </div>
             <div className="text-center">
               <div className="w-16 h-16 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-6">3</div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">Track & Pay for Results</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">Launch & Track Performance</h3>
               <p className="text-gray-600">
-                Monitor performance in real-time and pay fixed rates with guaranteed content delivery.
+                Monitor performance in real-time and pay according to your chosen model. Switch models anytime.
               </p>
             </div>
           </div>
@@ -761,10 +917,10 @@ export default function Home() {
       <section id="features" className="py-20 bg-white">
         <div className="max-w-6xl mx-auto px-4">
           <h2 className="text-4xl font-bold text-center mb-16">
-            Everything You Need in One Platform
+            Everything You Need for Flexible Payment Models
           </h2>
           <div className="grid md:grid-cols-2 gap-16">
-            {/* Block 1: Smart Discovery (Netflix-style grid of faces) */}
+            {/* Block 1: Payment Model Selection */}
             <div className="flex flex-col md:flex-row items-center gap-8">
               <div className="flex-1 w-full max-w-xs">
                 <div className="grid grid-cols-3 gap-2 mb-4">
@@ -790,15 +946,15 @@ export default function Home() {
               </div>
               <div className="flex-1">
                 <span className="bg-green-100 text-green-800 px-3 py-1 rounded font-semibold text-xs mb-2 inline-block">
-                  Smart Discovery
+                  Payment Models
                 </span>
-                <h3 className="text-xl font-bold mb-2">Smart Discovery</h3>
+                <h3 className="text-xl font-bold mb-2">Choose Your Payment Model</h3>
                 <p className="text-gray-700 mb-2">
-                  AI-powered creator matching. Find the perfect influencers for your brand in seconds, filtered by niche, audience, and engagement.
+                  Select from Fixed Payments, Hybrid Model, or Sales Commission. Set your own budgets and rates - from $50 to $5000+ per post. Each model is designed for different business goals and risk tolerance.
                 </p>
               </div>
             </div>
-            {/* Block 2: Real-Time Analytics (Dashboard screenshot) */}
+            {/* Block 2: Performance Tracking */}
             <div className="flex flex-col md:flex-row items-center gap-8">
               <div className="relative flex-1 w-full max-w-xs">
                 <img
@@ -813,57 +969,57 @@ export default function Home() {
               </div>
               <div className="flex-1">
                 <span className="bg-green-100 text-green-800 px-3 py-1 rounded font-semibold text-xs mb-2 inline-block">
-                  Real-Time Analytics
+                  Performance Tracking
                 </span>
-                <h3 className="text-xl font-bold mb-2">Real-Time Analytics</h3>
+                <h3 className="text-xl font-bold mb-2">Real-Time Performance Tracking</h3>
                 <p className="text-gray-700 mb-2">
-                  Track performance live. Instantly see views, clicks, conversions, and ROI for every campaign and creator.
+                  Track performance across all payment models. See exactly what's working and optimize your campaigns in real-time.
                 </p>
               </div>
             </div>
-            {/* Block 3: Secure Payments (Modern digital payment visual) */}
+            {/* Block 3: Flexible Pricing */}
             <div className="flex flex-col md:flex-row items-center gap-8">
               <div className="relative flex-1 w-full max-w-xs">
                 <img
                   src="https://images.pexels.com/photos/4968384/pexels-photo-4968384.jpeg?auto=compress&w=400&q=80"
-                  alt="Secure Payment"
+                  alt="Flexible Pricing"
                   className="rounded-xl shadow-lg w-full"
                 />
                 <div className="absolute bottom-4 left-4 bg-white rounded-lg shadow px-4 py-2 text-sm">
-                  <div className="font-semibold">Escrow</div>
-                  <div className="text-gray-500">#secure</div>
+                  <div className="font-semibold">Flexible</div>
+                  <div className="text-gray-500">#pricing</div>
                 </div>
               </div>
               <div className="flex-1">
                 <span className="bg-green-100 text-green-800 px-3 py-1 rounded font-semibold text-xs mb-2 inline-block">
-                  Secure Payments
+                  Flexible Pricing
                 </span>
-                <h3 className="text-xl font-bold mb-2">Secure Payments</h3>
+                <h3 className="text-xl font-bold mb-2">Switch Models Anytime</h3>
                 <p className="text-gray-700 mb-2">
-                  Escrow protection for all. Payments are held securely until campaign deliverables are met—no more chasing payments.
+                  Start with one payment model and switch to another as your business grows. No long-term commitments or rigid contracts.
                 </p>
               </div>
             </div>
-            {/* Block 4: Built-in Communication (Chat/Collaboration visual) */}
+            {/* Block 4: Global Network */}
             <div className="flex flex-col md:flex-row items-center gap-8">
               <div className="relative flex-1 w-full max-w-xs">
                 <img
                   src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=400&q=80"
-                  alt="Communication"
+                  alt="Global Network"
                   className="rounded-xl shadow-lg w-full"
                 />
                 <div className="absolute bottom-4 left-4 bg-white rounded-lg shadow px-4 py-2 text-sm">
-                  <div className="font-semibold">Chat</div>
-                  <div className="text-gray-500">#collaboration</div>
+                  <div className="font-semibold">Global</div>
+                  <div className="text-gray-500">#network</div>
                 </div>
               </div>
               <div className="flex-1">
                 <span className="bg-green-100 text-green-800 px-3 py-1 rounded font-semibold text-xs mb-2 inline-block">
-                  Built-in Communication
+                  Global Network
                 </span>
-                <h3 className="text-xl font-bold mb-2">Built-in Communication</h3>
+                <h3 className="text-xl font-bold mb-2">Global Creator Network</h3>
                 <p className="text-gray-700 mb-2">
-                  Seamless collaboration tools. Message, share files, and manage feedback with brands and creators in one place.
+                  Access creators from 50+ countries. Launch campaigns worldwide with local expertise and global reach.
                 </p>
               </div>
             </div>
@@ -896,19 +1052,19 @@ export default function Home() {
       <section className="py-8 bg-gradient-to-r from-purple-50 to-blue-50">
         <div className="max-w-4xl mx-auto flex flex-col md:flex-row justify-center items-center gap-8 text-center">
           <div>
-            <span className="text-2xl font-bold text-purple-700">🚀</span>
-            <div className="font-semibold text-gray-800">Launching Summer 2024</div>
-            <div className="text-xs text-gray-500">Be a founding member</div>
+            <span className="text-2xl font-bold text-purple-700">🌍</span>
+            <div className="font-semibold text-gray-800">Launching Globally</div>
+                            <div className="text-xs text-gray-500">Summer 2025</div>
           </div>
           <div>
-            <span className="text-2xl font-bold text-pink-600">🎉</span>
-            <div className="font-semibold text-gray-800">Now onboarding first 100 brands & creators</div>
-            <div className="text-xs text-gray-500">Early access, exclusive perks</div>
+            <span className="text-2xl font-bold text-pink-600">🎯</span>
+            <div className="font-semibold text-gray-800">3 Payment Models</div>
+            <div className="text-xs text-gray-500">Choose what works for you</div>
           </div>
           <div>
-            <span className="text-2xl font-bold text-blue-600">🛠️</span>
-            <div className="font-semibold text-gray-800">Shape the platform</div>
-            <div className="text-xs text-gray-500">Direct input into features & roadmap</div>
+            <span className="text-2xl font-bold text-blue-600">⚡</span>
+            <div className="font-semibold text-gray-800">Early access for first 1000 brands</div>
+            <div className="text-xs text-gray-500">Exclusive founding member perks</div>
           </div>
         </div>
       </section>
@@ -918,12 +1074,12 @@ export default function Home() {
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-12">
           <div className="flex-1">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Preview the ViralReach Dashboard</h2>
-            <p className="text-lg text-gray-600 mb-6">A sneak peek at the tools you'll use to launch, manage, and track your influencer campaigns. (Beta preview)</p>
+            <p className="text-lg text-gray-600 mb-6">A sneak peek at the tools you'll use to choose payment models, launch campaigns, and track performance. (Beta preview)</p>
             <ul className="list-disc pl-5 text-gray-600 space-y-2 mb-6">
+              <li>Payment model selection interface</li>
               <li>Real-time campaign analytics</li>
-              <li>AI-powered creator matching</li>
-              <li>Secure, escrow-based payments</li>
-              <li>Seamless brand-creator messaging</li>
+              <li>Performance-based tracking</li>
+              <li>Global creator marketplace</li>
             </ul>
             <span className="inline-block bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-xs font-semibold">Beta Preview</span>
           </div>
@@ -934,10 +1090,10 @@ export default function Home() {
       </section>
 
       {/* Early Adopter Testimonial */}
-      <section className="py-12 bg-gradient-to-r from-pink-50 to-purple-50 border-t border-b border-purple-100">
+      <section className="py-12 bg-gradient-to-r from-pink-50 to-purple-50 border-t border-purple-100">
         <div className="max-w-3xl mx-auto text-center">
           <div className="flex flex-col items-center">
-            <blockquote className="text-xl italic text-gray-700 mb-2">"We built ViralReach to solve the headaches we faced as marketers and creators. Join us as a founding member and help shape the future of influencer marketing!"</blockquote>
+            <blockquote className="text-xl italic text-gray-700 mb-2">"We built ViralReach to solve the payment model problem. Choose fixed, hybrid, or commission - whatever works for your business. Join us as a founding member!"</blockquote>
             <div className="font-semibold text-purple-700">Founding Team</div>
             <div className="text-xs text-gray-500">ViralReach</div>
           </div>
@@ -964,16 +1120,17 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Simple Waitlist Signup */}
-      <section id="waitlist" className="py-20 bg-gradient-to-br from-pink-500 to-purple-600">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+              {/* Simple Waitlist Signup */}
+        <section id="waitlist" className="py-20 bg-gradient-to-br from-pink-500 to-purple-600">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl font-bold text-white mb-4">
-            Join the Waitlist <span className="ml-2 bg-white text-pink-600 px-2 py-1 rounded-full text-xs align-middle font-semibold">Early Access</span>
+            Choose Your Payment Model 
+            <span className="ml-4 bg-white text-purple-600 px-4 py-2 rounded-full text-2xl align-middle font-semibold">Global Launch</span>
           </h2>
-          <p className="text-xl text-pink-100 mb-2">
-            Take our quick quiz to get personalized early access
+          <p className="text-xl text-purple-100 mb-4">
+            Join the global revolution in flexible payment models
           </p>
-          <p className="text-sm text-pink-200 mb-8">No credit card required • Early access guaranteed • Exclusive founding member perks</p>
+          <p className="text-sm text-purple-200 mb-8">No credit card required • Early access for founding members • 3 flexible payment models • Global creator network</p>
           
           {/* Error Message */}
           {error && (
@@ -984,19 +1141,19 @@ export default function Home() {
           
           {!isSubmitted ? (
             showQuiz ? (
-              <WaitlistQuiz 
-                onComplete={handleQuizComplete}
-                onSkip={handleQuizSkip}
-              />
+                              <WaitlistQuiz 
+                  onComplete={handleQuizComplete}
+                />
             ) : (
               <div className="max-w-md mx-auto">
                 <button 
                   onClick={handleStartQuiz}
                   disabled={isLoading}
-                  className="bg-white text-pink-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors w-full disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="bg-white text-purple-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors w-full disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {isLoading ? 'Loading...' : 'Take Quick Quiz & Join Waitlist'}
+                  {isLoading ? 'Loading...' : 'Take Payment Model Quiz & Join Waitlist'}
                 </button>
+                <p className="text-purple-200 text-sm mt-2">2-minute quiz • Get personalized recommendations • Join the revolution</p>
               </div>
             )
           ) : (
@@ -1005,10 +1162,10 @@ export default function Home() {
               <h3 className="text-xl font-semibold text-white mb-2">
                 {isAlreadyOnList ? "You're already on the list!" : "You're on the list!"}
               </h3>
-              <p className="text-pink-100">
+              <p className="text-purple-100">
                 {isAlreadyOnList 
-                  ? "Thanks for your interest! We'll notify you when ViralReach launches." 
-                  : "We'll notify you when ViralReach launches."
+                  ? "Thanks for your interest! We'll notify you when ViralReach launches globally." 
+                  : "We'll notify you when ViralReach launches globally."
                 }
               </p>
             </div>
@@ -1051,7 +1208,7 @@ export default function Home() {
           </div>
           
           <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-            <p>&copy; 2024 ViralReach. Empowering authentic influence.</p>
+            <p>&copy; 2025 ViralReach. Empowering authentic influence.</p>
           </div>
         </div>
       </footer>

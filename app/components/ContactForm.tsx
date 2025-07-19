@@ -2,6 +2,13 @@
 
 import { useState } from 'react'
 
+// Add gtag type declaration
+declare global {
+  interface Window {
+    gtag: (...args: any[]) => void;
+  }
+}
+
 export default function ContactForm() {
   const [formData, setFormData] = useState({
     name: '',
@@ -26,6 +33,15 @@ export default function ContactForm() {
     setIsSubmitting(true)
     setError('')
 
+    // Track form submission attempt
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'form_submit', {
+        form_name: 'contact_form',
+        form_type: 'contact',
+        page_location: window.location.href
+      });
+    }
+
     try {
       const response = await fetch('/api/contact', {
         method: 'POST',
@@ -44,6 +60,15 @@ export default function ContactForm() {
       const result = await response.json()
       
       if (result.success) {
+        // Track successful form submission
+        if (typeof window !== 'undefined' && window.gtag) {
+          window.gtag('event', 'form_success', {
+            form_name: 'contact_form',
+            form_type: 'contact',
+            page_location: window.location.href
+          });
+        }
+
         setSubmitted(true)
         setFormData({
           name: '',
@@ -53,10 +78,31 @@ export default function ContactForm() {
           message: ''
         })
       } else {
+        // Track form submission error
+        if (typeof window !== 'undefined' && window.gtag) {
+          window.gtag('event', 'form_error', {
+            form_name: 'contact_form',
+            form_type: 'contact',
+            error_message: result.error || 'Unknown error',
+            page_location: window.location.href
+          });
+        }
+
         setError(result.error || 'Failed to send message. Please try again.')
       }
     } catch (err) {
       console.error('Contact form error:', err)
+      
+      // Track form submission error
+      if (typeof window !== 'undefined' && window.gtag) {
+        window.gtag('event', 'form_error', {
+          form_name: 'contact_form',
+          form_type: 'contact',
+          error_message: 'Network error',
+          page_location: window.location.href
+        });
+      }
+
       setError('An error occurred. Please try again.')
     } finally {
       setIsSubmitting(false)
@@ -66,7 +112,7 @@ export default function ContactForm() {
   if (submitted) {
     return (
       <div className="max-w-2xl mx-auto">
-        <div className="monday-card p-8 text-center">
+        <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100 text-center">
           <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
             <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
@@ -78,7 +124,7 @@ export default function ContactForm() {
           </p>
           <button
             onClick={() => setSubmitted(false)}
-            className="monday-btn monday-btn-secondary"
+            className="bg-gray-100 text-gray-700 px-6 py-3 rounded-xl font-medium hover:bg-gray-200 transition-colors"
           >
             Send Another Message
           </button>
@@ -89,7 +135,7 @@ export default function ContactForm() {
 
   return (
     <div className="max-w-2xl mx-auto">
-      <div className="monday-card p-8">
+      <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
         <div className="text-center mb-8">
           <h2 className="text-3xl font-bold text-gray-900 mb-4">Get in Touch</h2>
           <p className="text-lg text-gray-600">
@@ -97,7 +143,7 @@ export default function ContactForm() {
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-6" id="contact_form">
           <div className="grid md:grid-cols-2 gap-6">
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
@@ -110,10 +156,11 @@ export default function ContactForm() {
                 required
                 value={formData.name}
                 onChange={handleChange}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                 placeholder="Your full name"
               />
             </div>
+            
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
                 Email Address *
@@ -125,7 +172,7 @@ export default function ContactForm() {
                 required
                 value={formData.email}
                 onChange={handleChange}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                 placeholder="your@email.com"
               />
             </div>
@@ -141,11 +188,11 @@ export default function ContactForm() {
               name="company"
               value={formData.company}
               onChange={handleChange}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
               placeholder="Your company name"
             />
           </div>
-
+          
           <div>
             <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
               Subject *
@@ -156,7 +203,7 @@ export default function ContactForm() {
               required
               value={formData.subject}
               onChange={handleChange}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
             >
               <option value="">Select a subject</option>
               <option value="General Inquiry">General Inquiry</option>
@@ -180,7 +227,7 @@ export default function ContactForm() {
               rows={6}
               value={formData.message}
               onChange={handleChange}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
               placeholder="Tell us how we can help you..."
             />
           </div>
@@ -194,7 +241,7 @@ export default function ContactForm() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full monday-btn monday-btn-primary py-4 text-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-gradient-to-r from-pink-500 to-purple-600 text-white px-6 py-4 rounded-xl font-semibold text-lg hover:from-pink-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
           >
             {isSubmitting ? (
               <span className="flex items-center justify-center">
@@ -213,8 +260,8 @@ export default function ContactForm() {
         <div className="mt-8 pt-8 border-t border-gray-200">
           <div className="grid md:grid-cols-2 gap-6 text-center">
             <div>
-              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-3">
-                <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mx-auto mb-3">
+                <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
               </div>
@@ -222,8 +269,8 @@ export default function ContactForm() {
               <p className="text-gray-600 text-sm">support@viralreach.ca</p>
             </div>
             <div>
-              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-3">
-                <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mx-auto mb-3">
+                <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>

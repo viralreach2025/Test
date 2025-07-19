@@ -18,7 +18,6 @@ interface QuizData {
 
 interface WaitlistQuizProps {
   onComplete: (data: QuizData) => void
-  onSkip: () => void
 }
 
 // Role selection question
@@ -162,7 +161,7 @@ const roleSpecificQuestions = {
   ]
 }
 
-export default function WaitlistQuiz({ onComplete, onSkip }: WaitlistQuizProps) {
+export default function WaitlistQuiz({ onComplete }: WaitlistQuizProps) {
   const [currentStep, setCurrentStep] = useState(0)
   const [email, setEmail] = useState('')
   const [answers, setAnswers] = useState<Partial<QuizData>>({})
@@ -299,14 +298,7 @@ export default function WaitlistQuiz({ onComplete, onSkip }: WaitlistQuizProps) 
       </AnimatePresence>
 
       {/* Navigation */}
-      <div className="flex justify-between items-center mt-8">
-        <button
-          onClick={onSkip}
-          className="text-gray-500 hover:text-gray-700 transition-colors"
-        >
-          Skip quiz
-        </button>
-        
+      <div className="flex justify-end items-center mt-8">
         <div className="flex gap-3">
           {currentStep > 0 && (
             <button

@@ -2,6 +2,42 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Poppins Font Optimization */
+@layer base {
+  html {
+    font-family: 'Poppins', system-ui, sans-serif;
+  }
+  
+  body {
+    font-family: 'Poppins', system-ui, sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', system-ui, sans-serif;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+  }
+  
+  h1 {
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  
+  h2 {
+    font-weight: 600;
+    letter-spacing: -0.015em;
+  }
+  
+  button, input, textarea, select {
+    font-family: 'Poppins', system-ui, sans-serif;
+  }
+}
+
 /* Monday.com-inspired Design System */
 :root {
   --monday-purple: #6c5ce7;
@@ -12,6 +48,40 @@
   --monday-gray: #636e72;
   --monday-light-gray: #ddd;
   --monday-dark-gray: #2d3436;
+  
+  /* Poppins Font Variables */
+  --font-poppins: 'Poppins', system-ui, sans-serif;
+}
+
+/* Poppins Typography Utilities */
+.font-poppins-light {
+  font-family: var(--font-poppins);
+  font-weight: 300;
+}
+
+.font-poppins-regular {
+  font-family: var(--font-poppins);
+  font-weight: 400;
+}
+
+.font-poppins-medium {
+  font-family: var(--font-poppins);
+  font-weight: 500;
+}
+
+.font-poppins-semibold {
+  font-family: var(--font-poppins);
+  font-weight: 600;
+}
+
+.font-poppins-bold {
+  font-family: var(--font-poppins);
+  font-weight: 700;
+}
+
+.font-poppins-extrabold {
+  font-family: var(--font-poppins);
+  font-weight: 800;
 }
 
 /* Ultra-Modern 3D Effects */
