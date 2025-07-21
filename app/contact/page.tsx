@@ -14,11 +14,25 @@ import {
 } from 'lucide-react'
 import ContactForm from '../components/ContactForm'
 import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
+import Head from 'next/head'
 
 export default function ContactPage() {
   return (
-    <div className="min-h-screen bg-white">
-      <Navbar currentPage="contact" />
+    <>
+      <Head>
+        <title>Contact Us - ViralReach Influencer Marketing Platform</title>
+        <meta name="description" content="Get in touch with ViralReach. Have questions about our influencer marketing platform? Ready to start your journey? We're here to help." />
+        <link rel="canonical" href="https://viralreach.com/contact" />
+        <meta property="og:url" content="https://viralreach.com/contact" />
+        <meta property="og:title" content="Contact Us - ViralReach Influencer Marketing Platform" />
+        <meta property="og:description" content="Get in touch with ViralReach. Have questions about our influencer marketing platform? Ready to start your journey? We're here to help." />
+        <meta name="twitter:url" content="https://viralreach.com/contact" />
+        <meta name="twitter:title" content="Contact Us - ViralReach Influencer Marketing Platform" />
+        <meta name="twitter:description" content="Get in touch with ViralReach. Have questions about our influencer marketing platform? Ready to start your journey? We're here to help." />
+      </Head>
+      <div className="min-h-screen bg-white">
+        <Navbar currentPage="contact" />
 
       {/* Hero Section */}
       <section className="pt-24 pb-16 bg-gradient-to-br from-pink-50 to-purple-50">
@@ -129,55 +143,8 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div>
-              <div className="text-2xl font-bold bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent mb-4">
-                ViralReach
-              </div>
-              <p className="text-gray-400 mb-4">
-                The future of flexible payment models for creators and brands.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="font-semibold mb-4">Platform</h3>
-              <ul className="space-y-2 text-gray-400">
-                <li><Link href="/" className="hover:text-white">Home</Link></li>
-                <li><Link href="/brand" className="hover:text-white">For Brands</Link></li>
-                <li><Link href="/creator" className="hover:text-white">For Creators</Link></li>
-                <li><Link href="/contact" className="hover:text-white">Contact</Link></li>
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="font-semibold mb-4">Company</h3>
-              <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-white">About Us</a></li>
-                <li><a href="#" className="hover:text-white">Careers</a></li>
-                <li><a href="#" className="hover:text-white">Press</a></li>
-                <li><Link href="/contact" className="hover:text-white">Contact</Link></li>
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="font-semibold mb-4">Support</h3>
-              <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-white">Help Center</a></li>
-                <li><a href="#" className="hover:text-white">Creator Guidelines</a></li>
-                <li><a href="#" className="hover:text-white">Privacy Policy</a></li>
-                <li><a href="#" className="hover:text-white">Terms of Service</a></li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; 2025 ViralReach. Empowering flexible influence.</p>
-          </div>
-        </div>
-      </footer>
-    </div>
+      <Footer />
+      </div>
+    </>
   )
 } 

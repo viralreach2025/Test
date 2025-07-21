@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { getAnimationProps, shouldDisableAnimations } from '../../lib/utils';
 import { 
   TrendingUp, 
   BarChart3, 
@@ -637,10 +638,12 @@ export function DashboardPreview() {
         <AnimatePresence mode="wait">
           <motion.div
             key={currentView}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
+            {...getAnimationProps(
+              { opacity: 0, y: 20 },
+              { opacity: 1, y: 0 },
+              { duration: 0.3 }
+            )}
+            exit={shouldDisableAnimations() ? undefined : { opacity: 0, y: -20 }}
           >
             {currentView === 'overview' && renderOverview()}
             {currentView === 'campaigns' && renderCampaigns()}

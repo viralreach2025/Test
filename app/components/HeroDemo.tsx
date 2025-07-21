@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { getAnimationProps, shouldDisableAnimations } from '../../lib/utils'
 import { 
   TrendingUp, 
   DollarSign, 
@@ -148,9 +149,11 @@ export default function HeroDemo() {
         {steps.map((step, index) => (
           <motion.div
             key={index}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 }}
+            {...getAnimationProps(
+              { opacity: 0, y: 20 },
+              { opacity: 1, y: 0 },
+              { delay: index * 0.1 }
+            )}
             className={`relative p-3 sm:p-6 rounded-xl sm:rounded-2xl border-2 transition-all duration-300 ${
               index === currentStep 
                 ? 'border-purple-300 bg-gradient-to-br from-purple-50 to-blue-50 shadow-lg scale-105' 
@@ -161,9 +164,11 @@ export default function HeroDemo() {
             {index === currentStep && (
               <motion.div
                 className="absolute -top-1 -right-1 sm:-top-2 sm:-right-2 w-5 h-5 sm:w-6 sm:h-6 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center"
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ delay: 0.2 }}
+                {...getAnimationProps(
+                  { scale: 0 },
+                  { scale: 1 },
+                  { delay: 0.2 }
+                )}
               >
                 <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
               </motion.div>

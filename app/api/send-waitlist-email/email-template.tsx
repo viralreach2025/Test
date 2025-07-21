@@ -1,7 +1,7 @@
 import { Html, Head, Body, Container, Section, Text, Heading, Hr, Link, Img } from '@react-email/components'
 
 interface WaitlistEmailTemplateProps {
-  userType: 'brand' | 'creator'
+  userType: 'brand' | 'creator' | 'affiliate'
   formData?: any
   template?: string
   data?: any
@@ -13,7 +13,13 @@ export function WaitlistEmailTemplate({ userType, formData, template, data }: Wa
     return <SkincareQuizEmailTemplate data={data} />
   }
 
+  // If it's an affiliate quiz, use the affiliate template
+  if (template === 'affiliate-quiz') {
+    return <AffiliateQuizEmailTemplate data={data} formData={formData} />
+  }
+
   const isCreator = userType === 'creator'
+  const isAffiliate = userType === 'affiliate'
   
   return (
     <Html>
@@ -145,6 +151,123 @@ export function WaitlistEmailTemplate({ userType, formData, template, data }: Wa
 }
 
 // Skincare Quiz Email Template
+function AffiliateQuizEmailTemplate({ data, formData }: { data: any, formData: any }) {
+  return (
+    <Html>
+      <Head />
+      <Body style={main}>
+        <Container style={container}>
+          {/* Header */}
+          <Section style={header}>
+            <div style={logo}>
+              <Text style={logoText}>VR</Text>
+            </div>
+            <Heading style={title}>ViralReach</Heading>
+          </Section>
+
+          {/* Welcome Message */}
+          <Section style={content}>
+            <Heading style={h1}>
+              🎉 Welcome to ViralReach Affiliate Program!
+            </Heading>
+            
+            <Text style={text}>
+              Hi {formData?.name || 'there'}! Thank you for completing our affiliate qualification quiz. We're excited to have you join our affiliate program and help us grow the ViralReach community.
+            </Text>
+
+            {/* Quiz Summary */}
+            <div style={quizSummary}>
+              <Heading style={h2}>📋 Your Application Summary</Heading>
+              <div style={summaryGrid}>
+                <div style={summaryItem}>
+                  <Text style={summaryLabel}>Affiliate Type</Text>
+                  <Text style={summaryValue}>{data?.affiliateType || 'N/A'}</Text>
+                </div>
+                <div style={summaryItem}>
+                  <Text style={summaryLabel}>Audience Size</Text>
+                  <Text style={summaryValue}>{data?.audienceSize || 'N/A'}</Text>
+                </div>
+                <div style={summaryItem}>
+                  <Text style={summaryLabel}>Primary Platform</Text>
+                  <Text style={summaryValue}>{data?.primaryPlatform || 'N/A'}</Text>
+                </div>
+                <div style={summaryItem}>
+                  <Text style={summaryLabel}>Experience Level</Text>
+                  <Text style={summaryValue}>{data?.experienceLevel || 'N/A'}</Text>
+                </div>
+                <div style={summaryItem}>
+                  <Text style={summaryLabel}>Expected Referrals</Text>
+                  <Text style={summaryValue}>{data?.monthlyReferrals || 'N/A'}</Text>
+                </div>
+                <div style={summaryItem}>
+                  <Text style={summaryLabel}>Motivation</Text>
+                  <Text style={summaryValue}>{data?.motivation || 'N/A'}</Text>
+                </div>
+              </div>
+            </div>
+
+            <Hr style={hr} />
+
+            {/* Next Steps */}
+            <Heading style={h2}>🚀 What Happens Next?</Heading>
+            <div style={timeline}>
+              <Text style={text}>
+                <strong>Step 1: Review Process (24-48 hours)</strong><br />
+                Our team will review your application and assess your fit for our affiliate program.
+              </Text>
+              <Text style={text}>
+                <strong>Step 2: Welcome Email</strong><br />
+                You'll receive a welcome email with your affiliate dashboard access and unique referral links.
+              </Text>
+              <Text style={text}>
+                <strong>Step 3: Start Earning</strong><br />
+                Begin promoting ViralReach and earn 10% commission on all recurring revenue from your referrals.
+              </Text>
+            </div>
+
+            {/* Benefits */}
+            <Heading style={h2}>💰 Your Affiliate Benefits</Heading>
+            <ul style={list}>
+              <li style={listItem}>✅ <strong>10% Commission:</strong> Earn on every recurring payment from your referrals</li>
+              <li style={listItem}>✅ <strong>Lifetime Earnings:</strong> Continue earning as long as your referrals stay active</li>
+              <li style={listItem}>✅ <strong>Professional Materials:</strong> Access to marketing materials and resources</li>
+              <li style={listItem}>✅ <strong>Real-time Tracking:</strong> Monitor your earnings and performance</li>
+              <li style={listItem}>✅ <strong>Dedicated Support:</strong> Personal support for all your affiliate needs</li>
+            </ul>
+
+            <Hr style={hr} />
+
+            {/* Contact Info */}
+            <Text style={signature}>
+              If you have any questions, feel free to reach out to us at{' '}
+              <Link href="mailto:support@viralreach.ca" style={link}>
+                support@viralreach.ca
+              </Link>
+            </Text>
+
+            <Text style={signature}>
+              Best regards,<br />
+              The ViralReach Team
+            </Text>
+          </Section>
+
+          {/* Footer */}
+          <Section style={footer}>
+            <Text style={footerText}>
+              © 2025 ViralReach. All rights reserved.
+            </Text>
+            <Text style={footerText}>
+              <Link href="https://viralreach.ca" style={link}>
+                viralreach.ca
+              </Link>
+            </Text>
+          </Section>
+        </Container>
+      </Body>
+    </Html>
+  )
+}
+
 function SkincareQuizEmailTemplate({ data }: { data: any }) {
   const isCreator = data?.userType?.includes('creator')
   const isBrand = data?.userType?.includes('brand')

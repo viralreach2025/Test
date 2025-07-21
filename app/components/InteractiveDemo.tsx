@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { getAnimationProps, shouldDisableAnimations } from '../../lib/utils';
 import { ArrowRight, CheckCircle, Users, TrendingUp, DollarSign, BarChart3, Target, MessageSquare, CreditCard } from 'lucide-react';
 
 export function InteractiveDemo() {
@@ -249,22 +250,26 @@ export function InteractiveDemo() {
               </span>
             </div>
             <div className="w-full bg-gray-200 rounded-full h-2">
-              <motion.div
-                className="bg-gradient-to-r from-purple-600 to-blue-600 h-2 rounded-full"
-                initial={{ width: 0 }}
-                animate={{ width: `${((step + 1) / steps.length) * 100}%` }}
-                transition={{ duration: 0.5 }}
-              />
+                          <motion.div
+              className="bg-gradient-to-r from-purple-600 to-blue-600 h-2 rounded-full"
+              {...getAnimationProps(
+                { width: 0 },
+                { width: `${((step + 1) / steps.length) * 100}%` },
+                { duration: 0.5 }
+              )}
+            />
             </div>
           </div>
 
           {/* Current Step */}
           <motion.div
             key={step}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
+            {...getAnimationProps(
+              { opacity: 0, y: 20 },
+              { opacity: 1, y: 0 },
+              { duration: 0.3 }
+            )}
+            exit={shouldDisableAnimations() ? undefined : { opacity: 0, y: -20 }}
             className="text-center mb-8"
           >
             <div className={`w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-r ${steps[step].color} flex items-center justify-center text-3xl`}>

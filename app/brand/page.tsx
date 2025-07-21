@@ -14,646 +14,940 @@ import {
   Target,
   DollarSign,
   BarChart3,
-  Eye,
+  Brain,
+  Sparkles,
+  Play,
+  MessageSquare,
+  Rocket,
   Clock,
-  Award,
-  Globe,
   ChevronDown,
+  ShoppingCart,
+  CreditCard,
+  Package,
+  Monitor,
+  Cloud,
+  X,
+  Menu,
+  Search,
+  Filter,
+  Calendar,
+  FileText,
+  Settings,
+  Bell,
+  User,
+  LogOut,
+  Globe,
+  Heart,
+  Send,
   Instagram,
-  Youtube,
-  Video
+  Video,
+  Crown,
+  TestTube,
+  Lightbulb,
+  Eye,
+  Camera,
+  Trophy
 } from 'lucide-react'
 import Navbar from '../components/Navbar'
-
+import Footer from '../components/Footer'
+import Head from 'next/head'
 
 export default function BrandPage() {
   const [isFAQOpen, setIsFAQOpen] = useState<number | null>(null)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
-  const brandBenefits = [
+  // Professional features inspired by Upfluence
+  const coreFeatures = [
     {
-      icon: <DollarSign className="w-8 h-8" />,
-      title: "Eliminate Campaign Waste",
-      description: "Stop paying $500 for posts that generate $0 in sales. Our commission model lets you pay only when customers buy.",
-      stat: "Zero upfront costs"
+      title: "AI-Powered Creator Discovery",
+      description: "Find the perfect creators using advanced AI that analyzes audience demographics, engagement quality, and brand affinity",
+      icon: <Brain className="w-8 h-8" />,
+      color: "from-purple-500 to-pink-600",
+      status: "Available Now"
     },
     {
+      title: "Campaign Management Suite",
+      description: "Complete workflow from creator selection to content approval, all in one intuitive dashboard",
       icon: <Target className="w-8 h-8" />,
-      title: "Predictable ROI",
-      description: "Know exactly what you'll pay and what results to expect. Set your own budget and performance targets.",
-      stat: "Budget control"
+      color: "from-green-500 to-emerald-600",
+      status: "Available Now"
     },
     {
-      icon: <Shield className="w-8 h-8" />,
-      title: "Performance Guarantees",
-      description: "If campaigns don't meet your targets, we work to optimize or provide credits. No more wasted marketing spend.",
-      stat: "Risk-free campaigns"
-    },
-    {
+      title: "Performance Analytics",
+      description: "Track ROI, engagement rates, and conversion metrics with detailed reporting and insights",
       icon: <BarChart3 className="w-8 h-8" />,
-      title: "Real Business Results",
-      description: "Track actual sales, conversions, and revenue - not just likes and comments. See the real impact on your business.",
-      stat: "Revenue-focused"
+      color: "from-blue-500 to-cyan-600",
+      status: "Available Now"
+    },
+    {
+      title: "Secure Payment System",
+      description: "Escrow-protected payments with flexible models: fixed pay, commission-based, or hybrid",
+      icon: <Shield className="w-8 h-8" />,
+      color: "from-orange-500 to-red-600",
+      status: "Available Now"
     }
   ]
 
-  const howItWorks = [
+  // Coming soon features
+  const comingSoonFeatures = [
     {
-      step: "1",
-      title: "Choose Your Risk Level",
-      description: "Fixed payments for predictable budgets, hybrid for balanced risk, or commission for performance-only. Match your business goals.",
-      icon: <Target className="w-6 h-6" />,
-      time: "2 minutes"
+      title: "Advanced Integrations",
+      description: "Connect with Shopify, WooCommerce, Amazon, and major e-commerce platforms",
+      icon: <Cloud className="w-8 h-8" />,
+      color: "from-indigo-500 to-purple-600",
+      status: "Coming Soon"
     },
     {
-      step: "2",
-      title: "Set Your Budget & Targets",
-      description: "Define your campaign budget, sales targets, and ROI goals. Our platform matches you with creators who can deliver.",
-      icon: <Eye className="w-6 h-6" />,
-      time: "5 minutes"
+      title: "Content Calendar",
+      description: "Visual timeline for content scheduling and campaign coordination",
+      icon: <Calendar className="w-8 h-8" />,
+      color: "from-teal-500 to-cyan-600",
+      status: "Coming Soon"
     },
     {
-      step: "3",
-      title: "Launch & Track Revenue",
-      description: "Monitor actual sales and conversions in real-time. Pay according to your chosen model - only for results that matter.",
-      icon: <TrendingUp className="w-6 h-6" />,
-      time: "Real-time"
+      title: "Creator Marketplace",
+      description: "Direct access to verified creators ready to collaborate with your brand",
+      icon: <Users className="w-8 h-8" />,
+      color: "from-pink-500 to-rose-600",
+      status: "Coming Soon"
     }
   ]
 
-  const creators = [
+  // Professional pricing
+  const pricing = [
     {
-      name: "Sarah Chen",
-      handle: "@sarahbeauty",
-      platform: "Instagram",
-      followers: "125K",
-      niche: "Skincare & Beauty",
-      rate: "$50-5000+",
-      image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=200&h=200&fit=crop&crop=face",
-      rating: 4.9,
-      engagement: "4.2%",
-      verified: true
+      title: "Starter",
+      price: "$25",
+      period: "/month",
+      description: "Perfect for small businesses and startups",
+      features: ["Up to 5 campaigns per month", "AI creator matching", "Basic analytics dashboard", "Email support", "Secure escrow payments"],
+      popular: false,
+      cta: "Start Free Trial"
     },
     {
-      name: "Maya Johnson",
-      handle: "@mayaskincare",
-      platform: "YouTube",
-      followers: "156K",
-      niche: "Skincare Reviews",
-      rate: "$50-5000+",
-      image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&h=200&fit=crop&crop=face",
-      rating: 4.9,
-      engagement: "3.8%",
-      verified: true
-    },
-    {
-      name: "Alex Kim",
-      handle: "@alexbeauty",
-      platform: "Instagram",
-      followers: "67K",
-      niche: "Beauty Tutorials",
-      rate: "$50-5000+",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face",
-      rating: 4.7,
-      engagement: "4.5%",
-      verified: true
+      title: "Professional",
+      price: "$49",
+      period: "/month",
+      description: "For growing businesses and agencies",
+      features: ["Unlimited campaigns", "Advanced AI matching", "Detailed analytics & reporting", "Priority support", "Custom payment models", "Team collaboration"],
+      popular: true,
+      cta: "Start Free Trial"
     }
   ]
 
+  // Professional workflow
+  const workflowSteps = [
+    {
+      step: "01",
+      title: "Define Your Campaign",
+      description: "Set your goals, budget, and target audience. Our AI will help optimize your campaign parameters.",
+      icon: <Target className="w-8 h-8" />,
+      color: "from-purple-500 to-pink-600"
+    },
+    {
+      step: "02",
+      title: "AI Matches Creators",
+      description: "Our advanced AI analyzes thousands of creators to find the perfect matches for your brand and campaign goals.",
+      icon: <Brain className="w-8 h-8" />,
+      color: "from-green-500 to-emerald-600"
+    },
+    {
+      step: "03",
+      title: "Review & Approve",
+      description: "Browse creator profiles, review their content quality, and select the creators that best fit your brand.",
+      icon: <CheckCircle className="w-8 h-8" />,
+      color: "from-blue-500 to-cyan-600"
+    },
+    {
+      step: "04",
+      title: "Track & Optimize",
+      description: "Monitor campaign performance in real-time, track ROI, and optimize your strategy based on data insights.",
+      icon: <BarChart3 className="w-8 h-8" />,
+      color: "from-orange-500 to-red-600"
+    }
+  ]
+
+  // How it works (alias for workflowSteps)
+  const howItWorks = workflowSteps
+
+  // Payment models
+  const paymentModels = [
+    {
+      title: "Fixed Pay",
+      description: "Pay creators a predetermined amount for their content",
+      icon: <DollarSign className="w-8 h-8" />,
+      color: "from-purple-500 to-pink-600",
+      details: ["Secure escrow protection", "Set your own rates", "Only 10% platform fee", "Simple and predictable"],
+      bestFor: "Brand awareness campaigns"
+    },
+    {
+      title: "Performance-Based",
+      description: "Pay only when creators drive measurable results",
+      icon: <TrendingUp className="w-8 h-8" />,
+      color: "from-green-500 to-emerald-600",
+      details: ["Commission-based payments", "Track conversions", "Risk-free for brands", "Motivates creators"],
+      bestFor: "Sales-driven campaigns"
+    },
+    {
+      title: "Hybrid Model",
+      description: "Combine fixed pay with performance bonuses",
+      icon: <BarChart3 className="w-8 h-8" />,
+      color: "from-blue-500 to-cyan-600",
+      details: ["Base payment + bonuses", "Balanced risk/reward", "Flexible structure", "Escrow security"],
+      bestFor: "Balanced campaigns"
+    }
+  ]
+
+  // Platform comparison
+  const comparisonData = [
+    {
+      feature: "Monthly Platform Fee",
+      viralreach: "$25-49",
+      upfluence: "$500+",
+      impact: "$500+",
+      favor: "$200+",
+      viralreachHighlight: true
+    },
+    {
+      feature: "Creator Commission",
+      viralreach: "10%",
+      upfluence: "15-30%",
+      impact: "20-35%",
+      favor: "10-25%",
+      viralreachHighlight: true
+    },
+    {
+      feature: "Setup Time",
+      viralreach: "5 minutes",
+      upfluence: "2-4 weeks",
+      impact: "1-3 weeks",
+      favor: "1-2 weeks",
+      viralreachHighlight: true
+    },
+    {
+      feature: "Minimum Budget",
+      viralreach: "$100",
+      upfluence: "$2,000+",
+      impact: "$2,000+",
+      favor: "$1,000+",
+      viralreachHighlight: true
+    },
+    {
+      feature: "AI Creator Matching",
+      viralreach: "Advanced AI",
+      upfluence: "Basic filters",
+      impact: "Manual search",
+      favor: "Limited AI",
+      viralreachHighlight: true
+    },
+    {
+      feature: "Payment Protection",
+      viralreach: "Escrow system",
+      upfluence: "Platform managed",
+      impact: "Platform managed",
+      favor: "Platform managed",
+      viralreachHighlight: true
+    }
+  ]
+
+  // Professional FAQs
   const faqs = [
     {
-      question: "How do I know which payment model is right for my business?",
-      answer: "Consider your business stage: New products → Commission model (zero risk). Growing business → Hybrid model (balanced). Established brand → Fixed payments (predictable). Our quiz helps you choose based on your goals and budget."
+      question: "How does ViralReach compare to Upfluence?",
+      answer: "We offer the same core functionality as Upfluence but at 80% lower cost. We have only 10% creator commissions, faster setup times, and more flexible payment options. While Upfluence targets enterprise clients, we're built for small to medium businesses who need professional results without enterprise pricing."
     },
     {
-      question: "What if my campaigns don't generate sales?",
-      answer: "With our commission model, you pay nothing if there are no sales. With hybrid, you get guaranteed content plus performance bonuses. We offer performance guarantees and work to optimize underperforming campaigns."
+      question: "What makes your AI creator matching different?",
+      answer: "Our AI analyzes audience demographics, engagement quality, content style, and brand affinity to find creators who will deliver real results for your specific campaign goals. We go beyond basic filters to provide intelligent recommendations."
     },
     {
-      question: "How do you track actual sales and conversions?",
-      answer: "We integrate with your e-commerce platform to track real sales, not just clicks. Our system monitors actual revenue generated from influencer campaigns, giving you true ROI data."
+      question: "How do you ensure creator quality?",
+      answer: "We use a multi-step verification process including identity verification, audience analysis, content quality assessment, and performance tracking. All creators are vetted before joining our platform."
     },
     {
-      question: "Can I switch payment models as my business grows?",
-      answer: "Absolutely! Start with commission for testing, switch to hybrid for scaling, and use fixed payments for brand awareness. Our platform adapts to your business evolution."
+      question: "What payment methods do you support?",
+      answer: "We accept all major credit cards and PayPal for platform fees. Creator payments are handled through our secure escrow system, protecting both brands and creators."
     },
     {
-      question: "What's different from other influencer platforms?",
-      answer: "Other platforms charge upfront regardless of results. We align costs with outcomes. You choose how to pay - only for results, guaranteed content, or performance bonuses. Real ROI tracking, not vanity metrics."
+      question: "Can I cancel my subscription anytime?",
+      answer: "Yes, you can cancel your subscription at any time with no penalties. We offer a 30-day money-back guarantee if you're not satisfied with our platform."
+    },
+    {
+      question: "Do you offer customer support?",
+      answer: "Yes, we provide comprehensive support including email support for all plans, priority support for Professional plans, and detailed documentation to help you succeed."
     }
+  ]
+
+  // Social proof logos (placeholder for now)
+  const clientLogos = [
+    "Brand 1", "Brand 2", "Brand 3", "Brand 4", "Brand 5", "Brand 6"
   ]
 
   return (
-    <div className="min-h-screen bg-white">
-      <Navbar currentPage="brand" />
+    <>
+      <Head>
+        <title>For Brands - ViralReach Influencer Marketing Platform</title>
+        <meta name="description" content="Professional influencer marketing for brands. Turn creators into revenue with AI-powered matching, campaign management, and performance analytics. 80% cheaper than Upfluence." />
+        <link rel="canonical" href="https://viralreach.com/brand" />
+        <meta property="og:url" content="https://viralreach.com/brand" />
+        <meta property="og:title" content="For Brands - ViralReach Influencer Marketing Platform" />
+        <meta property="og:description" content="Professional influencer marketing for brands. Turn creators into revenue with AI-powered matching, campaign management, and performance analytics." />
+        <meta name="twitter:url" content="https://viralreach.com/brand" />
+        <meta name="twitter:title" content="For Brands - ViralReach Influencer Marketing Platform" />
+        <meta name="twitter:description" content="Professional influencer marketing for brands. Turn creators into revenue with AI-powered matching, campaign management, and performance analytics." />
+      </Head>
+      <div className="min-h-screen bg-white">
+        <Navbar currentPage="brand" />
 
-      {/* Hero Section - Brand-Focused */}
-      <section className="relative pt-24 pb-16 bg-black overflow-hidden">
-        {/* Background with brand-focused imagery */}
-        <div className="absolute inset-0 w-full h-full z-0 pointer-events-none">
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rotate-[-18deg] flex flex-wrap gap-4" style={{ width: '120vw', height: '60vh' }}>
-            {[
-              // Brand-focused images - marketing campaigns, analytics, ROI charts
-              "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=200&h=200&fit=crop&crop=center", // Marketing analytics
-              "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=200&h=200&fit=crop&crop=center", // Business charts
-              "https://images.unsplash.com/photo-1556761175-b413da4baf72?w=200&h=200&fit=crop&crop=center", // ROI tracking
-              "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=200&h=200&fit=crop&crop=center", // Marketing strategy
-              "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=200&h=200&fit=crop&crop=center", // Business metrics
-              "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=200&h=200&fit=crop&crop=center", // Analytics dashboard
-              "https://images.unsplash.com/photo-1556761175-b413da4baf72?w=200&h=200&fit=crop&crop=center", // Performance tracking
-              "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=200&h=200&fit=crop&crop=center", // Campaign planning
-              "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=200&h=200&fit=crop&crop=center", // Business growth
-              "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=200&h=200&fit=crop&crop=center", // Marketing ROI
-              "https://images.unsplash.com/photo-1556761175-b413da4baf72?w=200&h=200&fit=crop&crop=center", // Conversion tracking
-              "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=200&h=200&fit=crop&crop=center", // Brand strategy
-              "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=200&h=200&fit=crop&crop=center", // Business metrics
-              "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=200&h=200&fit=crop&crop=center", // Marketing analytics
-              "https://images.unsplash.com/photo-1556761175-b413da4baf72?w=200&h=200&fit=crop&crop=center", // Performance data
-              "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=200&h=200&fit=crop&crop=center", // Campaign results
-              "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=200&h=200&fit=crop&crop=center", // Business growth
-              "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=200&h=200&fit=crop&crop=center" // Marketing success
-            ].map((src, i) => (
-              <img
-                key={i}
-                src={src}
-                alt={`Marketing Analytics ${i + 1}`}
-                className="w-32 h-32 object-cover rounded-xl shadow-lg border-2 border-white/10 opacity-90"
-                style={{ aspectRatio: '1/1', minWidth: 0, minHeight: 0 }}
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* Dark overlay for readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/90 z-10"></div>
-
-        {/* Content */}
-        <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-4xl mx-auto">
+      {/* Hero Section - Matching Main Page Style */}
+      <main>
+        <section className="relative pt-24 sm:pt-28 md:pt-32 pb-20 bg-white overflow-hidden">
+          <div className="relative z-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="mb-8"
+              className="space-y-8"
             >
-              <div className="inline-flex items-center bg-gradient-to-r from-pink-500 to-purple-600 text-white px-4 py-2 rounded-full text-sm font-medium mb-6 backdrop-blur-sm">
-                <Globe className="w-4 h-4 mr-2" />
-                🌍 For Brands - Launching Globally
+              <div className="inline-flex items-center bg-gradient-to-r from-purple-500 to-pink-600 text-white px-4 py-2 rounded-full text-sm font-medium mb-6 backdrop-blur-sm">
+                <Sparkles className="w-4 h-4 mr-2" />
+                🌟 Professional Results at Startup Prices
               </div>
               
-              <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight drop-shadow-xl">
-                Stop Wasting Money on
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight">
+                Turn Creators Into
                 <br />
-                <span className="bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">
-                  Influencer Campaigns
+                <span className="bg-gradient-to-r from-purple-500 to-pink-600 bg-clip-text text-transparent">
+                  Revenue
+                </span>
+                <br />
+                <span className="text-4xl md:text-5xl lg:text-6xl text-gray-700">
+                  for Your Brand
                 </span>
               </h1>
               
-              <p className="text-xl md:text-2xl text-gray-200 mb-8 max-w-3xl mx-auto drop-shadow">
-                Traditional platforms force you to pay upfront with no guarantees. 
-                <span className="font-medium text-purple-200"> Choose how you pay - fixed, hybrid, or commission.</span>
+              <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto">
+                Professional influencer marketing platform that delivers results. 
+                <span className="font-bold text-purple-600 text-2xl"> 80% cheaper than Upfluence</span>
                 <br />
-                <span className="text-lg text-gray-300">Only pay for results that drive your business.</span>
+                <span className="text-lg text-gray-500">Same powerful features, better ROI</span>
               </p>
-            </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center mb-8"
-            >
-              <Link 
-                href="/#waitlist"
-                className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:from-pink-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg"
-              >
-                Start Your Campaign
-                <ArrowRight className="w-5 h-5 ml-2 inline" />
-              </Link>
-              <Link 
-                href="/#waitlist"
-                className="bg-white text-purple-600 border-2 border-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-gray-100 transition-all duration-300"
-              >
-                See Payment Models
-              </Link>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-8 text-sm text-gray-200"
-            >
-              <div className="flex items-center space-x-2">
-                <CheckCircle className="w-5 h-5 text-green-400" />
-                <span>No Upfront Costs (Commission Model)</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <CheckCircle className="w-5 h-5 text-green-400" />
-                <span>Set Your Own Budget</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <CheckCircle className="w-5 h-5 text-green-400" />
-                <span>Performance Guarantees</span>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Why Choose ViralReach */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Solve Your Biggest Influencer Marketing Problems
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Traditional platforms waste your budget on vanity metrics. We focus on what matters - actual business results and ROI.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            {brandBenefits.map((benefit, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                className="bg-gray-50 p-8 rounded-2xl hover:bg-gray-100 transition-colors"
-              >
-                <div className="text-pink-500 mb-4">
-                  {benefit.icon}
-                </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-3">
-                  {benefit.title}
-                </h3>
-                <p className="text-gray-600 mb-4">
-                  {benefit.description}
-                </p>
-                <div className="text-sm font-medium text-purple-600">
-                  {benefit.stat}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* How It Works */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              How It Works for Your Business
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              From campaign planning to revenue tracking - everything designed around your business goals and budget.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {howItWorks.map((step, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                className="bg-white p-8 rounded-2xl text-center border border-gray-100 shadow-sm"
-              >
-                <div className="w-16 h-16 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-6">
-                  {step.step}
-                </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-4">{step.title}</h3>
-                <p className="text-gray-600 mb-6">
-                  {step.description}
-                </p>
-                <div className="flex items-center justify-center text-sm text-gray-500">
-                  {step.icon}
-                  <span className="ml-1">{step.time}</span>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Choose Your Payment Model */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Choose Your Business Model
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-6">
-              Align your influencer marketing costs with your business goals and risk tolerance
-            </p>
-            <p className="text-lg text-gray-600 max-w-4xl mx-auto">
-              Whether you're launching a new product or scaling an existing brand - we have a model that fits your strategy.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {/* Fixed Payments Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              className="bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-2xl border-2 border-blue-200 relative"
-            >
-              <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                <span className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-1 rounded-full text-sm font-semibold">
-                  For Established Brands
-                </span>
-              </div>
-              <div className="text-center mb-6">
-                <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <DollarSign className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">Fixed Payments</h3>
-                <p className="text-gray-600 mb-4">
-                  Perfect for brands with predictable budgets who want guaranteed content delivery and brand awareness.
-                </p>
-                <div className="bg-blue-50 text-blue-700 px-4 py-2 rounded-lg font-semibold text-sm">
-                  Best for: Brand awareness campaigns
-                </div>
-              </div>
-              <Link 
-                href="/#waitlist"
-                className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-blue-600 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center"
-              >
-                Get Started
-                <ArrowRight className="w-5 h-5 ml-2" />
-              </Link>
-            </motion.div>
-
-            {/* Hybrid Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="bg-gradient-to-br from-purple-50 to-pink-50 p-8 rounded-2xl border-2 border-purple-200 relative"
-            >
-              <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                <span className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-1 rounded-full text-sm font-semibold">
-                  For Growing Businesses
-                </span>
-              </div>
-              <div className="text-center mb-6">
-                <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Target className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">Hybrid Model</h3>
-                <p className="text-gray-600 mb-4">
-                  Balance guaranteed content with performance incentives. Motivate creators to drive sales while reducing risk.
-                </p>
-                <div className="bg-purple-50 text-purple-700 px-4 py-2 rounded-lg font-semibold text-sm">
-                  Best for: Product launches & scaling
-                </div>
-              </div>
-              <Link 
-                href="/#waitlist"
-                className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-3 rounded-xl font-semibold hover:from-purple-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center"
-              >
-                Get Started
-                <ArrowRight className="w-5 h-5 ml-2" />
-              </Link>
-            </motion.div>
-
-            {/* Sales Commission Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="bg-gradient-to-br from-green-50 to-green-100 p-8 rounded-2xl border-2 border-green-200 relative"
-            >
-              <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                <span className="bg-gradient-to-r from-green-500 to-green-600 text-white px-4 py-1 rounded-full text-sm font-semibold">
-                  For Performance-Focused
-                </span>
-              </div>
-              <div className="text-center mb-6">
-                <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <TrendingUp className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">Sales Commission</h3>
-                <p className="text-gray-600 mb-4">
-                  Zero upfront costs. Pay only when customers buy. Perfect for new products and ROI-focused campaigns.
-                </p>
-                <div className="bg-green-50 text-green-700 px-4 py-2 rounded-lg font-semibold text-sm">
-                  Best for: New products & testing
-                </div>
-              </div>
-              <Link 
-                href="/#waitlist"
-                className="w-full bg-gradient-to-r from-green-500 to-green-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-green-600 hover:to-green-700 transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center"
-              >
-                Get Started
-                <ArrowRight className="w-5 h-5 ml-2" />
-              </Link>
-            </motion.div>
-          </div>
-
-          {/* Flexibility Note */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            className="mt-16 text-center"
-          >
-            <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-2xl p-8 border border-purple-100 max-w-4xl mx-auto">
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                Adapt to Your Business Growth
-              </h3>
-              <p className="text-lg text-gray-600 mb-6">
-                Start with one model and switch as your business evolves. Whether you're testing new products or scaling successful campaigns, 
-                <span className="font-semibold text-purple-600"> our platform grows with your business strategy.</span>
-              </p>
-              <div className="grid md:grid-cols-3 gap-6 text-center">
-                <div>
-                  <div className="text-2xl font-bold text-purple-600 mb-2">🚀</div>
-                  <div className="text-gray-700 font-semibold">Test New Products</div>
-                  <div className="text-sm text-gray-500">Commission model for zero risk</div>
-                </div>
-                <div>
-                  <div className="text-2xl font-bold text-purple-600 mb-2">📈</div>
-                  <div className="text-gray-700 font-semibold">Scale Successful Campaigns</div>
-                  <div className="text-sm text-gray-500">Hybrid model for growth</div>
-                </div>
-                <div>
-                  <div className="text-2xl font-bold text-purple-600 mb-2">🏢</div>
-                  <div className="text-gray-700 font-semibold">Build Brand Awareness</div>
-                  <div className="text-sm text-gray-500">Fixed payments for consistency</div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Creator Preview */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Global Creator Network
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              We're building a global network of creators ready to promote your brand with flexible payment models.
-            </p>
-          </div>
-
-          <div className="text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="bg-gradient-to-br from-pink-50 to-purple-50 rounded-2xl p-12 max-w-2xl mx-auto"
-            >
-              <div className="w-20 h-20 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Globe className="w-10 h-10 text-white" />
-              </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                Join the Global Launch
-              </h3>
-              <p className="text-gray-600 mb-6">
-                We're launching globally and building a network of creators worldwide. 
-                Join our waitlist to get early access and help shape the platform.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
                 <Link 
                   href="/#waitlist"
-                  className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-pink-600 hover:to-purple-700 transition-all duration-300"
+                  className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:from-pink-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg text-center"
                 >
-                  Join Waitlist
+                  Start Free Trial
+                  <ArrowRight className="w-5 h-5 ml-2 inline" />
                 </Link>
-                <Link 
-                  href="/creator"
-                  className="bg-white text-purple-600 border-2 border-purple-600 px-6 py-3 rounded-lg font-semibold hover:bg-purple-50 transition-all duration-300"
-                >
-                  For Creators
-                </Link>
+                <button className="bg-white/90 backdrop-blur-sm text-purple-600 border-2 border-purple-600 px-8 py-4 rounded-xl font-semibold text-lg hover:bg-purple-50 transition-all duration-300 transform hover:scale-105 shadow-lg text-center">
+                  <Play className="w-5 h-5 mr-2 inline" />
+                  Watch Demo
+                </button>
+              </div>
+
+              <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-8 text-sm text-gray-600">
+                <div className="flex items-center space-x-2">
+                  <CheckCircle className="w-5 h-5 text-purple-400" />
+                  <span>80% Cost Savings</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <CheckCircle className="w-5 h-5 text-purple-400" />
+                  <span>5-Minute Setup</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <CheckCircle className="w-5 h-5 text-purple-400" />
+                  <span>Secure Payments</span>
+                </div>
               </div>
             </motion.div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* FAQ */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Frequently Asked Questions
-            </h2>
-            <p className="text-xl text-gray-600">
-              Everything brands need to know about ViralReach.
-            </p>
-          </div>
-
-          <div className="space-y-4">
-            {faqs.map((faq, index) => (
-              <div key={index} className="bg-white rounded-xl shadow-sm border border-gray-100">
-                <button
-                  onClick={() => setIsFAQOpen(isFAQOpen === index ? null : index)}
-                  className="w-full p-6 text-left flex justify-between items-center hover:bg-gray-50 transition-colors"
-                >
-                  <span className="text-lg font-semibold text-gray-900">{faq.question}</span>
-                  <ChevronDown 
-                    className={`w-5 h-5 text-gray-500 transition-transform ${
-                      isFAQOpen === index ? 'rotate-180' : ''
-                    }`} 
-                  />
-                </button>
-                {isFAQOpen === index && (
-                  <div className="px-6 pb-6">
-                    <p className="text-gray-600">{faq.answer}</p>
-                  </div>
-                )}
+        {/* Value Proposition Section - Matching Main Page Style */}
+        <section className="py-24 bg-gradient-to-br from-purple-50 via-white to-pink-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="text-center mb-16"
+            >
+              <div className="inline-flex items-center bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-full text-sm font-semibold mb-6">
+                <Star className="w-4 h-4 mr-2" />
+                Why Choose ViralReach?
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="py-20 bg-gradient-to-br from-pink-500 to-purple-600">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl font-bold text-white mb-4">
-            Stop Wasting Money on Influencer Marketing
-          </h2>
-          <p className="text-xl text-pink-100 mb-8">
-            Choose your business model and start campaigns that drive actual revenue, not just likes.
-          </p>
-          <Link 
-            href="/#waitlist"
-            className="inline-flex items-center bg-white text-pink-600 px-8 py-4 rounded-xl font-semibold text-lg hover:bg-gray-100 transition-colors"
-          >
-            Start Your Campaign
-            <ArrowRight className="w-5 h-5 ml-2" />
-          </Link>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div>
-              <div className="text-2xl font-bold bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent mb-4">
-                ViralReach
-              </div>
-              <p className="text-gray-400 mb-4">
-                The future of flexible payment models for influencer marketing. Choose fixed, hybrid, or commission.
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                Professional Results,
+                <br />
+                <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                  Startup Prices
+                </span>
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                We've built a platform that combines the power of enterprise tools with the simplicity and affordability that growing businesses need.
               </p>
-              <div className="flex space-x-4">
-                <a href="#" className="text-gray-400 hover:text-white">
-                  <Instagram className="w-5 h-5" />
-                </a>
-                <a href="#" className="text-gray-400 hover:text-white">
-                  <Youtube className="w-5 h-5" />
-                </a>
-                <a href="#" className="text-gray-400 hover:text-white">
-                  <Video className="w-5 h-5" />
-                </a>
+            </motion.div>
+
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
+              {/* Left Column - Benefits */}
+              <motion.div 
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="space-y-8"
+              >
+                <div className="flex items-start space-x-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <DollarSign className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">Transparent Pricing</h3>
+                    <p className="text-gray-600">Pay $25-49/month with only 10% commission on creator payments</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start space-x-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <Zap className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">5-Minute Setup</h3>
+                    <p className="text-gray-600">Start your first campaign immediately, no complex onboarding</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start space-x-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <Shield className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">Secure Payments</h3>
+                    <p className="text-gray-600">Escrow-protected payments with flexible models for any campaign</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start space-x-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <Globe className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">Global Access</h3>
+                    <p className="text-gray-600">Connect with creators from 50+ countries, perfect for brands looking to expand their reach</p>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Right Column - Visual */}
+              <motion.div 
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                className="relative"
+              >
+                <div className="bg-white rounded-3xl p-8 shadow-2xl border border-gray-100">
+                  <div className="flex items-center justify-between mb-6">
+                    <h3 className="text-xl font-bold text-gray-900">Campaign Dashboard</h3>
+                    <div className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold">
+                      +85%
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between p-4 bg-purple-50 rounded-xl">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center">
+                          <Users className="w-5 h-5 text-white" />
+                        </div>
+                        <div>
+                          <div className="font-semibold text-gray-900">Active Creators</div>
+                          <div className="text-sm text-gray-600">12 creators</div>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="font-bold text-purple-600">85%</div>
+                        <div className="text-sm text-gray-600">Complete</div>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center justify-between p-4 bg-pink-50 rounded-xl">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-10 h-10 bg-pink-500 rounded-full flex items-center justify-center">
+                          <Eye className="w-5 h-5 text-white" />
+                        </div>
+                        <div>
+                          <div className="font-semibold text-gray-900">Total Reach</div>
+                          <div className="text-sm text-gray-600">2.4M views</div>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="font-bold text-pink-600">2.4M</div>
+                        <div className="text-sm text-gray-600">Reach</div>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center justify-between p-4 bg-blue-50 rounded-xl">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
+                          <BarChart3 className="w-5 h-5 text-white" />
+                        </div>
+                        <div>
+                          <div className="font-semibold text-gray-900">Engagement</div>
+                          <div className="text-sm text-gray-600">8.7% rate</div>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="font-bold text-blue-600">8.7%</div>
+                        <div className="text-sm text-gray-600">Engagement</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* Core Features Section - Matching Main Page Style */}
+        <section className="py-24 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="text-center mb-16"
+            >
+              <div className="inline-flex items-center bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-full text-sm font-semibold mb-6">
+                <Zap className="w-4 h-4 mr-2" />
+                Everything You Need to Succeed
+              </div>
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                Professional Tools That
+                <br />
+                <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                  Actually Work
+                </span>
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Professional tools that deliver real results, without the enterprise complexity
+              </p>
+            </motion.div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {coreFeatures.map((feature, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: index * 0.1 }}
+                  className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100"
+                >
+                  <div className={`w-16 h-16 bg-gradient-to-r ${feature.color} rounded-2xl flex items-center justify-center mb-6`}>
+                    <div className="text-white">
+                      {feature.icon}
+                    </div>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4">{feature.title}</h3>
+                  <p className="text-gray-600 mb-6 leading-relaxed">{feature.description}</p>
+                  <span className="inline-block bg-green-100 text-green-800 text-sm font-medium px-3 py-1 rounded-full">
+                    {feature.status}
+                  </span>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Coming Soon Section - Matching Main Page Style */}
+        <section className="py-24 bg-gradient-to-br from-purple-50 via-white to-pink-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="text-center mb-16"
+            >
+              <div className="inline-flex items-center bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-full text-sm font-semibold mb-6">
+                <Rocket className="w-4 h-4 mr-2" />
+                What's Coming Soon
+              </div>
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                Building Fast to Bring You
+                <br />
+                <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                  Enterprise Features
+                </span>
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                We're building fast to bring you enterprise-level features at startup prices
+              </p>
+            </motion.div>
+
+            <div className="grid md:grid-cols-3 gap-8">
+              {comingSoonFeatures.map((feature, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: index * 0.1 }}
+                  className="bg-white rounded-2xl p-8 shadow-lg border-2 border-dashed border-gray-300"
+                >
+                  <div className={`w-16 h-16 bg-gradient-to-r ${feature.color} rounded-2xl flex items-center justify-center mb-6`}>
+                    <div className="text-white">
+                      {feature.icon}
+                    </div>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4">{feature.title}</h3>
+                  <p className="text-gray-600 mb-6 leading-relaxed">{feature.description}</p>
+                  <span className="inline-block bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">
+                    {feature.status}
+                  </span>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Workflow Section - Matching Main Page Style */}
+        <section className="py-24 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="text-center mb-16"
+            >
+              <div className="inline-flex items-center bg-gradient-to-r from-green-600 to-emerald-600 text-white px-6 py-3 rounded-full text-sm font-semibold mb-6">
+                <Target className="w-4 h-4 mr-2" />
+                How It Works
+              </div>
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                Simple 4-Step Process
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                From campaign creation to results - everything you need to succeed
+              </p>
+            </motion.div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {workflowSteps.map((step, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: index * 0.1 }}
+                  className="text-center"
+                >
+                  <div className="relative mb-8">
+                    <div className={`w-20 h-20 bg-gradient-to-r ${step.color} rounded-2xl flex items-center justify-center mx-auto mb-4`}>
+                      <div className="text-white">
+                        {step.icon}
+                      </div>
+                    </div>
+                    <div className="absolute -top-2 -right-2 w-8 h-8 bg-gray-900 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                      {step.step}
+                    </div>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4">{step.title}</h3>
+                  <p className="text-gray-600 leading-relaxed">{step.description}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Platform Comparison Section - Matching Main Page Style */}
+        <section className="py-24 bg-gradient-to-br from-purple-50 via-white to-pink-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="text-center mb-16"
+            >
+              <div className="inline-flex items-center bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-full text-sm font-semibold mb-6">
+                <Trophy className="w-4 h-4 mr-2" />
+                Why Choose ViralReach?
+              </div>
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                See How We Compare to
+                <br />
+                <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                  Other Platforms
+                </span>
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Professional results without the enterprise price tag
+              </p>
+            </motion.div>
+
+            <div className="overflow-x-auto">
+              <div className="min-w-full bg-white rounded-3xl shadow-xl border border-gray-200">
+                <div className="grid grid-cols-5 gap-6 p-8 bg-gradient-to-r from-purple-50 to-pink-50 rounded-t-3xl">
+                  <div className="font-bold text-gray-900 text-lg">Feature</div>
+                  <div className="font-bold text-purple-600 text-center text-lg">ViralReach</div>
+                  <div className="font-bold text-gray-600 text-center text-lg">Upfluence</div>
+                  <div className="font-bold text-gray-600 text-center text-lg">Impact</div>
+                  <div className="font-bold text-gray-600 text-center text-lg">Favor</div>
+                </div>
+                
+                {comparisonData.map((row, index) => (
+                  <div key={index} className={`grid grid-cols-5 gap-6 p-6 ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}`}>
+                    <div className="font-semibold text-gray-900">{row.feature}</div>
+                    <div className={`text-center font-bold ${row.viralreachHighlight ? 'text-purple-600' : 'text-gray-900'}`}>
+                      {row.viralreach}
+                    </div>
+                    <div className="text-center text-gray-600">{row.upfluence}</div>
+                    <div className="text-center text-gray-600">{row.impact}</div>
+                    <div className="text-center text-gray-600">{row.favor}</div>
+                  </div>
+                ))}
               </div>
             </div>
+          </div>
+        </section>
 
-            <div>
-              <h3 className="font-semibold mb-4">Platform</h3>
-              <ul className="space-y-2 text-gray-400">
-                <li><Link href="/" className="hover:text-white">Home</Link></li>
-                <li><Link href="/creator" className="hover:text-white">For Creators</Link></li>
-                <li><a href="#" className="hover:text-white">Payment Models</a></li>
-                <li><a href="#" className="hover:text-white">Success Stories</a></li>
-              </ul>
-            </div>
+        {/* Payment Models Section - Matching Main Page Style */}
+        <section className="py-24 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="text-center mb-16"
+            >
+              <div className="inline-flex items-center bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-full text-sm font-semibold mb-6">
+                <DollarSign className="w-4 h-4 mr-2" />
+                Flexible Payment Models
+              </div>
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                Choose the Payment Structure
+                <br />
+                <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                  That Works for You
+                </span>
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Choose the payment structure that works best for your business goals
+              </p>
+            </motion.div>
 
-            <div>
-              <h3 className="font-semibold mb-4">Company</h3>
-              <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-white">About Us</a></li>
-                <li><a href="#" className="hover:text-white">Careers</a></li>
-                <li><a href="#" className="hover:text-white">Press</a></li>
-                <li><Link href="/contact" className="hover:text-white">Contact</Link></li>
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="font-semibold mb-4">Support</h3>
-              <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-white">Help Center</a></li>
-                <li><a href="#" className="hover:text-white">Privacy Policy</a></li>
-                <li><a href="#" className="hover:text-white">Terms of Service</a></li>
-                <li><a href="#" className="hover:text-white">Cookie Policy</a></li>
-              </ul>
+            <div className="grid md:grid-cols-3 gap-8">
+              {paymentModels.map((model, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: index * 0.1 }}
+                  className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300"
+                >
+                  <div className={`w-16 h-16 bg-gradient-to-r ${model.color} rounded-2xl flex items-center justify-center mb-6`}>
+                    <div className="text-white">
+                      {model.icon}
+                    </div>
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">{model.title}</h3>
+                  <p className="text-gray-600 mb-6">{model.description}</p>
+                  <div className="mb-6">
+                    <span className="inline-block bg-purple-100 text-purple-800 text-sm font-medium px-3 py-1 rounded-full">
+                      Best for: {model.bestFor}
+                    </span>
+                  </div>
+                  <ul className="space-y-3">
+                    {model.details.map((detail, detailIndex) => (
+                      <li key={detailIndex} className="flex items-start">
+                        <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
+                        <span className="text-gray-700">{detail}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </motion.div>
+              ))}
             </div>
           </div>
+        </section>
 
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; 2025 ViralReach. Empowering flexible influence.</p>
+        {/* Pricing Section - Matching Main Page Style */}
+        <section className="py-24 bg-gradient-to-br from-purple-50 via-white to-pink-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="text-center mb-16"
+            >
+              <div className="inline-flex items-center bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-full text-sm font-semibold mb-6">
+                <Crown className="w-4 h-4 mr-2" />
+                Simple, Transparent Pricing
+              </div>
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                No Hidden Fees,
+                <br />
+                <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                  No Surprises
+                </span>
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Transparent pricing with only 10% commission, no hidden fees, no surprises
+              </p>
+            </motion.div>
+
+            <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+              {pricing.map((plan, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: index * 0.1 }}
+                  className={`bg-white rounded-3xl p-8 shadow-xl border-2 ${
+                    plan.popular ? 'border-purple-500 relative' : 'border-gray-200'
+                  }`}
+                >
+                  {plan.popular && (
+                    <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                      <span className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-2 rounded-full text-sm font-semibold">
+                        Most Popular
+                      </span>
+                    </div>
+                  )}
+                  
+                  <div className="text-center mb-8">
+                    <h3 className="text-2xl font-bold text-gray-900 mb-2">{plan.title}</h3>
+                    <p className="text-gray-600 mb-6">{plan.description}</p>
+                    <div className="flex items-baseline justify-center">
+                      <span className="text-5xl font-bold text-gray-900">{plan.price}</span>
+                      <span className="text-gray-600 ml-2 text-xl">{plan.period}</span>
+                    </div>
+                  </div>
+
+                  <ul className="space-y-4 mb-8">
+                    {plan.features.map((feature, featureIndex) => (
+                      <li key={featureIndex} className="flex items-center">
+                        <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0" />
+                        <span className="text-gray-700">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <Link 
+                    href="/#waitlist"
+                    className={`w-full py-4 px-6 rounded-xl font-semibold text-center transition-all duration-300 ${
+                      plan.popular
+                        ? 'bg-gradient-to-r from-pink-500 to-purple-600 text-white hover:from-pink-600 hover:to-purple-700'
+                        : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
+                    }`}
+                  >
+                    {plan.cta}
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="text-center mt-12"
+            >
+              <p className="text-gray-600 mb-4">
+                <span className="font-semibold">30-day money-back guarantee</span> • No long-term contracts • Cancel anytime
+              </p>
+            </motion.div>
           </div>
-        </div>
-      </footer>
-    </div>
+        </section>
+
+        {/* FAQ Section - Matching Main Page Style */}
+        <section className="py-24 bg-white">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="text-center mb-16"
+            >
+              <div className="inline-flex items-center bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-full text-sm font-semibold mb-6">
+                <MessageSquare className="w-4 h-4 mr-2" />
+                Frequently Asked Questions
+              </div>
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                Everything You Need to
+                <br />
+                <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                  Know About ViralReach
+                </span>
+              </h2>
+              <p className="text-xl text-gray-600">
+                Professional answers to your most common questions
+              </p>
+            </motion.div>
+
+            <div className="space-y-4">
+              {faqs.map((faq, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: index * 0.1 }}
+                  className="bg-white rounded-2xl shadow-sm border border-gray-200"
+                >
+                  <button
+                    onClick={() => setIsFAQOpen(isFAQOpen === index ? null : index)}
+                    className="w-full px-8 py-6 text-left flex items-center justify-between hover:bg-gray-50 transition-colors duration-200"
+                  >
+                    <span className="font-semibold text-gray-900 text-lg">{faq.question}</span>
+                    <ChevronDown 
+                      className={`w-6 h-6 text-gray-500 transition-transform duration-200 ${
+                        isFAQOpen === index ? 'rotate-180' : ''
+                      }`}
+                    />
+                  </button>
+                  {isFAQOpen === index && (
+                    <div className="px-8 pb-6">
+                      <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
+                    </div>
+                  )}
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Section - Matching Main Page Style */}
+        <section className="py-24 bg-gradient-to-br from-purple-500 to-pink-600">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+                Ready to Get Started?
+              </h2>
+              <p className="text-xl text-purple-100 mb-8 max-w-2xl mx-auto">
+                Join growing brands who've switched from expensive platforms. 
+                Start your free trial today with our 30-day money-back guarantee.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                <Link 
+                  href="/#waitlist"
+                  className="bg-white text-purple-600 px-10 py-4 rounded-xl font-semibold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 inline-flex items-center text-lg shadow-lg"
+                >
+                  Start Free Trial
+                  <ArrowRight className="w-5 h-5 ml-2" />
+                </Link>
+                <p className="text-purple-100 text-sm">
+                  No credit card required • 30-day guarantee
+                </p>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        <Footer />
+      </main>
+      </div>
+    </>
   )
-} 
+}

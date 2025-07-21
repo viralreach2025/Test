@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { getAnimationProps, shouldDisableAnimations } from '../../lib/utils'
 import { ArrowRight, ArrowLeft, CheckCircle } from 'lucide-react'
 
 interface QuizData {
@@ -241,10 +242,12 @@ export default function WaitlistQuiz({ onComplete }: WaitlistQuizProps) {
       <AnimatePresence mode="wait">
         <motion.div
           key={currentStep}
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -20 }}
-          transition={{ duration: 0.3 }}
+          {...getAnimationProps(
+            { opacity: 0, x: 20 },
+            { opacity: 1, x: 0 },
+            { duration: 0.3 }
+          )}
+          exit={shouldDisableAnimations() ? undefined : { opacity: 0, x: -20 }}
         >
           {currentStep === 0 ? (
             // Email Step

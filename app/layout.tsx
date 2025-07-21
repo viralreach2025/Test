@@ -47,7 +47,6 @@ export const metadata: Metadata = {
   },
   metadataBase: new URL('https://viralreach.com'),
   alternates: {
-    canonical: '/',
     languages: {
       'en-US': '/en-US',
       'en-GB': '/en-GB',

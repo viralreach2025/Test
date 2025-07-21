@@ -35,6 +35,14 @@
     <priority>0.7</priority>
   </url>
   
+  <!-- Case Studies Page -->
+  <url>
+    <loc>https://viralreach.com/case-studies</loc>
+    <lastmod>2025-01-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
   <!-- Future pages (commented for now) -->
   <!--
   <url>

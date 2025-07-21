@@ -118,9 +118,7 @@ export default function CreatorStoriesCarousel() {
   return (
     <section className="py-20 bg-black">
       <div className="max-w-7xl mx-auto px-4">
-        <h2 className="text-5xl md:text-7xl font-bold text-white mb-12 text-center tracking-tight">
-          Thriving with ViralReach
-        </h2>
+
         <div className="relative">
           {/* Carousel Arrows */}
           <button
