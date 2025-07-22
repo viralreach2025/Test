@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { CheckCircle, ChevronDown, Menu, X, ArrowRight, Search, Shield, TrendingUp, Users, DollarSign, BarChart3, MessageSquare, Star, Clock, Camera, Target, Eye, Zap, Crown, TestTube, Lightbulb, Globe, Heart, Send, Instagram, Video, Play, User, Loader2, Trophy, Settings } from 'lucide-react'
+import { CheckCircle, ChevronDown, Menu, X, ArrowRight, Search, Shield, TrendingUp, Users, DollarSign, BarChart3, MessageSquare, Star, Clock, Camera, Target, Eye, Zap, Crown, TestTube, Lightbulb, Globe, Heart, Send, Instagram, Video, Play, User, Loader2, Trophy, Settings, Calculator } from 'lucide-react'
 import HeroDemo from './components/HeroDemo'
 import { DashboardPreview } from './components/DashboardPreview'
 import { saveWaitlistEntry } from '../lib/database'
@@ -955,6 +955,158 @@ export default function Home() {
                   <p className="text-gray-600">A: {faq.answer}</p>
                 </motion.div>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Free Tools Section */}
+        <section className="py-24 bg-gradient-to-br from-gray-50 to-purple-50">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div 
+              {...getAnimationProps(
+                { opacity: 0, y: 30 },
+                { opacity: 1, y: 0 },
+                { duration: 0.8 }
+              )}
+              whileInView={shouldDisableAnimations() ? undefined : { opacity: 1, y: 0 }}
+              className="text-center mb-16"
+            >
+              <div className="inline-flex items-center bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-full text-sm font-semibold mb-6">
+                <Calculator className="w-4 h-4 mr-2" />
+                Free Tools
+              </div>
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                Powerful Tools to Help You
+                <br />
+                <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                  Succeed
+                </span>
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Access our free tools designed to help brands and creators make informed decisions and grow their business.
+              </p>
+            </motion.div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {/* Influencer Rate Calculator */}
+              <motion.div
+                {...getAnimationProps(
+                  { opacity: 0, y: 30 },
+                  { opacity: 1, y: 0 },
+                  { duration: 0.6, delay: 0.1 }
+                )}
+                whileInView={shouldDisableAnimations() ? undefined : { opacity: 1, y: 0 }}
+                className="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-purple-200"
+              >
+                <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <DollarSign className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">Influencer Rate Calculator</h3>
+                <p className="text-gray-600 mb-6 leading-relaxed">
+                  Calculate fair rates for influencer partnerships based on platform, followers, niche, and experience.
+                </p>
+                <div className="space-y-3 mb-6">
+                  <div className="flex items-center text-sm text-gray-600">
+                    <CheckCircle className="w-4 h-4 text-green-500 mr-2" />
+                    <span>Accurate market rates</span>
+                  </div>
+                  <div className="flex items-center text-sm text-gray-600">
+                    <CheckCircle className="w-4 h-4 text-green-500 mr-2" />
+                    <span>Multiple platforms</span>
+                  </div>
+                  <div className="flex items-center text-sm text-gray-600">
+                    <CheckCircle className="w-4 h-4 text-green-500 mr-2" />
+                    <span>Payment model options</span>
+                  </div>
+                </div>
+                <Link 
+                  href="/tools/influencer-rate-calculator"
+                  className="inline-flex items-center bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-purple-700 hover:to-pink-700 transition-all duration-300 transform hover:scale-105"
+                >
+                  Calculate Rates
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Link>
+              </motion.div>
+
+              {/* Brand Strategy Quiz */}
+              <motion.div
+                {...getAnimationProps(
+                  { opacity: 0, y: 30 },
+                  { opacity: 1, y: 0 },
+                  { duration: 0.6, delay: 0.2 }
+                )}
+                whileInView={shouldDisableAnimations() ? undefined : { opacity: 1, y: 0 }}
+                className="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-purple-200"
+              >
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <TrendingUp className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">Brand Strategy Quiz</h3>
+                <p className="text-gray-600 mb-6 leading-relaxed">
+                  Get a comprehensive brand strategy with personalized insights and actionable recommendations.
+                </p>
+                <div className="space-y-3 mb-6">
+                  <div className="flex items-center text-sm text-gray-600">
+                    <CheckCircle className="w-4 h-4 text-green-500 mr-2" />
+                    <span>24+ questions</span>
+                  </div>
+                  <div className="flex items-center text-sm text-gray-600">
+                    <CheckCircle className="w-4 h-4 text-green-500 mr-2" />
+                    <span>Personalized insights</span>
+                  </div>
+                  <div className="flex items-center text-sm text-gray-600">
+                    <CheckCircle className="w-4 h-4 text-green-500 mr-2" />
+                    <span>Actionable strategy</span>
+                  </div>
+                </div>
+                <Link 
+                  href="/quiz/comprehensive-brand-quiz"
+                  className="inline-flex items-center bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105"
+                >
+                  Take Quiz
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Link>
+              </motion.div>
+
+              {/* Creator Assessment */}
+              <motion.div
+                {...getAnimationProps(
+                  { opacity: 0, y: 30 },
+                  { opacity: 1, y: 0 },
+                  { duration: 0.6, delay: 0.3 }
+                )}
+                whileInView={shouldDisableAnimations() ? undefined : { opacity: 1, y: 0 }}
+                className="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-purple-200"
+              >
+                <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <Users className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">Creator Assessment</h3>
+                <p className="text-gray-600 mb-6 leading-relaxed">
+                  Optimize your creator strategy with our comprehensive assessment and growth plan.
+                </p>
+                <div className="space-y-3 mb-6">
+                  <div className="flex items-center text-sm text-gray-600">
+                    <CheckCircle className="w-4 h-4 text-green-500 mr-2" />
+                    <span>15 focused questions</span>
+                  </div>
+                  <div className="flex items-center text-sm text-gray-600">
+                    <CheckCircle className="w-4 h-4 text-green-500 mr-2" />
+                    <span>Monetization strategy</span>
+                  </div>
+                  <div className="flex items-center text-sm text-gray-600">
+                    <CheckCircle className="w-4 h-4 text-green-500 mr-2" />
+                    <span>Growth roadmap</span>
+                  </div>
+                </div>
+                <Link 
+                  href="/quiz/comprehensive-creator-quiz"
+                  className="inline-flex items-center bg-gradient-to-r from-green-600 to-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-green-700 hover:to-blue-700 transition-all duration-300 transform hover:scale-105"
+                >
+                  Get Assessment
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Link>
+              </motion.div>
             </div>
           </div>
         </section>

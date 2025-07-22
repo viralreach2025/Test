@@ -18,6 +18,11 @@ export function WaitlistEmailTemplate({ userType, formData, template, data }: Wa
     return <AffiliateQuizEmailTemplate data={data} formData={formData} />
   }
 
+  // If it's a quiz completion, use the quiz template
+  if (template === 'quiz-completion') {
+    return <QuizCompletionEmailTemplate userType={userType} data={data} name={formData?.name} />
+  }
+
   const isCreator = userType === 'creator'
   const isAffiliate = userType === 'affiliate'
   
@@ -260,6 +265,162 @@ function AffiliateQuizEmailTemplate({ data, formData }: { data: any, formData: a
               <Link href="https://viralreach.ca" style={link}>
                 viralreach.ca
               </Link>
+            </Text>
+          </Section>
+        </Container>
+      </Body>
+    </Html>
+  )
+}
+
+// Quiz Completion Email Template
+function QuizCompletionEmailTemplate({ userType, data, name }: { userType: string, data: any, name?: string }) {
+  const isCreator = userType === 'creator'
+  const isBrand = userType === 'brand'
+  
+  const playbookUrl = isCreator 
+    ? '/Creator-Monetization-Guide.pdf'
+    : '/Influencer-Marketing-Playbook.pdf'
+  
+  const playbookTitle = isCreator 
+    ? 'Creator Monetization Guide'
+    : 'Influencer Marketing Playbook'
+  
+  const roi = data?.roi || '475'
+  const income = data?.income?.monthly || '2,500'
+  
+  return (
+    <Html>
+      <Head />
+      <Body style={main}>
+        <Container style={container}>
+          {/* Header */}
+          <Section style={header}>
+            <div style={logo}>
+              <Text style={logoText}>VR</Text>
+            </div>
+            <Heading style={title}>ViralReach</Heading>
+          </Section>
+
+          {/* Welcome Message */}
+          <Section style={content}>
+            <Heading style={h1}>
+              🎉 Your Results Are Ready!
+            </Heading>
+            
+            <Text style={text}>
+              Hi {name || 'there'}! Thank you for completing our {isCreator ? 'creator income' : 'brand ROI'} quiz. Here are your personalized results and your free guide.
+            </Text>
+
+            {/* Quiz Results */}
+            <div style={quizSummary}>
+              <Heading style={h2}>📊 Your Results</Heading>
+              
+              {isBrand ? (
+                <div style={summaryGrid}>
+                  <div style={summaryItem}>
+                    <Text style={summaryLabel}>Your ROI Potential</Text>
+                    <Text style={summaryValue}>{roi}%</Text>
+                  </div>
+                  <div style={summaryItem}>
+                    <Text style={summaryLabel}>Industry Average</Text>
+                    <Text style={summaryValue}>250%</Text>
+                  </div>
+                  <div style={summaryItem}>
+                    <Text style={summaryLabel}>Improvement</Text>
+                    <Text style={summaryValue}>+{(parseInt(roi) - 250)}%</Text>
+                  </div>
+                </div>
+              ) : (
+                <div style={summaryGrid}>
+                  <div style={summaryItem}>
+                    <Text style={summaryLabel}>Monthly Income Potential</Text>
+                    <Text style={summaryValue}>${income}</Text>
+                  </div>
+                  <div style={summaryItem}>
+                    <Text style={summaryLabel}>Current Average</Text>
+                    <Text style={summaryValue}>$500</Text>
+                  </div>
+                  <div style={summaryItem}>
+                    <Text style={summaryLabel}>10X Potential</Text>
+                    <Text style={summaryValue}>${(parseInt(income.replace(/,/g, '')) * 2.5).toLocaleString()}</Text>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Download Section */}
+            <div style={downloadSection}>
+              <Heading style={h2}>📚 Your Free Guide</Heading>
+              <Text style={text}>
+                Download your comprehensive {playbookTitle} with strategies, templates, and case studies to help you achieve your goals.
+              </Text>
+              
+              <div style={downloadButton}>
+                <Link href={playbookUrl} style={downloadButtonText}>
+                  📥 Download {playbookTitle}
+                </Link>
+              </div>
+              
+              <Text style={smallText}>
+                This guide includes:
+              </Text>
+              <ul style={list}>
+                {isBrand ? (
+                  <>
+                    <li style={listItem}>🎯 Campaign strategy templates</li>
+                    <li style={listItem}>📊 ROI calculation formulas</li>
+                    <li style={listItem}>🤝 Influencer outreach templates</li>
+                    <li style={listItem}>📈 Performance tracking tools</li>
+                    <li style={listItem}>💡 Case studies and success stories</li>
+                  </>
+                ) : (
+                  <>
+                    <li style={listItem}>💰 Income calculation formulas</li>
+                    <li style={listItem}>📱 Content strategy guides</li>
+                    <li style={listItem}>🤝 Brand partnership templates</li>
+                    <li style={listItem}>📊 Analytics and tracking tools</li>
+                    <li style={listItem}>🚀 Growth and scaling strategies</li>
+                  </>
+                )}
+              </ul>
+            </div>
+
+            <Hr style={hr} />
+
+            {/* Next Steps */}
+            <Heading style={h2}>🚀 What's Next?</Heading>
+            <Text style={text}>
+              <strong>Step 1:</strong> Download and read your free guide
+            </Text>
+            <Text style={text}>
+              <strong>Step 2:</strong> Join our waitlist for early platform access
+            </Text>
+            <Text style={text}>
+              <strong>Step 3:</strong> Get notified when we launch and start achieving your goals
+            </Text>
+
+            <Hr style={hr} />
+
+            <Text style={text}>
+              Have questions about your results? Just reply to this email - we'd love to help!
+            </Text>
+
+            <Text style={signature}>
+              Cheers,<br />
+              <strong>The ViralReach Team</strong><br />
+              <Link href="https://viralreach.ca" style={link}>viralreach.ca</Link>
+            </Text>
+          </Section>
+
+          {/* Footer */}
+          <Section style={footer}>
+            <Text style={footerText}>
+              You received this email because you completed our quiz.
+            </Text>
+            <Text style={footerText}>
+              ViralReach • Toronto, Canada<br />
+              <Link href="mailto:support@viralreach.ca" style={link}>support@viralreach.ca</Link>
             </Text>
           </Section>
         </Container>
@@ -665,4 +826,35 @@ const footerText = {
   fontSize: '12px',
   lineHeight: '1.4',
   margin: '0 0 5px 0',
+}
+
+const downloadSection = {
+  backgroundColor: '#f0f9ff',
+  padding: '24px',
+  borderRadius: '12px',
+  border: '1px solid #bae6fd',
+  margin: '20px 0',
+}
+
+const downloadButton = {
+  backgroundColor: '#3b82f6',
+  borderRadius: '8px',
+  padding: '16px 24px',
+  textAlign: 'center' as const,
+  margin: '20px 0',
+}
+
+const downloadButtonText = {
+  color: '#ffffff',
+  fontSize: '16px',
+  fontWeight: 'bold',
+  textDecoration: 'none',
+  display: 'block',
+}
+
+const smallText = {
+  color: '#6b7280',
+  fontSize: '14px',
+  lineHeight: '1.5',
+  margin: '15px 0 10px 0',
 } 

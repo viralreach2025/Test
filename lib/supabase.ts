@@ -77,4 +77,93 @@ export interface PortfolioItem {
   order_index: number
   created_at: string
   updated_at: string
+}
+
+// Enhanced Quiz Results Types (NEW TABLES)
+export interface EnhancedBrandQuizResult {
+  id?: string
+  user_type: 'brand'
+  // Basic Business Info
+  industry: string
+  company_size: string
+  influencer_budget: string
+  
+  // Goals & Strategy
+  primary_goals: string[]
+  target_audience: string
+  platforms: string[]
+  
+  // Creator Strategy
+  creator_size: string
+  creator_criteria: string[]
+  previous_experience: string
+  
+  // Campaign Details
+  campaign_objective: string
+  campaign_duration: string
+  content_preferences: string[]
+  
+  // Contact Information
+  name: string
+  email: string
+  company: string
+  
+  // Generated Insights
+  growth_potential: string
+  time_to_10x: string
+  revenue_potential: string
+  expected_roi: string
+  
+  // Report Data
+  report_data: any
+  
+  created_at?: string
+}
+
+export interface EnhancedCreatorQuizResult {
+  id?: string
+  user_type: 'creator'
+  // Basic Profile
+  platform: string
+  followers: string
+  engagement: string
+  niche: string
+  experience: string
+  
+  // Content Strategy
+  content_type: string[]
+  posting_frequency: string
+  content_quality: string
+  
+  // Monetization
+  current_income: string
+  income_sources: string[]
+  pricing_strategy: string
+  
+  // Growth & Analytics
+  growth_rate: string
+  analytics_tools: string[]
+  
+  // Brand & Partnerships
+  brand_alignment: string[]
+  partnership_goals: string[]
+  
+  // Goals & Aspirations
+  short_term_goals: string[]
+  target_income: string
+  
+  // Contact Information
+  name: string
+  email: string
+  
+  // Generated Insights
+  growth_multiplier: string
+  time_to_10x: string
+  target_income_potential: string
+  avg_engagement: string
+  
+  // Report Data
+  report_data: any
+  
+  created_at?: string
 } 
