@@ -965,8 +965,161 @@ export default function CreatorPage() {
           </div>
         </section>
 
-        {/* Platform Comparison Section - Matching Main Page Style */}
+        {/* Long-term Partnerships Section */}
         <section className="py-24 bg-gradient-to-br from-purple-50 via-white to-pink-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="text-center mb-16"
+            >
+              <div className="inline-flex items-center bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-full text-sm font-semibold mb-6">
+                <Users className="w-4 h-4 mr-2" />
+                Long-term Partnerships
+              </div>
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                Build Lasting
+                <br />
+                <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                  Creator Relationships
+                </span>
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Move beyond one-off campaigns. Create stable income streams while building meaningful brand relationships.
+              </p>
+            </motion.div>
+
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
+              {/* Left Column - Benefits */}
+              <motion.div 
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="space-y-8"
+              >
+                <div className="flex items-start space-x-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <DollarSign className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">Stable Monthly Income</h3>
+                    <p className="text-gray-600">Guaranteed monthly payments plus performance bonuses for consistent, reliable earnings.</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start space-x-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <Star className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">Brand Equity</h3>
+                    <p className="text-gray-600">Build lasting relationships with brands and become their authentic voice in your community.</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start space-x-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <TrendingUp className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">Career Growth</h3>
+                    <p className="text-gray-600">Access to exclusive opportunities, higher rates, and professional development support.</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start space-x-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <Shield className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">Creative Freedom</h3>
+                    <p className="text-gray-600">More creative control and flexibility when brands trust you as a long-term partner.</p>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Right Column - Visual */}
+              <motion.div 
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                className="relative"
+              >
+                <div className="bg-white rounded-3xl p-8 shadow-2xl border border-gray-100">
+                  <div className="flex items-center justify-between mb-6">
+                    <h3 className="text-xl font-bold text-gray-900">Projected Creator Partnership Success</h3>
+                    <div className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold">
+                      +300%
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between p-4 bg-purple-50 rounded-xl">
+                      <div className="flex items-center space-x-3">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah" className="w-10 h-10 rounded-full" />
+                        <div>
+                          <div className="font-semibold text-gray-900">Industry Example: Beauty Creator</div>
+                          <div className="text-sm text-gray-600">8-month partnership projection</div>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="font-bold text-green-600">$12,400</div>
+                        <div className="text-sm text-gray-600">Earnings</div>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center justify-between p-4 bg-pink-50 rounded-xl">
+                      <div className="flex items-center space-x-3">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Mike" className="w-10 h-10 rounded-full" />
+                        <div>
+                          <div className="font-semibold text-gray-900">Industry Example: Lifestyle Creator</div>
+                          <div className="text-sm text-gray-600">12-month partnership projection</div>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="font-bold text-green-600">$18,600</div>
+                        <div className="text-sm text-gray-600">Earnings</div>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center justify-between p-4 bg-blue-50 rounded-xl">
+                      <div className="flex items-center space-x-3">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Emma" className="w-10 h-10 rounded-full" />
+                        <div>
+                          <div className="font-semibold text-gray-900">Industry Example: Fitness Creator</div>
+                          <div className="text-sm text-gray-600">6-month partnership projection</div>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="font-bold text-green-600">$9,800</div>
+                        <div className="text-sm text-gray-600">Earnings</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              className="text-center mt-12"
+            >
+              <Link 
+                href="/partnerships"
+                className="inline-flex items-center bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:from-purple-700 hover:to-pink-700 transition-all duration-300 transform hover:scale-105 shadow-lg"
+              >
+                Explore Partnerships
+                <ArrowRight className="w-5 h-5 ml-2" />
+              </Link>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Platform Comparison Section - Matching Main Page Style */}
+        <section className="py-24 bg-gradient-to-br from-gray-50 to-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 30 }}

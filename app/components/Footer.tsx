@@ -69,6 +69,11 @@ export default function Footer() {
                   Affiliate
                 </Link>
               </li>
+              <li>
+                <Link href="/partnerships" className="text-gray-300 hover:text-white transition-colors text-sm">
+                  Partnerships
+                </Link>
+              </li>
             </ul>
           </div>
 

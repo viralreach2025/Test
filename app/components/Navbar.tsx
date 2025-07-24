@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 import { Menu, X, ChevronDown, Calculator, TrendingUp, DollarSign } from 'lucide-react'
 
 interface NavbarProps {
-  currentPage?: 'home' | 'brand' | 'creator' | 'contact' | 'affiliate' | 'case-studies' | 'quiz'
+  currentPage?: 'home' | 'brand' | 'creator' | 'contact' | 'affiliate' | 'case-studies' | 'quiz' | 'tools' | 'partnerships'
 }
 
 export default function Navbar({ currentPage = 'home' }: NavbarProps) {
@@ -114,6 +114,16 @@ export default function Navbar({ currentPage = 'home' }: NavbarProps) {
             >
               Affiliate
             </Link>
+            <Link 
+              href="/partnerships" 
+              className={`text-sm transition-colors ${
+                isActive('partnerships') 
+                  ? 'text-purple-600 font-medium' 
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}
+            >
+              Partnerships
+            </Link>
             
             {/* Tools Dropdown */}
             <div className="relative" ref={dropdownRef}>
@@ -163,6 +173,17 @@ export default function Navbar({ currentPage = 'home' }: NavbarProps) {
                     <div>
                       <div className="font-medium">Influencer Rate Calculator</div>
                       <div className="text-xs text-gray-500">Calculate fair partnership rates</div>
+                    </div>
+                  </Link>
+                  <Link
+                    href="/tools/trend-predictor"
+                    className="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-purple-50 hover:text-purple-600 transition-colors"
+                    onClick={() => setToolsDropdownOpen(false)}
+                  >
+                    <TrendingUp className="w-4 h-4 mr-3 text-purple-500" />
+                    <div>
+                      <div className="font-medium">Trend Predictor</div>
+                      <div className="text-xs text-gray-500">Discover trending topics & hashtags</div>
                     </div>
                   </Link>
 
@@ -263,6 +284,17 @@ export default function Navbar({ currentPage = 'home' }: NavbarProps) {
               >
                 Affiliate
               </Link>
+              <Link 
+                href="/partnerships" 
+                className={`block px-3 py-2 text-sm font-medium transition-colors ${
+                  isActive('partnerships') 
+                    ? 'text-purple-600' 
+                    : 'text-gray-600 hover:text-purple-600'
+                }`}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Partnerships
+              </Link>
               
               {/* Tools Section */}
               <div className="pt-2 border-t border-gray-200">
@@ -292,6 +324,14 @@ export default function Navbar({ currentPage = 'home' }: NavbarProps) {
               >
                 <DollarSign className="w-4 h-4 mr-3 text-yellow-500" />
                 Influencer Rate Calculator
+              </Link>
+              <Link
+                href="/tools/trend-predictor"
+                className="flex items-center px-3 py-2 text-sm text-gray-600 hover:text-purple-600 transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <TrendingUp className="w-4 h-4 mr-3 text-purple-500" />
+                Trend Predictor
               </Link>
 
               </div>

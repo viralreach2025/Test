@@ -224,7 +224,7 @@ export default function Home() {
     },
     {
       question: "Can I set my own budget and rates?",
-      answer: "Absolutely! You have complete control over your investment. Set your own budget from $50 to $5000+ per post, choose your commission rates, and adjust anytime. No fixed rates or minimums."
+      answer: "Absolutely! You have complete control over your investment. Set your own budget from $50 to $5000+ per post, choose your commission rates, and adjust anytime. We only charge a simple 5% platform fee on successful campaigns."
     },
     {
       question: "What's the difference between hybrid and commission?",
@@ -240,14 +240,14 @@ export default function Home() {
     <>
       <Head>
         <title>ViralReach - Performance-Based Influencer Marketing Platform</title>
-        <meta name="description" content="Connect beauty and skincare brands with authentic creators. Choose from 3 flexible payment models: Fixed Payments, Hybrid, or Commission. Pay only for real results, not just posts." />
+        <meta name="description" content="Connect beauty and skincare brands with authentic creators. Choose from 3 flexible payment models: Fixed Payments, Hybrid, or Commission. Pay only for real results with just 5% platform fee." />
         <link rel="canonical" href="https://viralreach.com" />
         <meta property="og:url" content="https://viralreach.com" />
         <meta property="og:title" content="ViralReach - Performance-Based Influencer Marketing Platform" />
-        <meta property="og:description" content="Connect beauty and skincare brands with authentic creators. Choose from 3 flexible payment models and pay only for real results, not just posts." />
+        <meta property="og:description" content="Connect beauty and skincare brands with authentic creators. Choose from 3 flexible payment models and pay only for real results with just 5% platform fee." />
         <meta name="twitter:url" content="https://viralreach.com" />
         <meta name="twitter:title" content="ViralReach - Performance-Based Influencer Marketing Platform" />
-        <meta name="twitter:description" content="Connect beauty and skincare brands with authentic creators. Choose from 3 flexible payment models and pay only for real results, not just posts." />
+        <meta name="twitter:description" content="Connect beauty and skincare brands with authentic creators. Choose from 3 flexible payment models and pay only for real results with just 5% platform fee." />
       </Head>
       <div className="min-h-screen bg-white">
         <Navbar currentPage="home" />
@@ -710,6 +710,171 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Long-term Partnerships Section */}
+        <section className="py-24 bg-gradient-to-br from-purple-50 via-white to-pink-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div 
+              {...getAnimationProps(
+                { opacity: 0, y: 30 },
+                { opacity: 1, y: 0 },
+                { duration: 0.8 }
+              )}
+              whileInView={shouldDisableAnimations() ? undefined : { opacity: 1, y: 0 }}
+              className="text-center mb-16"
+            >
+              <div className="inline-flex items-center bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-full text-sm font-semibold mb-6">
+                <Users className="w-4 h-4 mr-2" />
+                Long-term Partnerships
+              </div>
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                Build Lasting
+                <br />
+                <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                  Relationships
+                </span>
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Move beyond transactional campaigns. Create authentic partnerships that deliver 5x better ROI through sustained trust and authentic content.
+              </p>
+            </motion.div>
+
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
+              {/* Left Column - Benefits */}
+              <motion.div 
+                {...getAnimationProps(
+                  { opacity: 0, x: -30 },
+                  { opacity: 1, x: 0 },
+                  { duration: 0.8, delay: 0.2 }
+                )}
+                whileInView={shouldDisableAnimations() ? undefined : { opacity: 1, x: 0 }}
+                className="space-y-8"
+              >
+                <div className="flex items-start space-x-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <TrendingUp className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">5x Better ROI</h3>
+                    <p className="text-gray-600">Long-term partnerships deliver significantly better returns through sustained audience trust and authentic content.</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start space-x-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <Users className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">Authentic Relationships</h3>
+                    <p className="text-gray-600">Build genuine partnerships with creators who truly understand and represent your brand values.</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start space-x-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <Shield className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">Dedicated Support</h3>
+                    <p className="text-gray-600">Get a dedicated relationship manager to coordinate campaigns and optimize performance.</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start space-x-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <Crown className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">Premium Access</h3>
+                    <p className="text-gray-600">Access to premium creators who prefer long-term partnerships over transactional campaigns.</p>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Right Column - Visual */}
+              <motion.div 
+                {...getAnimationProps(
+                  { opacity: 0, x: 30 },
+                  { opacity: 1, x: 0 },
+                  { duration: 0.8, delay: 0.4 }
+                )}
+                whileInView={shouldDisableAnimations() ? undefined : { opacity: 1, x: 0 }}
+                className="relative"
+              >
+                <div className="bg-white rounded-3xl p-8 shadow-2xl border border-gray-100">
+                  <div className="flex items-center justify-between mb-6">
+                    <h3 className="text-xl font-bold text-gray-900">Projected Partnership Success</h3>
+                    <div className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold">
+                      +500%
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between p-4 bg-purple-50 rounded-xl">
+                      <div className="flex items-center space-x-3">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah" className="w-10 h-10 rounded-full" />
+                        <div>
+                          <div className="font-semibold text-gray-900">Industry Example: Beauty Brand</div>
+                          <div className="text-sm text-gray-600">8-month partnership projection</div>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="font-bold text-green-600">$45,200</div>
+                        <div className="text-sm text-gray-600">Revenue</div>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center justify-between p-4 bg-pink-50 rounded-xl">
+                      <div className="flex items-center space-x-3">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Mike" className="w-10 h-10 rounded-full" />
+                        <div>
+                          <div className="font-semibold text-gray-900">Industry Example: Food Delivery</div>
+                          <div className="text-sm text-gray-600">12-month partnership projection</div>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="font-bold text-green-600">$32,800</div>
+                        <div className="text-sm text-gray-600">Revenue</div>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center justify-between p-4 bg-blue-50 rounded-xl">
+                      <div className="flex items-center space-x-3">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Emma" className="w-10 h-10 rounded-full" />
+                        <div>
+                          <div className="font-semibold text-gray-900">Industry Example: Fitness Brand</div>
+                          <div className="text-sm text-gray-600">6-month partnership projection</div>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="font-bold text-green-600">$28,400</div>
+                        <div className="text-sm text-gray-600">Revenue</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+
+            <motion.div 
+              {...getAnimationProps(
+                { opacity: 0, y: 30 },
+                { opacity: 1, y: 0 },
+                { duration: 0.8, delay: 0.6 }
+              )}
+              whileInView={shouldDisableAnimations() ? undefined : { opacity: 1, y: 0 }}
+              className="text-center mt-12"
+            >
+              <Link 
+                href="/partnerships"
+                className="inline-flex items-center bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:from-purple-700 hover:to-pink-700 transition-all duration-300 transform hover:scale-105 shadow-lg"
+              >
+                Explore Partnerships
+                <ArrowRight className="w-5 h-5 ml-2" />
+              </Link>
+            </motion.div>
+          </div>
+        </section>
+
         {/* Platform Features */}
         <section className="py-24 bg-gradient-to-br from-gray-50 to-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -841,12 +1006,12 @@ export default function Home() {
                     <Target className="w-7 h-7 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">Zero Hidden Fees</h3>
-                    <div className="text-sm text-purple-600 font-semibold">What You See is What You Pay</div>
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">Transparent 5% Platform Fee</h3>
+                    <div className="text-sm text-purple-600 font-semibold">Simple & Fair Pricing</div>
                   </div>
                 </div>
                 <p className="text-gray-600 mb-6 leading-relaxed">
-                  No platform fees, no processing charges, no surprises. Your budget stays your budget.
+                  Just 5% platform fee on successful campaigns. No hidden charges, no surprises. Clear and transparent pricing.
                 </p>
                 <div className="bg-gradient-to-r from-purple-50 to-pink-50 p-4 rounded-xl border border-purple-200">
                   <div className="text-sm text-purple-800 font-medium">
@@ -915,6 +1080,10 @@ export default function Home() {
           </div>
         </section>
 
+
+
+
+
         {/* FAQ Section */}
         <section id="faq" className="py-24 bg-white">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -959,157 +1128,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Free Tools Section */}
-        <section className="py-24 bg-gradient-to-br from-gray-50 to-purple-50">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div 
-              {...getAnimationProps(
-                { opacity: 0, y: 30 },
-                { opacity: 1, y: 0 },
-                { duration: 0.8 }
-              )}
-              whileInView={shouldDisableAnimations() ? undefined : { opacity: 1, y: 0 }}
-              className="text-center mb-16"
-            >
-              <div className="inline-flex items-center bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-full text-sm font-semibold mb-6">
-                <Calculator className="w-4 h-4 mr-2" />
-                Free Tools
-              </div>
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                Powerful Tools to Help You
-                <br />
-                <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                  Succeed
-                </span>
-              </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Access our free tools designed to help brands and creators make informed decisions and grow their business.
-              </p>
-            </motion.div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {/* Influencer Rate Calculator */}
-              <motion.div
-                {...getAnimationProps(
-                  { opacity: 0, y: 30 },
-                  { opacity: 1, y: 0 },
-                  { duration: 0.6, delay: 0.1 }
-                )}
-                whileInView={shouldDisableAnimations() ? undefined : { opacity: 1, y: 0 }}
-                className="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-purple-200"
-              >
-                <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <DollarSign className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Influencer Rate Calculator</h3>
-                <p className="text-gray-600 mb-6 leading-relaxed">
-                  Calculate fair rates for influencer partnerships based on platform, followers, niche, and experience.
-                </p>
-                <div className="space-y-3 mb-6">
-                  <div className="flex items-center text-sm text-gray-600">
-                    <CheckCircle className="w-4 h-4 text-green-500 mr-2" />
-                    <span>Accurate market rates</span>
-                  </div>
-                  <div className="flex items-center text-sm text-gray-600">
-                    <CheckCircle className="w-4 h-4 text-green-500 mr-2" />
-                    <span>Multiple platforms</span>
-                  </div>
-                  <div className="flex items-center text-sm text-gray-600">
-                    <CheckCircle className="w-4 h-4 text-green-500 mr-2" />
-                    <span>Payment model options</span>
-                  </div>
-                </div>
-                <Link 
-                  href="/tools/influencer-rate-calculator"
-                  className="inline-flex items-center bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-purple-700 hover:to-pink-700 transition-all duration-300 transform hover:scale-105"
-                >
-                  Calculate Rates
-                  <ArrowRight className="w-4 h-4 ml-2" />
-                </Link>
-              </motion.div>
-
-              {/* Brand Strategy Quiz */}
-              <motion.div
-                {...getAnimationProps(
-                  { opacity: 0, y: 30 },
-                  { opacity: 1, y: 0 },
-                  { duration: 0.6, delay: 0.2 }
-                )}
-                whileInView={shouldDisableAnimations() ? undefined : { opacity: 1, y: 0 }}
-                className="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-purple-200"
-              >
-                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <TrendingUp className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Brand Strategy Quiz</h3>
-                <p className="text-gray-600 mb-6 leading-relaxed">
-                  Get a comprehensive brand strategy with personalized insights and actionable recommendations.
-                </p>
-                <div className="space-y-3 mb-6">
-                  <div className="flex items-center text-sm text-gray-600">
-                    <CheckCircle className="w-4 h-4 text-green-500 mr-2" />
-                    <span>24+ questions</span>
-                  </div>
-                  <div className="flex items-center text-sm text-gray-600">
-                    <CheckCircle className="w-4 h-4 text-green-500 mr-2" />
-                    <span>Personalized insights</span>
-                  </div>
-                  <div className="flex items-center text-sm text-gray-600">
-                    <CheckCircle className="w-4 h-4 text-green-500 mr-2" />
-                    <span>Actionable strategy</span>
-                  </div>
-                </div>
-                <Link 
-                  href="/quiz/comprehensive-brand-quiz"
-                  className="inline-flex items-center bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105"
-                >
-                  Take Quiz
-                  <ArrowRight className="w-4 h-4 ml-2" />
-                </Link>
-              </motion.div>
-
-              {/* Creator Assessment */}
-              <motion.div
-                {...getAnimationProps(
-                  { opacity: 0, y: 30 },
-                  { opacity: 1, y: 0 },
-                  { duration: 0.6, delay: 0.3 }
-                )}
-                whileInView={shouldDisableAnimations() ? undefined : { opacity: 1, y: 0 }}
-                className="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-purple-200"
-              >
-                <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <Users className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Creator Assessment</h3>
-                <p className="text-gray-600 mb-6 leading-relaxed">
-                  Optimize your creator strategy with our comprehensive assessment and growth plan.
-                </p>
-                <div className="space-y-3 mb-6">
-                  <div className="flex items-center text-sm text-gray-600">
-                    <CheckCircle className="w-4 h-4 text-green-500 mr-2" />
-                    <span>15 focused questions</span>
-                  </div>
-                  <div className="flex items-center text-sm text-gray-600">
-                    <CheckCircle className="w-4 h-4 text-green-500 mr-2" />
-                    <span>Monetization strategy</span>
-                  </div>
-                  <div className="flex items-center text-sm text-gray-600">
-                    <CheckCircle className="w-4 h-4 text-green-500 mr-2" />
-                    <span>Growth roadmap</span>
-                  </div>
-                </div>
-                <Link 
-                  href="/quiz/comprehensive-creator-quiz"
-                  className="inline-flex items-center bg-gradient-to-r from-green-600 to-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-green-700 hover:to-blue-700 transition-all duration-300 transform hover:scale-105"
-                >
-                  Get Assessment
-                  <ArrowRight className="w-4 h-4 ml-2" />
-                </Link>
-              </motion.div>
-            </div>
-          </div>
-        </section>
 
         {/* Waitlist Signup Section */}
         <section id="waitlist" className="py-24 bg-gradient-to-br from-purple-600 via-pink-600 to-red-600">
